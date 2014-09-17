@@ -1,15 +1,14 @@
 from pymongo import MongoClient
 import logging
-import lib
 
 path = "db.log"
 # path = "weshappening.log"
-logging.basicConfig(filename=path, level=logging.DEBUG,
-                        format="%(asctime)s: %(message)s")
+# logging.basicConfig(filename=path, level=logging.DEBUG,
+                        # format="%(asctime)s: %(message)s")
 client = MongoClient()
 db = client.wes_api
 
-def addEvent(event):
+def add_event(event):
 	"""
 	Upserts the event. Returns False if unable to upsert.
 	Uses 'name' of event as unique ID
@@ -25,7 +24,7 @@ def addEvent(event):
 	except:
 		logging.debug('Unable to upsert event, can\'t add to db',event)
 
-def removeEventByName(eventName):
+def remove_event_by_name(eventName):
 	"""
 	Removes one instance of the event with 'name' == 'eventName'
 	if it exists, otherwise do nothing.
@@ -37,7 +36,7 @@ def removeEventByName(eventName):
 		logging.debug('Unable to remove event',eventName)
 		return False
 
-def removeAllEvents():
+def remove_all_events():
 	"""
 	Removes all events from the DB
 	"""
