@@ -2,7 +2,7 @@
 import feedparser
 import re
 import datetime
-from wesleying_fetch import xml_parser, cat_choose2
+from wesleying_fetch import xml_parser
 from time import sleep
 import logging
 import os

@@ -111,45 +111,7 @@ also be worth just talking to Wesleying people and asking them to
 put in some more generalized categories in their feed. Also better locations.
 """
 
-def cat_choose2(posts):
-
-    """
-    FOR WESLEYAN EVENTS until they get their ....  together and give us the actual categories.
-    For each event in posts, for each category in cat_tags, return the category 
-    with the maximum number of cat_tag matches. If matches = 0 for a post, 
-    return 'other' for that post. Returns a dictionary of all events and
-    their corrosponding category.
-    """
-    cat_tags = {
-    'Film':['film','movie','film series'],
-    'Auditions':['auditions','seek','try','out'],
-    'Theater':['play','see','92','theater','stage','second'],
-    'Performances':['dance','slam','poetry','reading','mic','open','soul'],
-    'Student Groups':['cause','education','meeting','food','student','group',
-        'student group','queer','?','community','club','sustain','environment',
-        'help','civic','forums','engage','art','culture','academic','art','diversity'],
-    'Sports':['football','soccer','baseball','swimming','lacross','basketball',
-        'softball','varsity','tennis','hockey','athlet','freeman','sport'],
-    'Admissions':['admission','tour','session','information']
-    }
-    event_cats = {}
-    for post in posts:
-        potentials = []
-        description = post['description'].lower()
-        best_match = "Other"
-        best_count = 0
-        for item in cat_tags.keys():
-            count = 0
-            for tag in cat_tags[item]:
-                occurs = description.count(tag)
-                count += occurs
-                if count > best_count:
-                    best_count = count
-                    best_match = item
-        event_cats[post] = best_match
-    return event_cats
-
-def cat_choose(posts):
+def wesleying_categorizer(posts):
     """
     For each event in posts, for each category in cat_tags, return the category 
     with the maximum number of cat_tag matches. If matches = 0 for a post, 
@@ -208,7 +170,7 @@ def xml_parser():
     all_items = get_xml()
     events = []
     items = only_events(all_items)[0]
-    event_cats = cat_choose(items)
+    event_cats = wesleying_categorizer(items)
     for i in items:
         print i,"A"
         title = i.getElementsByTagName('title')[0].childNodes[0].data

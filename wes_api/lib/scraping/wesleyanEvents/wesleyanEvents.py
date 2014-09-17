@@ -68,14 +68,12 @@ def wesleyan_events_categorizer(posts):
 
 
 def scrape_wesleyan_events():
-    print "FUCK???"
     wesleyan_events = []
     feed_url = "http://events.wesleyan.edu/events/cal_rss_today"
     feed = feedparser.parse(feed_url)
     wes_events_cats = wesleyan_events_categorizer(feed['items'])
 
     for item in feed["items"]:
-        print item
         name = str(item["title"])
         if name.startswith("TBA"):
             name = name[4:]
@@ -117,7 +115,6 @@ def scrape_wesleyan_events():
                  "source":'Wesleyan Events'
                  }
         wesleyan_events.append(event)
-        print event
     return wesleyan_events
 
         
