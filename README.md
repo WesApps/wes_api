@@ -9,7 +9,7 @@ __          __                  _____ _____
     \/  \/ \___||___/ /_/    \_\_|   |_____|
 </pre>
 									
-	<b>RESTful API that fetches, stores, and serves Wesleyan related information.</b>
+	RESTful API that fetches, stores, and serves Wesleyan related information.
        
         Documentation forthcoming.
         Current status: Collecting data scrapers.
