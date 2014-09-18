@@ -1,14 +1,12 @@
 from pymongo import MongoClient
-# import logging
 
-# path = "db.log"
-# logging.basicConfig(filename="db.log", level=logging.DEBUG,
-                        # format="%(asctime)s: %(message)s")
-# logging.debug("Asd")
 client = MongoClient() 
 db = client.wes_api
 
-def get_events(numEvents):
+"""
+EVENTS SEARCH
+"""
+def get_all_events(numEvents):
 	"""
 	Returns numEvents MAX latest events from the DB
 	"""
@@ -25,9 +23,15 @@ def get_events(numEvents):
 		return list(sorted_results)
 
 def get_wesleying_events(numEvents):
-	print "NOt YEt IMPLEMEntEd"
+	
 	pass
 
 def get_wesleyanEvents_events(numEvents):
 	print "NOt YEt IMPLEMEntEd"
 	pass
+
+
+"""
+MENUS SEARCH
+"""
+# def get_menus_all(numResults):
