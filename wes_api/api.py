@@ -41,11 +41,15 @@ def get_latest_events():
 	Maxresults defaults to 30.
 	Max is 100
 	Min is 1
+	If source=wesleying or source=wesleyanEvents
+	is specified, only events from that source will be 
+	returned. Default is both.
 	"""
 	# default
 	DEFAULT_MAX_RESULTS = 30
 
 	req_max_results = request.args.get('maxresults')
+	data_source = request.args.get('source')
 	if req_max_results:
 		try:
 			req_max_results = int(req_max_results)
@@ -72,4 +76,3 @@ def get_latest_events():
 		return err_response(errMsg)
 	else:
 		return json.dumps(format_events(search_results))
-  

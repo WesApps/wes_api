@@ -24,3 +24,10 @@ def get_events(numEvents):
 	else:
 		return list(sorted_results)
 
+def get_wesleying_events(numEvents):
+	print "NOt YEt IMPLEMEntEd"
+	pass
+
+def get_wesleyanEvents_events(numEvents):
+	print "NOt YEt IMPLEMEntEd"
+	pass

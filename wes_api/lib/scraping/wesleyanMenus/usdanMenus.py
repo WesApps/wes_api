@@ -2,12 +2,12 @@ from BeautifulSoup import BeautifulSoup
 import feedparser
 
 usdan_rss = "http://legacy.cafebonappetit.com/rss/menu/332"
-summerfields_rss = 'http://legacy.cafebonappetit.com/rss/menu/337'
+# summerfields_rss = 'http://legacy.cafebonappetit.com/rss/menu/337'
 
 def fetch_all():
 	usdan_meals = fetch_meals(usdan_rss)
-	summerfields_meals = fetch_meals(summerfields_rss)
-	return {"Usdan":usdan_meals,"Summerfields":summerfields_meals}
+	# summerfields_meals = fetch_meals(summerfields_rss)
+	return {"Usdan":usdan_meals}
 
 def fetch_meals(source):
 	fp = feedparser.parse(source)
@@ -28,15 +28,8 @@ def parse_day_item(item):
 	meals = soup.findAll('h3')
 	item_time = item.title
 
+	#weekday, breakfast,lunch,dinner
 	if len(meals) == 3:
-		source = "usdan"
-	elif len(meals) == 2:
-		source = "summerfields"
-	else:
-		print "PROBLEM, not enough meals :("
-		return
-
-	if source == "usdan":
 		breakfast = meals[0]
 		if not breakfast.text == "Breakfast":
 			print "Umm... Usdan haz no breakfast. Should we be concerned?"
@@ -51,15 +44,33 @@ def parse_day_item(item):
 					 "dinner":dinner_items
 					 }
 		return items_obj
-	else:
-		#Summerfields case
-		lunch_items = get_food_items_until(meals[0],"Dinner")
+
+	#weekend, brunch, dinner
+	elif len(meals) == 2:
+		brunch = meals[0]
+		if not brunch.text == "Brunch":
+			print "Umm... Usdan haz no brunch. Should we be concerned?"
+			return
+		brunch_items = get_food_items_until(brunch,"Dinner")
 		dinner_items = get_food_items_until(meals[1],"")
+		
 		items_obj = {"time":item_time,
-					 "lunch":lunch_items,
+					 "brunch":brunch_items,
 					 "dinner":dinner_items
 					 }
 		return items_obj
+	else:
+		print "PANIC, usdan does not have 2 or 3 meals."
+		
+	# else:
+	# 	#Summerfields case
+	# 	lunch_items = get_food_items_until(meals[0],"Dinner")
+	# 	dinner_items = get_food_items_until(meals[1],"")
+	# 	items_obj = {"time":item_time,
+	# 				 "lunch":lunch_items,
+	# 				 "dinner":dinner_items
+	# 				 }
+	# 	return items_obj
 
 def get_food_items_until(bs_obj,stop):
 	"""
