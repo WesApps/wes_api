@@ -1,13 +1,14 @@
 wes-api
 =======
+<pre>
 __          __                  _____ _____ 
 \ \        / /            /\   |  __ \_   _|
  \ \  /\  / /__  ___     /  \  | |__) || |  
   \ \/  \/ / _ \/ __|   / /\ \ |  ___/ | |  
    \  /\  /  __/\__ \  / ____ \| |    _| |_ 
     \/  \/ \___||___/ /_/    \_\_|   |_____|
-                                            
-         RESTful API that fetches, stores, and serves Wesleyan related information.
+</pre>
+									RESTful API that fetches, stores, and serves Wesleyan related information.
 
          Documentation forthcoming.
          Current status: Collecting data scrapers.
