@@ -32,8 +32,8 @@ def scrape_all_sources():
 				print "AHH COULND'T ADD"
 		return True
 
+	# scrape Wesleyan Menus
+	
 	# scrape WesMaps
 
 	# scrape Wesleyan Hours
-
-	# scrape Wesleyan Menus
