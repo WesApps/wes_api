@@ -93,7 +93,7 @@ def format_mongo_objs(mongo_objs):
 			print "mongo_obj",mongo_obj,"has no time"
 			continue
 		mongo_obj['time'] = old_time.isoformat()
-	return [{"Result Count":len(mongo_objs)},{"Results":mongo_objs}]
+	return {"Result Count":len(mongo_objs),"Results":mongo_objs}
 
 
 @api.route('/events/latest',methods=['GET'])
