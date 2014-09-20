@@ -42,6 +42,17 @@ def remove_event_by_name(eventName):
 		print 'Unable to remove event',eventName
 		return False
 
+def remove_events_by_source(sourceName):
+	"""
+	Removes all event documets with source == sourceName
+	"""
+	try:
+		events.remove({'source':sourceName})
+		return True
+	except:
+		print 'Unable to remove events from source',sourceName
+		return False
+
 def remove_all_events():
 	"""
 	Removes all events from the DB
@@ -120,6 +131,7 @@ def add_usdan_day(day_item):
 		meals = ['breakfast','lunch','dinner','brunch']
 		for meal in meals:
 			raw_meal = day_item.get(meal)
+			print meal,"RAW"
 			if raw_meal:
 				dict_meal = flatten_meal_item(raw_meal)
 				processed_meals[meal] = dict_meal
@@ -128,10 +140,23 @@ def add_usdan_day(day_item):
 			"time":day_time,
 			"breakfast":processed_meals.get('breakfast'),
 			"lunch":processed_meals.get('lunch'),
-			"dinner":processed_meals.get('dinner')
+			"dinner":processed_meals.get('dinner'),
+			"brunch":processed_meals.get('brunch')
 		}
 		usdan_menus.insert(processed_day_item)
 		return True
 	except:
 		print "Unable to add usdan day,",day_item
+		return False
+
+def remove_all_menus():
+	"""
+	Removes all events from the DB
+	"""
+	try:
+		usdan_menus.drop()
+		print 'Dropped usdan Menus DB'
+		return True
+	except:
+		print 'Unable to drop menus DB'
 		return False

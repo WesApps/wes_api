@@ -52,6 +52,7 @@ def parse_day_item(item):
 			print "Umm... Usdan haz no brunch. Should we be concerned?"
 			return
 		brunch_items = get_food_items_until(brunch,"Dinner")
+		print brunch_items,"BRUNCH"
 		dinner_items = get_food_items_until(meals[1],"")
 		
 		items_obj = {"time":item_time,

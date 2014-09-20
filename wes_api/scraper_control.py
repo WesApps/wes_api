@@ -13,9 +13,37 @@ def scrape_all_sources():
 	of the scraping sources imported above.
 	TODO: Multi-threading
 	"""
-	scrape_wesleying()
-	scrape_wesleyan_events()
-	scrape_usdan_menus()
+	result1 = scrape_wesleying()
+	result2 = scrape_wesleyan_events()
+	result3 = scrape_usdan_menus()
+	if not result1 and result2 and result3:
+		print "UNABLE TO SCRAPE ALL SOURCE"
+		return False
+	return True
+
+
+def clear_all_sources():
+	"""
+	Drop.
+	"""
+	result1 = db.remove_all_events()
+	result2 = db.remove_all_menus()
+	if not result1 and result2:
+		print "UNABLE TO CLEAR ALL SOURCES"
+		return False
+	return True
+
+def clear_wesleying():
+	if not db.remove_events_by_source("Wesleying"):
+		print "UNABLE TO CLEAR WESLEYING"
+		return False
+	return True
+
+def clear_wesleying():
+	if not db.remove_events_by_source("Wesleyan Events"):
+		print "UNABLE TO CLEAR WESLEYAN EVENTS"
+		return False
+	return True
 
 def scrape_wesleying():
 	# scrape Wesleying
@@ -27,7 +55,7 @@ def scrape_wesleying():
 			if not add_result:
 				print "AHH COULND'T ADD"
 		return True
-	return False
+	return True
 
 def scrape_wesleyan_events():
 	# scrape Wesleyan Events
@@ -39,7 +67,7 @@ def scrape_wesleyan_events():
 			if not add_result:
 				print "AHH COULND'T ADD"
 		return True
-	return False
+	return True
 
 def scrape_usdan_menus():
 	# scrape Wesleyan Menus
@@ -54,6 +82,7 @@ def scrape_usdan_menus():
 			if not result:
 				print item,"failed to add to db"
 		return True
+	return True
 
 
 

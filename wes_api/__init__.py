@@ -15,7 +15,10 @@ app.register_blueprint(api,url_prefix='/api')
 def index():
     return "Welcome to the Wesleyan API. Get your info here."
 
-
 @app.route('/update')
 def update():
-	return json.dumps({"Results":scraper_control.scrape_all_sources()})
+	return json.dumps({"Success?":scraper_control.scrape_all_sources()})
+
+@app.route('/clearAll')
+def clearAll():
+	return json.dumps({"Cleared?":scraper_control.clear_all_sources()})

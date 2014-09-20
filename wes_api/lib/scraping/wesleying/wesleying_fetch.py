@@ -172,14 +172,14 @@ def xml_parser():
     items = only_events(all_items)[0]
     event_cats = wesleying_categorizer(items)
     for i in items:
-        print i,"A"
+        # print i,"A"
         title = i.getElementsByTagName('title')[0].childNodes[0].data
         url = i.getElementsByTagName('link')[0].childNodes[0].data
         description = i.getElementsByTagName('description')[0].childNodes[0].data
         content_html = i.getElementsByTagName('content:encoded')[0].childNodes[0].data
         parsed_content = BeautifulSoup.BeautifulSoup(content_html)
         try:
-            print parsed_content
+            # print parsed_content
             full_description = parsed_content.find('blockquote').text
         except:
             full_description = ""

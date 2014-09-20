@@ -4,7 +4,6 @@ import re
 import datetime
 from wesleying_fetch import xml_parser
 from time import sleep
-import logging
 import os
 
 def u_to_string(string):
@@ -33,7 +32,7 @@ def initialize():
 def scrape_wesleying():
     wesleying_events = []
     wesleying_feed = xml_parser()
-    print "LEN WESLEYING FEED:",len(wesleying_feed)
+    # print "LEN WESLEYING FEED:",len(wesleying_feed)
     for item in wesleying_feed:
         name = no_unicode(item["title"])
         try:
