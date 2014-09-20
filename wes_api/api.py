@@ -7,6 +7,12 @@ api = Blueprint('api',__name__,template_folder='templates')
 EVENT_SOURCES = ["wesleying","wesleyanEvents"]
 MENU_SOURCES = ["usdan"]
 
+"""
+TODO: Refactor some of this to get rid of the 
+repeated code..
+"""
+
+
 def err_response(errMsg):
 	"""
 	Responds with:
@@ -75,7 +81,6 @@ def format_mongo_objs(mongo_objs):
 	if the obj has a time.
 	Also strips out object ID
 	"""
-	print len(mongo_objs),"COUNT"
 	for mongo_obj in mongo_objs:
 		#remove object_id 
 		try:
@@ -125,6 +130,10 @@ def get_latest_events():
 def get_sources():
 	return json.dumps(EVENT_SOURCES)
 
+
+
+
+
 """
 MENUS
 
@@ -160,7 +169,28 @@ def get_menus_all():
 
 @api.route('/menus/today',methods=['GET'])
 def get_menus_today():
-	pass
+	"""
+	Only source argument accepted here.
+	"""
+	MIN_RESULTS=1
+	MAX_RESULTS=1
+	validation_result = validate_request(request,MIN_RESULTS,MAX_RESULTS)
+	if not validation_result[0]:
+		return validation_result[1]
+	else:
+		req_max_results = validation_result[1]['max_results']
+
+	#Now search, check, and respond
+	search_results = search.get_menus_today()
+
+	if not search_results:
+		errMsg = ("Unable to find menus in the database. Sadface")
+		return err_response(errMsg)
+	if len(search_results) < 1:
+		errMsg = ("No latest events, panic.")
+		return err_response(errMsg)
+	else:
+		return json.dumps(format_mongo_objs(search_results))
 
 @api.route('/menus/clear/password',methods=['GET'])
 def clear_menus():
