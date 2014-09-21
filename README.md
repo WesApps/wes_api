@@ -13,6 +13,12 @@ __          __                  _____ _____
        
         Documentation forthcoming.
         Current status: Collecting data scrapers.
+        	Have:
+        		+Wesleying Events
+        		+Wesleyan Events
+        		+Usdan Daily Menus
+        		+Summerfields Static Menu
+        		+Late Night Static Menu
 
         Data scrapers have been collected and modified from:
          	Wesleying and Wesleyan event data scrapers: https://github.com/WesAppGroup/
@@ -20,7 +26,6 @@ __          __                  _____ _____
 	
 	TODO (high priority):
 		-Event searching capability
-		-Summerfields menus
 		-Film Series Info
 		-WesMaps data
 		-Wesleyan Hours of Operations
