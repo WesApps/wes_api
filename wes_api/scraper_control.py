@@ -21,7 +21,6 @@ def scrape_all_sources():
 		return False
 	return True
 
-
 def clear_all_sources():
 	"""
 	Drop.
@@ -84,9 +83,8 @@ def scrape_usdan_menus():
 		return True
 	return True
 
-
-
-
+def populate_static_menus():
+	db.populate_static_menus()
 
 	# scrape WesMaps
 

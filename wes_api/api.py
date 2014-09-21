@@ -72,6 +72,18 @@ def validate_request(request_obj,min_results,max_results,accepted_sources=None):
 		data_source = None
 	return [True,{"max_results":req_max_results,"source":data_source}]
 
+
+def validate_search_results(search_results):
+	if not search_results:
+		errMsg = ("Unable to find menus in the database. Sadface")
+		return [False,err_response(errMsg)]
+	if len(search_results) < 1:
+		errMsg = ("No latest events, panic.")
+		return [False,err_response(errMsg)]
+	else:
+		return [True,search_results]
+
+
 """
 EVENTS
 """
@@ -90,10 +102,11 @@ def format_mongo_objs(mongo_objs):
 			
 		old_time = mongo_obj.get('time')
 		if not old_time:
-			print "mongo_obj",mongo_obj,"has no time"
+			# print "mongo_obj",mongo_obj,"has no time"
 			continue
 		mongo_obj['time'] = old_time.isoformat()
-	return {"Result Count":len(mongo_objs),"Results":mongo_objs}
+	return mongo_objs 
+	# return {"Result Count":len(mongo_objs),"Results":mongo_objs}
 
 
 @api.route('/events/latest',methods=['GET'])
@@ -117,21 +130,18 @@ def get_latest_events():
 
 	#Now search, check, and respond
 	search_results = search.get_events(req_max_results,req_source)
-	if not search_results:
-		errMsg = ("Unable to find events in the database. Sadface")
-		return err_response(errMsg)
-	if len(search_results) < 1:
-		errMsg = ("No latest events, panic.")
-		return err_response(errMsg)
+	validated_search = validate_search_results(search_results)
+	if not validated_search[0]:
+		return validated_search[1]
 	else:
-		return json.dumps(format_mongo_objs(search_results))
+		final_objs = format_mongo_objs(validated_search[1])
+		response = {"Result Count":len(final_objs),
+					"Results":final_objs}
+		return json.dumps(response)
 
 @api.route('/events/sources',methods=['GET'])
 def get_sources():
 	return json.dumps(EVENT_SOURCES)
-
-
-
 
 
 """
@@ -141,11 +151,10 @@ MENUS
 			default both usdan and summerfields
 /today --gets everything, default both usdan and summerfields
 """
-@api.route('/menus/all',methods=['GET'])
-def get_menus_all():
+def get_menus(min_res,max_res,today=False):
 	# default
-	MIN_RESULTS = 1
-	MAX_RESULTS = 100
+	MIN_RESULTS = min_res
+	MAX_RESULTS = max_res
 
 	validation_result = validate_request(request,MIN_RESULTS,MAX_RESULTS)
 	if not validation_result[0]:
@@ -154,17 +163,36 @@ def get_menus_all():
 		req_max_results = validation_result[1]['max_results']
 
 	#Now search, check, and respond
-	search_results = search.get_menus_all(req_max_results)
-
-	if not search_results:
-		errMsg = ("Unable to find menus in the database. Sadface")
-		return err_response(errMsg)
-	if len(search_results) < 1:
-		errMsg = ("No latest events, panic.")
-		return err_response(errMsg)
+	if today:
+		search_results = search.get_menus_today(req_max_results)
+		print "RES",search_results
 	else:
-		return json.dumps(format_mongo_objs(search_results))
+		search_results = search.get_menus_all(req_max_results)
+	#only need to validate the usdan ones.
+	usdan_results = search_results.get('usdan')
+	validated_search = validate_search_results(usdan_results)
+	if not validated_search[0]:
+		return validated_search[1]
+	else:
+		#get late night and summerfields.
+		#this method will return all or nothing,
+		#so if usdan fails, you get nothing.
+		#ALSO, number of results is tied to usdan results
+		summerfields = format_mongo_objs(search_results.get('summerfields'))
+		late_night = format_mongo_objs(search_results.get('late_night'))
+		usdan = format_mongo_objs(validated_search[1])
+		final_objs = {"usdan":usdan,
+					"summerfields":summerfields,
+					"late_night":late_night}
 
+		response = {"Result Count":len(usdan),
+					"Results":final_objs}
+		print response
+		return json.dumps(response)
+
+@api.route('/menus/all',methods=['GET'])
+def get_menus_all():
+	return get_menus(1,100)
 
 
 @api.route('/menus/today',methods=['GET'])
@@ -172,26 +200,4 @@ def get_menus_today():
 	"""
 	Only source argument accepted here.
 	"""
-	MIN_RESULTS=1
-	MAX_RESULTS=1
-	validation_result = validate_request(request,MIN_RESULTS,MAX_RESULTS)
-	if not validation_result[0]:
-		return validation_result[1]
-	else:
-		req_max_results = validation_result[1]['max_results']
-
-	#Now search, check, and respond
-	search_results = search.get_menus_today()
-
-	if not search_results:
-		errMsg = ("Unable to find menus in the database. Sadface")
-		return err_response(errMsg)
-	if len(search_results) < 1:
-		errMsg = ("No latest events, panic.")
-		return err_response(errMsg)
-	else:
-		return json.dumps(format_mongo_objs(search_results))
-
-@api.route('/menus/clear/password',methods=['GET'])
-def clear_menus():
-	pass
+	return get_menus(1,1)

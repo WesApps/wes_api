@@ -7,10 +7,22 @@ client = MongoClient()
 db = client.wes_api
 events = db.events
 usdan_menus = db.usdan_menus
+summerfields_menu = db.summerfields_menu
+late_night_menu = db.late_night_menu
 
 """
 EVENTS SEARCH
 """
+
+def limit_results(numResults,results):
+	"""
+	Limits results to numResults
+	"""
+	if numResults < results.count():
+		return list(results[0:numResults])
+	else:
+		return list(results)
+
 def get_events(numEvents,source=None):
 	"""
 	Returns numEvents MAX latest events from the DB
@@ -23,11 +35,8 @@ def get_events(numEvents,source=None):
 		print "Found no events"
 		return None
 	sorted_results = results.sort('time',pymongo.DESCENDING)
-
-	if numEvents < sorted_results.count():
-		return list(sorted_results[0:numEvents])
-	else:
-		return list(sorted_results)
+	return limit_results(numEvents,sorted_results)
+	
 
 def search_events(numResults,title_query,location_query,
 					time_from,time_until,category_query,source):
@@ -48,13 +57,23 @@ def search_events(numResults,title_query,location_query,
 MENUS SEARCH
 """
 def get_menus_all(numResults):
-	return get_usdan(numResults)
+	usdan = get_usdan(numResults)
+	summerfields = get_summerfields_menu()
+	late_night = get_late_night_menu()
+	return {"usdan":usdan,
+			"summerfields":summerfields,
+			"late_night":late_night}
 
 def get_menus_today():
 	now = datetime.datetime.today()
 	start_today = datetime.datetime(now.year,now.month,now.day)
-	return get_usdan(1,start_today,start_today)
+	usdan = get_usdan(1,start_today) 
 
+	summerfields = get_summerfields_menu()
+	late_night = get_late_night_menu()
+	return {"usdan":usdan,
+			"summerfields":summerfields,
+			"late_night":late_night}
 
 def get_usdan(numResults,time_from=None,time_until=None):
 	# grab time_from to present
@@ -77,7 +96,21 @@ def get_usdan(numResults,time_from=None,time_until=None):
 		return None
 	sorted_results = usdan_results.sort('time',pymongo.DESCENDING)
 
-	if numResults < sorted_results.count():
-		return list(sorted_results[0:numResults])
-	else:
-		return list(sorted_results)
+	return limit_results(numResults,sorted_results)
+
+def get_summerfields_menu():
+	return get_static_menu(summerfields_menu)
+
+def get_late_night_menu():
+	return get_static_menu(late_night_menu)
+
+def get_static_menu(target_db):
+	"""
+	Not worried about time here since these menus
+	don't change on a daily basis.
+	"""
+	results = target_db.find()
+	if results.count() == 0:
+		print "Found no static meals"
+		return None
+	return list(results)

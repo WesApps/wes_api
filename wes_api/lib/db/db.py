@@ -1,15 +1,13 @@
 from pymongo import MongoClient
-import logging
 import datetime
+import csv
 
-path = "db.log"
-# path = "weshappening.log"
-# logging.basicConfig(filename=path, level=logging.DEBUG,
-                        # format="%(asctime)s: %(message)s")
 client = MongoClient()
 db = client.wes_api
 events = db.events
 usdan_menus = db.usdan_menus
+late_night_menu = db.late_night_menu
+summerfields_menu = db.summerfields_menu
 
 """
 EVENT DB METHODS
@@ -65,10 +63,42 @@ def remove_all_events():
 		print 'Unable to drop events DB'
 		return False
 
-
 """
 MENU DB METHODS
 """
+def populate_static_menus():
+	try:
+		print "Populating static menus"
+		populate_static_menu("static/summerfields_menu.csv",summerfields_menu)
+		populate_static_menu("static/late_night.csv",late_night_menu)
+		return True
+	except:
+		print "Populating static menus failed"
+		return False
+
+def populate_static_menu(csv_file,target_db):
+	"""
+	csv_file is a string.
+	Reads from late_night.csv and summerfields_menu.csv
+	and adds them to db.late_night_menu and db.summerfields_menu
+	"""
+	reader = csv.DictReader(file(csv_file))
+	
+	for line in reader:
+		title = line.get('item')
+		item_filter = line.get('filter')
+		description = line.get('description')
+		price = line.get('price')
+		obj = {
+				"title":title,
+				"filter":item_filter,
+				"description":description,
+				"price":price
+			}
+		#if it does not exist, insert it.
+		if target_db.find(obj).count() == 0:
+			target_db.insert(obj)
+
 def flatten_meal_item(meal_item):
 	"""
 	Input: <meal_items> is in the form:
@@ -131,7 +161,6 @@ def add_usdan_day(day_item):
 		meals = ['breakfast','lunch','dinner','brunch']
 		for meal in meals:
 			raw_meal = day_item.get(meal)
-			print meal,"RAW"
 			if raw_meal:
 				dict_meal = flatten_meal_item(raw_meal)
 				processed_meals[meal] = dict_meal
@@ -155,7 +184,9 @@ def remove_all_menus():
 	"""
 	try:
 		usdan_menus.drop()
-		print 'Dropped usdan Menus DB'
+		summerfields_menu.drop()
+		late_night_menu.drop()
+		print 'Dropped Menus DB'
 		return True
 	except:
 		print 'Unable to drop menus DB'
