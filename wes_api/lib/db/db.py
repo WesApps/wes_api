@@ -199,7 +199,7 @@ def remove_all_menus():
 FILM SERIES METHODS
 """
 def add_film_event(film_event):
-	if film_series.find(film_event).count() == 0:
+	if film_series.find(film_event).count() != 0:
 		print "Have film, done."
 		return True
 	try:
