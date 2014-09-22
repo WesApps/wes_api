@@ -6,6 +6,8 @@ from lib.db import db
 SCRAPE_WESLEYING = True
 SCRAPE_WESLEYAN_EVENTS = True
 SCRAPE_USDAN = True
+SCRAPE_STATIC_MENUS = True
+SCRAPE_FILM_SERIES = True
 
 def scrape_all_sources():
 	"""
@@ -16,6 +18,7 @@ def scrape_all_sources():
 	result1 = scrape_wesleying()
 	result2 = scrape_wesleyan_events()
 	result3 = scrape_usdan_menus()
+	result4 = scrape_film_series()
 	if not result1 and result2 and result3:
 		print "UNABLE TO SCRAPE ALL SOURCE"
 		return False
@@ -27,7 +30,8 @@ def clear_all_sources():
 	"""
 	result1 = db.remove_all_events()
 	result2 = db.remove_all_menus()
-	if not result1 and result2:
+	result3 = db.remove_all_films()
+	if not result1 and result2 and result3:
 		print "UNABLE TO CLEAR ALL SOURCES"
 		return False
 	return True

@@ -8,6 +8,7 @@ events = db.events
 usdan_menus = db.usdan_menus
 late_night_menu = db.late_night_menu
 summerfields_menu = db.summerfields_menu
+film_series = db.film_series
 
 """
 EVENT DB METHODS
@@ -27,6 +28,7 @@ def add_event(event):
 		return True
 	except:
 		print 'Unable to upsert event, can\'t add to db',event
+		return False
 
 def remove_event_by_name(eventName):
 	"""
@@ -190,4 +192,28 @@ def remove_all_menus():
 		return True
 	except:
 		print 'Unable to drop menus DB'
+		return False
+
+
+"""
+FILM SERIES METHODS
+"""
+def add_film_event(film_event):
+	if film_series.find(film_event).count() == 0:
+		print "Have film, done."
+		return True
+	try:
+		film_series.insert(film_event)
+		return True
+	except:
+		print 'Unable to add film event, can\'t add to db',film_event
+		return False
+
+def remove_all_films():
+	try:
+		film_series.drop()
+		print 'Dropped Film Series DB'
+		return True
+	except:
+		print 'Unable to drop Film Series DB'
 		return False
