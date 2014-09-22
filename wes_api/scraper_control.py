@@ -92,7 +92,6 @@ def scrape_usdan_menus():
 def populate_static_menus():
 	db.populate_static_menus()
 
-
 def scrape_film_series():
 	if not SCRAPE_FILM_SERIES:
 		return True
@@ -105,7 +104,6 @@ def scrape_film_series():
 		if not result:
 			print item,"failed to add to db"
 	return True
-
 
 # scrape WesMaps
 

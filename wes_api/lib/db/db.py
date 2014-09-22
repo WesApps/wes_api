@@ -194,7 +194,6 @@ def remove_all_menus():
 		print 'Unable to drop menus DB'
 		return False
 
-
 """
 FILM SERIES METHODS
 """

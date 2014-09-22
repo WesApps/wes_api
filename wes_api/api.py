@@ -164,7 +164,7 @@ def get_menus(min_res,max_res,today=False):
 
 	#Now search, check, and respond
 	if today:
-		search_results = search.get_menus_today(req_max_results)
+		search_results = search.get_menus_today()
 		print "RES",search_results
 	else:
 		search_results = search.get_menus_all(req_max_results)
@@ -200,4 +200,31 @@ def get_menus_today():
 	"""
 	Only source argument accepted here.
 	"""
-	return get_menus(1,1)
+	return get_menus(1,1,True)
+
+"""
+FILM SERIES METHODS
+"""
+def get_film_series(today=False):
+	if today:
+		search_results = search.get_film_series_today()
+		print "RES",search_results
+	else:
+		search_results = search.get_film_series_all()
+	#only need to validate the usdan ones.
+	validated_search = validate_search_results(usdan_results)
+	if not validated_search[0]:
+		return validated_search[1]
+	else:
+		final_objs = format_mongo_objs(validated_search[1])
+		response = {"Result Count":len(final_objs),
+					"Results":final_objs}
+		return json.dumps(response)
+
+@api.route('/filmseries/all')
+def get_film_series_all():
+	return get_film_series()
+
+@api.route('/filmseries/today')
+def get_film_series_today():
+	return get_film_series(True)

@@ -9,6 +9,7 @@ events = db.events
 usdan_menus = db.usdan_menus
 summerfields_menu = db.summerfields_menu
 late_night_menu = db.late_night_menu
+film_series = db.film_series
 
 """
 EVENTS SEARCH
@@ -66,8 +67,9 @@ def get_menus_all(numResults):
 
 def get_menus_today():
 	now = datetime.datetime.today()
-	start_today = datetime.datetime(now.year,now.month,now.day)
-	usdan = get_usdan(1,start_today) 
+	today = datetime.datetime(now.year,now.month,now.day)
+	tomorrow = today + datetime.timedelta(days=1)
+	usdan = get_usdan(1,today,tomorrow) 
 
 	summerfields = get_summerfields_menu()
 	late_night = get_late_night_menu()
@@ -86,7 +88,7 @@ def get_usdan(numResults,time_from=None,time_until=None):
 
 	# grab time_from to time_until
 	elif time_from and time_until:
-		usdan_results=usdan_menus.find({"time":{"$lte":time_until,"$gte":time_from}})
+		usdan_results=usdan_menus.find({"time":{"$lt":time_until,"$gte":time_from}})
 
 	# grab all
 	else:
@@ -114,3 +116,23 @@ def get_static_menu(target_db):
 		print "Found no static meals"
 		return None
 	return list(results)
+
+"""
+FILM SERIES SEARCH
+"""
+def get_film_series_all():
+	search_results = film_series.find()
+	if search_results.count() == 0:
+		print "Found no film series at all...?"
+		return None
+	return list(search_results)
+
+def get_film_series_today():
+	now = datetime.datetime.today()
+	today = datetime.datetime(now.year,now.month,now.day)
+	tomorrow = today + datetime.timedelta(days=1)
+	search_results = film_series.find({"date":{"$gte":today,"$lt":tomorrow}})
+	if search_results.count() == 0:
+		print "Found no film for today."
+		return None
+	return list(search_results)
