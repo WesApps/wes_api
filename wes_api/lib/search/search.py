@@ -51,17 +51,57 @@ def get_events_today():
 def search_events(numResults,title_query,location_query,
 					time_from,time_until,category_query,source):
 	"""
-	To minimize search space, search hierarchically.
+	To minimize total search space, search hierarchically.
+	This will do only exact matches. Since the amount of event
+	data (for now) is relatively small, people can just
+	do whatever more-serious searching they want on the 
+	front end once they have the data.
 	Order of search:
 		-source
 		-category_query
-		-time_from AND time_until
+		-time_from and time_until
 		-location_query
 		-title_query
 	Then restrict results to numResults.
 	"""
-	print "Not yet implemented. Will be slightly painful."
-	pass
+	# Source Filter
+	if source:
+		search_results = db.events.find({'source':source})
+	else:
+		search_results = db.events.find()
+	if not search_results:
+		print "NO events found in search events"
+		return None
+
+	# Category Filter
+	if category_query:
+		lower_cat = category_query.lower()
+		search_results_2 = [i if i['category'].lower() == lower_cat for i in search_results]
+	else:
+		search_results_2 = search_results
+
+	# Time Filter
+	if time_from and not time_until:
+		search_results_3 = [i if i['time'] >= time_from for i in search_results_2]
+	
+	# grab from beginning to time_until
+	elif not time_from and time_until:
+		search_results_3 = [i if i['time'] <= time_until for i in search_results_2]
+
+	# grab time_from to time_until
+	elif time_from and time_until:
+		search_results_3 = [i if i['time'] <= time_from and i['time'] <= time_until for i in search_results_2]
+
+	else:
+		search_results_3 = search_results_2
+
+	# Location Filter
+	if location_query:
+		lower_loc = location_query.lower()
+		search_results_4 = [i if i['location'].lower() == lower_loc for i in search_results_3]
+	else:
+		search_results_4 = search_results
+
 
 """
 MENUS SEARCH
