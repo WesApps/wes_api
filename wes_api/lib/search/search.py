@@ -38,6 +38,15 @@ def get_events(numEvents,source=None):
 	sorted_results = results.sort('time',pymongo.DESCENDING)
 	return limit_results(numEvents,sorted_results)
 	
+def get_events_today():
+	now = datetime.datetime.today()
+	today = datetime.datetime(now.year,now.month,now.day)
+	tomorrow = today + datetime.timedelta(days=1)
+	search_results = events.find({"time":{"$gte":today,"$lt":tomorrow}})
+	if search_results.count() == 0:
+		print "Found no events for today."
+		return None
+	return list(search_results)
 
 def search_events(numResults,title_query,location_query,
 					time_from,time_until,category_query,source):
@@ -131,7 +140,7 @@ def get_film_series_today():
 	now = datetime.datetime.today()
 	today = datetime.datetime(now.year,now.month,now.day)
 	tomorrow = today + datetime.timedelta(days=1)
-	search_results = film_series.find({"date":{"$gte":today,"$lt":tomorrow}})
+	search_results = film_series.find({"time":{"$gte":today,"$lt":tomorrow}})
 	if search_results.count() == 0:
 		print "Found no film for today."
 		return None

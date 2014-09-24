@@ -105,6 +105,11 @@ def scrape_film_series():
 			print item,"failed to add to db"
 	return True
 
+def remove_all_films():
+	if not db.remove_all_films():
+		print "UNABLE TO CLEAR FILM SERIES"
+		return False
+	return True
 # scrape WesMaps
 
 # scrape Wesleyan Hours

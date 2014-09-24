@@ -101,6 +101,7 @@ def format_mongo_objs(mongo_objs):
 			print "mongo_obj has no _id, panic!"
 			
 		old_time = mongo_obj.get('time')
+		print mongo_obj
 		if not old_time:
 			# print "mongo_obj",mongo_obj,"has no time"
 			continue
@@ -109,8 +110,17 @@ def format_mongo_objs(mongo_objs):
 	# return {"Result Count":len(mongo_objs),"Results":mongo_objs}
 
 
+@api.route('/events/today',methods=['GET'])
+def get_today_events():
+	return get_events(True)
+
+
 @api.route('/events/latest',methods=['GET'])
 def get_latest_events():
+	return get_events()
+
+
+def get_events(today=False):
 	"""
 	Returns latest results.
 	Maxresults defaults to 30.
@@ -129,7 +139,11 @@ def get_latest_events():
 		req_source = validation_result[1]['source']
 
 	#Now search, check, and respond
-	search_results = search.get_events(req_max_results,req_source)
+	if today:
+		search_results = search.get_events_today()
+	else:
+		search_results = search.get_events(req_max_results,req_source)
+
 	validated_search = validate_search_results(search_results)
 	if not validated_search[0]:
 		return validated_search[1]
@@ -212,11 +226,12 @@ def get_film_series(today=False):
 	else:
 		search_results = search.get_film_series_all()
 	#only need to validate the usdan ones.
-	validated_search = validate_search_results(usdan_results)
+	validated_search = validate_search_results(search_results)
 	if not validated_search[0]:
 		return validated_search[1]
 	else:
 		final_objs = format_mongo_objs(validated_search[1])
+		print final_objs
 		response = {"Result Count":len(final_objs),
 					"Results":final_objs}
 		return json.dumps(response)

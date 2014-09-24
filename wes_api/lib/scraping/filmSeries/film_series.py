@@ -77,24 +77,23 @@ def process_date(date):
 	return datetime.datetime.strptime(date_with_year,"%Y %B %d")
 
 def process_p_style(soup):
-	date = process_date(soup.next)
+	time = process_date(soup.next)
 	movie_span = soup.find('span',{"class":"LargeText"})
 	movie_title = movie_span.text
 	short_description = movie_span.next.next.next
 	
-	#Catch italic cases for this.. hacky :(
+	#Catch italic tag cases for this.. hacky :(
 	long_description = movie_span.next.next.next.next.next
-	print type(long_description),"type"
 	if type(long_description) not in  [BeautifulSoup.NavigableString,unicode]:
 		long_description = long_description.text + long_description.nextSibling
 
-	movie_obj = {"date":date,"title":movie_title,
+	movie_obj = {"time":time,"title":movie_title,
 				 "short_description":short_description,
 				 "long_description":long_description}
  	return movie_obj
 
 def process_div_style(soup):
-	date = process_date(soup.next)
+	time = process_date(soup.next)
 	movie_h3 = soup.find('h3',{'class':'movietitle'})
 	movie_title = movie_h3.next
 	short_description = movie_h3.next.next
@@ -104,7 +103,7 @@ def process_div_style(soup):
 	if type(long_description) not in  [BeautifulSoup.NavigableString,unicode]:
 		long_description = long_description.next + long_description.next.nextSibling
 
-	movie_obj = {"date":date,"title":movie_title,
+	movie_obj = {"time":time,"title":movie_title,
 				 "short_description":short_description,
 				 "long_description":long_description}
 	return movie_obj
