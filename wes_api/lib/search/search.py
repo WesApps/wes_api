@@ -1,5 +1,7 @@
 import pymongo
 import datetime
+import Levenshtein
+import difflib
 
 MongoClient = pymongo.MongoClient
 
@@ -48,6 +50,28 @@ def get_events_today():
 		return None
 	return list(search_results)
 
+def closest_results(query_string,results,key):
+	"""
+	For every element 'i' in results (mongo db results)
+	compute the closest dist (query_string,i['key']) and sort results,
+	in ascending order.
+	"""
+	#Max dist allowed to keep a result
+	MIN_SCORE = 0.5
+
+	#Edit distances for each
+	# res = [(Levenshtein.distance(unicode(query_string.lower()),i[key].lower()),i) for i in results]
+
+	res = [(difflib.SequenceMatcher(None,unicode(query_string.lower()),i[key].lower()).ratio(),i) for i in results]
+	res.sort()
+	# print "RES 3",res3
+	#Filter out the scores (could in the future return some sort of match score)
+	res2 = map(lambda x: x[1],filter(lambda y: y[0] >= MIN_SCORE,res))
+	# res3 = map(lambda x: (x[0],x[1][key]),filter(lambda y: y[0] >= MIN_SCORE,res))
+	# print res3,"RES3",query_string
+	# print map(lambda x: x[0],res)
+	return res2
+
 def search_events(numResults,title_query,location_query,
 					time_from,time_until,category_query,source):
 	"""
@@ -75,32 +99,42 @@ def search_events(numResults,title_query,location_query,
 
 	# Category Filter
 	if category_query:
-		lower_cat = category_query.lower()
-		search_results_2 = [i if i['category'].lower() == lower_cat for i in search_results]
+		search_results_2 = closest_results(category_query,search_results,"category")
 	else:
-		search_results_2 = search_results
+		search_results_2 = list(search_results)
 
 	# Time Filter
 	if time_from and not time_until:
-		search_results_3 = [i if i['time'] >= time_from for i in search_results_2]
+		search_results_3 = [i for i in search_results_2 if i['time'] >= time_from]
 	
 	# grab from beginning to time_until
 	elif not time_from and time_until:
-		search_results_3 = [i if i['time'] <= time_until for i in search_results_2]
+		search_results_3 = [i for i in search_results_2 if i['time'] <= time_until]
 
 	# grab time_from to time_until
 	elif time_from and time_until:
-		search_results_3 = [i if i['time'] <= time_from and i['time'] <= time_until for i in search_results_2]
-
+		search_results_3 = [i for i in search_results_2 if i['time'] <= time_from and i['time'] <= time_until]
 	else:
 		search_results_3 = search_results_2
 
 	# Location Filter
 	if location_query:
-		lower_loc = location_query.lower()
-		search_results_4 = [i if i['location'].lower() == lower_loc for i in search_results_3]
+		search_results_4 = closest_results(location_query,search_results_3,"location")
+		# [i if i['location'].lower() == lower_loc for i in search_results_3]
 	else:
-		search_results_4 = search_results
+		search_results_4 = search_results_3
+
+	# Title Filter
+	if title_query:
+		search_results_5 = closest_results(title_query,search_results_4,"name")
+		# [i if i['location'].lower() == lower_loc for i in search_results_3]
+	else:
+		search_results_5 = search_results_4
+
+	# Limit results
+	if len(search_results_5) > numResults:
+		return list(search_results_5[0:numResults])
+	return list(search_results_5)
 
 
 """
@@ -160,6 +194,7 @@ def get_static_menu(target_db):
 	Not worried about time here since these menus
 	don't change on a daily basis.
 	"""
+	print target_db
 	results = target_db.find()
 	if results.count() == 0:
 		print "Found no static meals"

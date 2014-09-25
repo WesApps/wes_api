@@ -10,6 +10,11 @@ SCRAPE_USDAN = True
 SCRAPE_STATIC_MENUS = True
 SCRAPE_FILM_SERIES = True
 
+def initialize():
+	clear_all_sources()
+	scrape_all_sources()
+	populate_static_menus()
+
 def scrape_all_sources():
 	"""
 	Calls all of the scraping methods from all 
@@ -21,7 +26,7 @@ def scrape_all_sources():
 	result3 = scrape_usdan_menus()
 	result4 = scrape_film_series()
 	if not result1 and result2 and result3:
-		print "UNABLE TO SCRAPE ALL SOURCE"
+		print "UNABLE TO SCRAPE ALL SOURCES"
 		return False
 	return True
 
@@ -90,8 +95,12 @@ def scrape_usdan_menus():
 	return True
 
 def populate_static_menus():
-	db.populate_static_menus()
-
+	try:
+		db.populate_static_menus()
+		return True
+	except:
+		return False
+		
 def scrape_film_series():
 	if not SCRAPE_FILM_SERIES:
 		return True

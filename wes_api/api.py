@@ -39,6 +39,49 @@ def validate_max_results_arg(req_max_results,min_results,max_results):
 def validate_source(req_source,accepted_sources):
 	return req_source in accepted_sources
 
+def validate_search_request(request_obj,min_results,max_results):
+	"""
+	Grabs search terms from request if they exist, including:
+	-title
+	-location
+	-time_from
+	-time_until
+	-category_query
+	-source
+	-maxresults
+	"""
+	raw_title = request.args.get('title')
+	raw_location = request.args.get('location')
+	raw_time_from = request.args.get('time_from')
+	raw_time_until = request.args.get('time_until')
+	raw_category = request.args.get('category')
+	raw_source = request.args.get('source')
+	raw_max_results = request.args.get('maxresults')
+
+	if raw_time_from:
+		pass
+		#TODO: Figure out time format to be passed.
+		#probably month,day,year in isoformat?
+		#ALSO: Remember to change the return statement below.
+	if raw_time_until:
+		#TODO: Figure out time format to be passed.
+		#probably month,day,year in isoformat?
+		pass
+
+	if raw_max_results:
+		# check the request
+		valid = validate_max_results_arg(raw_max_results,min_results,max_results)
+		if not valid[0]:
+			return [False,valid[1]]
+		# grab the int-ified result from validate since valid
+		raw_max_results = valid[1]
+	else:
+		raw_max_results = max_results
+
+	return [True,{"max_results":raw_max_results,"source":raw_source,
+					"title":raw_title, "location":raw_location,
+					"time_from":None,"time_until":None,
+					"category":raw_category}]
 
 def validate_request(request_obj,min_results,max_results,accepted_sources=None):
 	"""
@@ -73,15 +116,25 @@ def validate_request(request_obj,min_results,max_results,accepted_sources=None):
 	return [True,{"max_results":req_max_results,"source":data_source}]
 
 
+# def validate_search_results(search_results):
+# 	if not search_results:
+# 		errMsg = ("Unable to find menus in the database. Sadface")
+# 		return [False,err_response(errMsg)]
+# 	if len(search_results) < 1:
+# 		errMsg = ("No latest events, panic.")
+# 		return [False,err_response(errMsg)]
+# 	else:
+# 		return [True,search_results]
+
 def validate_search_results(search_results):
 	if not search_results:
-		errMsg = ("Unable to find menus in the database. Sadface")
-		return [False,err_response(errMsg)]
-	if len(search_results) < 1:
-		errMsg = ("No latest events, panic.")
-		return [False,err_response(errMsg)]
-	else:
-		return [True,search_results]
+		return json.dumps({"Result Count":0,"Results":[]})
+
+	final_objs = format_mongo_objs(search_results)
+	response = {"Result Count":len(final_objs),
+				"Results":final_objs}
+	return json.dumps(response)
+
 
 
 """
@@ -101,7 +154,6 @@ def format_mongo_objs(mongo_objs):
 			print "mongo_obj has no _id, panic!"
 			
 		old_time = mongo_obj.get('time')
-		print mongo_obj
 		if not old_time:
 			# print "mongo_obj",mongo_obj,"has no time"
 			continue
@@ -118,6 +170,46 @@ def get_today_events():
 @api.route('/events/latest',methods=['GET'])
 def get_latest_events():
 	return get_events()
+
+@api.route('/events/search',methods=['GET'])
+def search_events():
+	return search_events()
+
+
+def search_events():
+	"""
+	Moar powarful searching RAWR!
+	"""
+	# default
+	MIN_RESULTS = 1
+	MAX_RESULTS = 100
+	validation_result = validate_search_request(request,MIN_RESULTS,MAX_RESULTS)
+	if not validation_result[0]:
+		return validation_result[1]
+	else:
+		req_max_results = validation_result[1]['max_results']
+		req_source = validation_result[1]['source']
+		req_title = validation_result[1]['title']
+		req_time_from = validation_result[1]['time_from']
+		req_time_until = validation_result[1]['time_until']
+		req_category = validation_result[1]['category']
+		req_location = validation_result[1]['location']
+
+	#Now search, check, and respond
+	"""
+	def search_events(numResults,title_query,location_query,
+					time_from,time_until,category_query,source):
+	"""
+	search_results = search.search_events(
+					numResults=req_max_results,
+					title_query=req_title,
+					location_query=req_location,
+					time_from=req_time_from,
+					time_until=req_time_until,
+					category_query=req_category,
+					source=req_source)
+	
+	return validate_search_results(search_results)
 
 
 def get_events(today=False):
@@ -144,14 +236,7 @@ def get_events(today=False):
 	else:
 		search_results = search.get_events(req_max_results,req_source)
 
-	validated_search = validate_search_results(search_results)
-	if not validated_search[0]:
-		return validated_search[1]
-	else:
-		final_objs = format_mongo_objs(validated_search[1])
-		response = {"Result Count":len(final_objs),
-					"Results":final_objs}
-		return json.dumps(response)
+	return validate_search_results(search_results)
 
 @api.route('/events/sources',methods=['GET'])
 def get_sources():
@@ -179,30 +264,27 @@ def get_menus(min_res,max_res,today=False):
 	#Now search, check, and respond
 	if today:
 		search_results = search.get_menus_today()
-		print "RES",search_results
 	else:
 		search_results = search.get_menus_all(req_max_results)
 	#only need to validate the usdan ones.
 	usdan_results = search_results.get('usdan')
-	validated_search = validate_search_results(usdan_results)
-	if not validated_search[0]:
-		return validated_search[1]
-	else:
-		#get late night and summerfields.
-		#this method will return all or nothing,
-		#so if usdan fails, you get nothing.
-		#ALSO, number of results is tied to usdan results
-		summerfields = format_mongo_objs(search_results.get('summerfields'))
-		late_night = format_mongo_objs(search_results.get('late_night'))
-		usdan = format_mongo_objs(validated_search[1])
-		final_objs = {"usdan":usdan,
-					"summerfields":summerfields,
-					"late_night":late_night}
+	if not usdan_results:
+		return json.dumps({"Result Count":0,"Results":[]})
 
-		response = {"Result Count":len(usdan),
-					"Results":final_objs}
-		print response
-		return json.dumps(response)
+	#get late night and summerfields.
+	#this method will return all or nothing,
+	#so if usdan fails, you get nothing.
+	#ALSO, number of results is tied to usdan results
+	summerfields = format_mongo_objs(search_results.get('summerfields'))
+	late_night = format_mongo_objs(search_results.get('late_night'))
+	usdan = format_mongo_objs(usdan_results)
+	final_objs = {"usdan":usdan,
+				"summerfields":summerfields,
+				"late_night":late_night}
+
+	response = {"Result Count":len(usdan),
+				"Results":final_objs}
+	return json.dumps(response)
 
 @api.route('/menus/all',methods=['GET'])
 def get_menus_all():
@@ -222,19 +304,10 @@ FILM SERIES METHODS
 def get_film_series(today=False):
 	if today:
 		search_results = search.get_film_series_today()
-		print "RES",search_results
 	else:
 		search_results = search.get_film_series_all()
 	#only need to validate the usdan ones.
-	validated_search = validate_search_results(search_results)
-	if not validated_search[0]:
-		return validated_search[1]
-	else:
-		final_objs = format_mongo_objs(validated_search[1])
-		print final_objs
-		response = {"Result Count":len(final_objs),
-					"Results":final_objs}
-		return json.dumps(response)
+	return validate_search_results(search_results)
 
 @api.route('/filmseries/all')
 def get_film_series_all():
