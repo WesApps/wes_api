@@ -1,8 +1,9 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from lib.scraping.wesleying import wesleying
 from api import api
 import scraper_control
 import json
+import os
 
 app = Flask(__name__)
 
@@ -13,7 +14,8 @@ app.register_blueprint(api,url_prefix='/api')
 # and display the exact API call used
 @app.route('/')
 def index():
-    return "Welcome to the Wesleyan API. Get your info here."
+	print os.listdir('wes_api/templates')
+	return render_template('index.html')
 
 @app.route('/update')
 def update():
