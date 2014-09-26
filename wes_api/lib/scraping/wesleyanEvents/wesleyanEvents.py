@@ -82,8 +82,11 @@ def scrape_wesleyan_events():
         value = item["summary_detail"]["value"].split("<br />")
         value0 = str(no_unicode(value[0]))
         date = re.match("\d\d/\d\d/\d\d\d\d", value0)
-        time = re.search("(TBA|\d\d:\d\d (a|p)m( - \d\d:\d\d (a|p)m)*)", value0)
-        if date.group() and time.group():
+        time = re.search("(TBA|\d\d:\d\d (a|p)m( - \d\d:\d\d (a|p)m)*)", value0)        
+        if not time:
+            date = date.group().split("/")
+            dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]))
+        elif date.group() and time.group():
             date = date.group().split("/")
             time = time.group().split(" ")
         
@@ -98,9 +101,12 @@ def scrape_wesleyan_events():
             else:
                 dt = datetime.datetime(int(date[2]), int(date[0]), int(date[1]))
         else:
-            date = str(datetime.dateime.today())
+            dt = str(datetime.dateime.today())
         desc = value[0]
-        loc = re.search("Location: .*", str(value[-1])).group().lstrip("Location: ")
+        try:
+            loc = re.search("Location: .*", str(value[-1])).group().lstrip("Location: ")
+        except:
+            loc = ""
         link = ""
         for v in value:
             if v.startswith("URL"):

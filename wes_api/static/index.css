@@ -19,6 +19,7 @@
 #title {
     text-align: center;
     font-size: 3.5em;
+    .blur(5px);
 }
 #subtitle {
     margin-top: -40px;
@@ -34,7 +35,13 @@
     max-width: 1000px;
     width: 73%;
 }
-#userreviews {
-    ;
-    /*float: right;*/
+.statusdiv {
+	display: block;
+}
+.statusdiv > h4 {
+    display: inline-block;
+}
+.statusdiv > span {
+    display: inline-block;
+    float: right;
 }

@@ -11,8 +11,10 @@
     <meta property="og:description" content="Unofficial API for Wesleyan University related information" />
     <meta property="og:site_name" content="Wes Api" />
     <title>Wes Api</title>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- // <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
+    <script src="/static/jQuery1.11.1.min.js"></script>
     <script src="/static/kube.min.js"></script>
+    <script src="/static/index.js"></script>
     <link rel="stylesheet" href="/static/kube.min.css">
     <link rel="stylesheet" href="/static/index.css">
 </head>
@@ -41,32 +43,55 @@
         <h3>Your one stop shop for Wesleyan info</h3>
     </div>
     <div class="units-row units-padding" id="maincontainer">
-	    <div class="unit-50">
-	    	<p class="lead">
-	    		<b>What does it do?:</b>
-		    		<br>Wes API scrapes, aggregates, and serves data from sources including <i>Wesleying, Wesleyan Events, Wesleyan Film Series, Usdan, Summerfields, WesMaps</i>, and various other pages.</p>
-			    	<p>Wes API scrapes, aggregates, and serves data from sources including Wesleying, Wesleyan Events, Wesleyan Film Series, Usdan, Summerfields</p>
-	    </div>
-	    <div class="unit-push-right unit-40" id="userreviews">
-	        <h4><i>What are users saying?</i></h4>
-	        <blockquote>
-	            Lonnie: Much data.<br>
-	            Prancer: So data.<br>
-	            Crinkles: Very data.<br>
-	            Wilfred: Such consensus.<br>
-	            Puddles: Wow.
-	        </blockquote>
-	    </div>
-	</div>
-	<div class="units-row units-padding" id="maincontainer">
-	    <div class="unit-50">
-	    	<p class="lead">Here's Tonight's Usdan Menu (RANDOM BUTTON?)
-	    </div>
-	    <div class="unit-push-right unit-40" id="userreviews">
-	        <h4>STATUS-O-METER!</h4>
-	        <h2>ALL SYSTEMS OFFLINE</h2>
-	    </div>
-	</div>
+        <div class="unit-50">
+            <h3 id="headerexplain">What does it do?:</h3>
+            <p>
+                Wes API scrapes, aggregates, and provides standardized programmatic access to data from sources including <i>Wesleying, Wesleyan Events, Wesleyan Film Series, Usdan, Summerfields, WesMaps</i>, and various others. For more information about what exactly is going on under the hood, check out the about page.
+            </p>
+
+            <!-- <p>Wes API scrapes, aggregates, and serves data from sources including Wesleying, Wesleyan Events, Wesleyan Film Series, Usdan, Summerfields</p> -->
+        </div>
+        <div class="unit-push-right unit-40" id="userreviews">
+            <h3><i>What are users saying?</i>
+            </h3>
+            <blockquote>
+                Lonnie: Much data.
+                <br>Prancer: So data.
+                <br>Crinkles: Very data.
+                <br>Wilfred: Such consensus.
+                <br>Puddles: Wow.
+            </blockquote>
+        </div>
+    </div>
+    <div class="units-row units-padding" id="maincontainer">
+        <div class="unit-50">
+            <h3 class="randomDataTitle">Here's: Tonight's Film (RANDOM BUTTON?)</h3>
+            <div class="randomData"></div>
+        </div>
+        <div class="unit-push-right unit-40" id="statusometer">
+            <h3>STATUS-O-METER!</h3>
+            <div class="statusdiv">
+                <h4>Events:</h4>
+                <span class="label label-outline label-green">Nominal</span>
+            </div>
+            <div class="statusdiv">
+                <h4>Film Series:</h4>
+                <span class="label label-outline label-green">Nominal</span>
+            </div>
+            <div class="statusdiv">
+                <h4>Menus:</h4>
+                <span class="label label-outline label-green">Nominal</span>
+            </div>
+            <div class="statusdiv">
+                <h4>Hours:</h4>
+                <span class="label label-outline label-red">Offline</span>
+            </div>
+            <div class="statusdiv">
+                <h4>WesMaps:</h4>
+                <span class="label label-outline label-red">Offline</span>
+            </div>
+        </div>
+    </div>
 
 </body>
 
