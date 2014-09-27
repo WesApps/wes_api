@@ -1,52 +1,20 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <meta property="og:title" content="Wes Api" />
-    <meta property="og:url" content="http://????????/" />
-    <meta property="og:image" content="/static/bunchie.jpg" />
-    <meta property="og:description" content="Unofficial API for Wesleyan University related information" />
-    <meta property="og:site_name" content="Wes Api" />
-    <title>Wes Api</title>
-    <!-- // <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
-    <script src="/static/jQuery1.11.1.min.js"></script>
-    <script src="/static/kube.min.js"></script>
-    <script src="/static/index.js"></script>
-    <link rel="stylesheet" href="/static/kube.min.css">
-    <link rel="stylesheet" href="/static/index.css">
-</head>
+{% extends "layout.html" %} {% block title %}Home{% endblock %} {% block head %} {{ super() }}
+<script src="/static/index.js"></script>
+<link rel="stylesheet" href="/static/index.css">{% endblock %} {% block content %}
 
 <body>
-    <nav class="navbar navbar-pills nav-fullwidth" id="menubar">
-        <ul>
-            <li>
-                <a href="#" class="menuitem">Home</a>
-            </li>
-            <li>
-                <a href="#" class="menuitem">Try it out</a>
-            </li>
-            <li>
-                <a href="#" class="menuitem">Documentation</a>
-            </li>
-            <li>
-                <a href="#" class="menuitem">About</a>
-            </li>
-        </ul>
-    </nav>
     <div id="title">
-        <h1>Wes API</h1>
+        <h1>
+            <img id="titleimg" src="/static/icon2.png">es API</h1>
     </div>
     <div id="subtitle">
         <h3>Your one stop shop for Wesleyan info</h3>
     </div>
     <div class="units-row units-padding" id="maincontainer">
         <div class="unit-50">
-            <h3 id="headerexplain">What does it do?:</h3>
+            <h3 id="headerexplain">What does it do?</h3>
             <p>
-                Wes API scrapes, aggregates, and provides standardized programmatic access to data from sources including <i>Wesleying, Wesleyan Events, Wesleyan Film Series, Usdan, Summerfields, WesMaps</i>, and various others. For more information about what exactly is going on under the hood, check out the about page.
+                Wes API scrapes, aggregates, and provides standardized programmatic access to data from sources including <i><a href="http://wesleying.org/">Wesleying</a>, <a href="http://events.wesleyan.edu/">Wesleyan Events</a>, <a href="http://www.wesleyan.edu/filmseries/">Wesleyan Film Series</a>, <a href="http://wesleyan.cafebonappetit.com/">Usdan</a>,<a href="http://wesleyan.cafebonappetit.com/"> Summerfields</a>, <a href="https://iasext.wesleyan.edu/regprod/!wesmaps_page.html">WesMaps</a></i>, and various others. For more information about what exactly is going on under the hood, check out the <a href="/about">about page</a>.
             </p>
 
             <!-- <p>Wes API scrapes, aggregates, and serves data from sources including Wesleying, Wesleyan Events, Wesleyan Film Series, Usdan, Summerfields</p> -->
@@ -65,7 +33,7 @@
     </div>
     <div class="units-row units-padding" id="maincontainer">
         <div class="unit-50">
-            <h3 class="randomDataTitle">Here's: Tonight's Film (RANDOM BUTTON?)</h3>
+            <h3 class="randomDataTitle" id="headerexplain">Here's: Tonight's Film (RANDOM BUTTON?)</h3>
             <div class="randomData"></div>
         </div>
         <div class="unit-push-right unit-40" id="statusometer">
@@ -92,7 +60,8 @@
             </div>
         </div>
     </div>
+    {% endblock %}
 
-</body>
+    <!-- </body> -->
 
-</html>
+    <!-- </html> -->

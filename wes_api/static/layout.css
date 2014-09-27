@@ -1,0 +1,38 @@
+body {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0.063em;
+    word-spacing: 0.12em;
+    line-height: 1.56;
+    font-family: 'Lato', sans-serif;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+#menubar {
+    background: white;
+    padding: 20px;
+}
+.menuitem {
+    color: black;
+}
+.navbar-pills a {
+    /*text-transform: */
+}
+.navbar-pills a:hover {
+    color: white;
+    background: black;
+}
+.navbar a:hover {
+    /*color: white;*/
+    text-decoration: none;
+}
+/*font-style: normal;
+font-weight: 400;
+font-size: 13px;
+text-transform: none;
+text-decoration: none;
+letter-spacing: 0.063em;
+word-spacing: 0.12em;
+line-height: 1.56;*/

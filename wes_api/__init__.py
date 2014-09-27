@@ -9,13 +9,27 @@ app = Flask(__name__)
 
 app.register_blueprint(api,url_prefix='/api')
 
-
 #TODO: Create playground to do basic api calls and see data
 # and display the exact API call used
 @app.route('/')
 def index():
 	print os.listdir('wes_api/templates')
 	return render_template('index.html')
+
+@app.route('/try')
+def try_route():
+	print os.listdir('wes_api/templates')
+	return render_template('try.html')
+
+@app.route('/documentation')
+def documentation():
+	print os.listdir('wes_api/templates')
+	return render_template('documentation.html')
+
+@app.route('/about')
+def about():
+	print os.listdir('wes_api/templates')
+	return render_template('about.html')
 
 @app.route('/update')
 def update():

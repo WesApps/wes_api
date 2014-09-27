@@ -1,0 +1,56 @@
+{% extends "layout.html" %} {% block title %}Try{% endblock %} {% block head %} {{ super() }}
+<!-- // <script src="/static/index.js"></script> -->
+<link rel="stylesheet" href="/static/index.css">{% endblock %} {% block content %}
+
+<body>
+    <div id="title">
+        <h1>&ltThe Sandbox&gt</h1>
+    </div>
+    <div id="subtitle">
+        <h3>(Disclaimer: Please wash off all sand before sending these requests.)</h3>
+    </div>
+    <div id="maincontainer">
+        <nav class="nav-tabs">
+            <ul>
+                <li><a href="#">Menus</a>
+                </li>
+                <li>
+                    <span>Events</span>
+                </li>
+            </ul>
+        </nav>
+        <form method="get" action="" class="forms">
+            <fieldset>
+                <legend>Select a method</legend>
+                <label for="subtypeSelect">Option 1</label>
+                <input type="radio" name="subtypeSelect" id="radio-1">
+            </fieldset>
+
+            <fieldset>
+                <legend>Required Fields</legend>
+                <label>
+                    Email
+                    <input type="email" name="user-email" class="width-50" />
+                </label>
+                <label>
+                    Password
+                    <input type="password" name="user-password" class="width-50" />
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>About</legend>
+                <label>
+                    <textarea name="user-about" class="width-100" rows="5"></textarea>
+                </label>
+            </fieldset>
+            <p>
+                <input type="submit" class="btn" value="Submit" />
+            </p>
+        </form>
+    </div>
+
+    {% endblock %}
+
+    <!-- </body> -->
+
+    <!-- </html> -->
