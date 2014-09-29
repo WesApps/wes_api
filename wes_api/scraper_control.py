@@ -21,12 +21,17 @@ def scrape_all_sources():
 	of the scraping sources imported above.
 	TODO: Multi-threading
 	"""
+	print "SCRAPER: Scraping all sources"
+	print "SCRAPER: Scraping Wesleying"
 	result1 = scrape_wesleying()
+	print "SCRAPER: Scraping Wesleyan Events"
 	result2 = scrape_wesleyan_events()
+	print "SCRAPER: Scraping Usdan Menus"
 	result3 = scrape_usdan_menus()
+	print "SCRAPER: Scraping Film Series"
 	result4 = scrape_film_series()
-	if not result1 and result2 and result3:
-		print "UNABLE TO SCRAPE ALL SOURCES"
+	if not result1 and result2 and result3 and result4:
+		print "SCRAPER: ERROR, UNABLE TO SCRAPE ALL SOURCES"
 		return False
 	return True
 
