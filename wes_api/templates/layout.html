@@ -13,33 +13,26 @@
     <script src="/static/jQuery1.11.1.min.js"></script>
     <script src="/static/jquery.jsonview.js"></script>
     <script src="/static/kube.min.js"></script>
-    <link rel="stylesheet" href="/static/kube.min.css">
-    {% block head %}
+    <link rel="stylesheet" href="/static/kube.min.css">{% block head %}
     <link rel="stylesheet" href="/static/layout.css">
     <link rel="stylesheet" href="/static/jquery.jsonview.css">
     <!--     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
     <!-- <link href='http://fonts.googleapis.com/css?family=Puritan:400,700,400italic,700italic|PT+Sans:400,700,400italic,700italic|Muli:300,400,400italic,300italic|Hind:400,700,600,500,300' rel='stylesheet' type='text/css'> -->
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic|PT+Mono|Oswald:400,300,700|Merriweather+Sans:400,300,300italic,400italic,700,700italic,800italic,800|Merriweather:400,300,300italic,400italic,700,700italic,900,900italic|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,700,800,600' rel='stylesheet' type='text/css'>
-     <link rel="icon" type="image/png" href="/static/icon2.png" />
+    <link rel="icon" type="image/png" href="/static/icon2.png" />
     <title>{% block title %}{% endblock %}</title>
     {% endblock %}
 </head>
 
 <body>
+    {% set navigation_bar = [ ('/','home','Home'), ('/sandbox','sandbox','Sandbox'), ('/documentation','documentation', 'Documentation'),('/about','about','About')] -%} {% set active_page = active_page|default('home') -%}
     <nav class="navbar navbar-pills nav-fullwidth" id="menubar">
         <ul>
-            <li>
-                <a href="/" class="menuitem">Home</a>
-            </li>
-            <li>
-                <a href="/try" class="menuitem">Try it out</a>
-            </li>
-            <li>
-                <a href="/docs" class="menuitem">Documentation</a>
-            </li>
-            <li>
-                <a href="/about" class="menuitem">About</a>
-            </li>
+            {% for href, id, caption in navigation_bar %}
+            <li{% if id==active_page %} id="activeMenuItem"{% endif %}><a href="{{ href|e }}" class="menuitem">{{ caption|e }}</a>
+                </li>
+                {% endfor %}
+
         </ul>
     </nav>
     <div id="content">{% block content %}{% endblock %}</div>

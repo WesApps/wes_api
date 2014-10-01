@@ -45,7 +45,6 @@ def content_builder(content,identifiers,matches):
 
     #sort matches by index ascending
     matches = sorted(matches,key=itemgetter(1))
-    # print matches,"matches"
 
     #iterating through the matches and building up a list of words that 
     #occur before the next match item. If no next match, grab everything
@@ -87,7 +86,6 @@ def only_events(posts):
                 if post not in actual_events:
                     actual_events.append(post)
             
-    # print categories
     return actual_events,categories
 
 
@@ -172,14 +170,12 @@ def xml_parser():
     items = only_events(all_items)[0]
     event_cats = wesleying_categorizer(items)
     for i in items:
-        # print i,"A"
         title = i.getElementsByTagName('title')[0].childNodes[0].data
         url = i.getElementsByTagName('link')[0].childNodes[0].data
         description = i.getElementsByTagName('description')[0].childNodes[0].data
         content_html = i.getElementsByTagName('content:encoded')[0].childNodes[0].data
         parsed_content = BeautifulSoup.BeautifulSoup(content_html)
         try:
-            # print parsed_content
             full_description = parsed_content.find('blockquote').text
         except:
             full_description = ""

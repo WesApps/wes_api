@@ -1,6 +1,6 @@
-$(document).ready(initialize_try);
+$(document).ready(initialize_sandbox);
 
-function initialize_try() {
+function initialize_sandbox() {
     var json = {
         "Result Count": 4,
         "Results": [{

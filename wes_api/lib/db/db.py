@@ -21,13 +21,13 @@ def add_event(event):
 	#ensure event['name'] exists
 	name = event.get('name')
 	if not name:
-		print 'Unable to upsert event, no name',event
+		print 'DB: Unable to upsert event, no name',event
 		return False
 	try:
 		events.update({'name':name},event,True)
 		return True
 	except:
-		print 'Unable to upsert event, can\'t add to db',event
+		print 'DB: Unable to upsert event, can\'t add to db',event
 		return False
 
 def remove_event_by_name(eventName):
@@ -39,7 +39,7 @@ def remove_event_by_name(eventName):
 		events.remove({'name':eventName})
 		return True
 	except:
-		print 'Unable to remove event',eventName
+		print 'DB: Unable to remove event',eventName
 		return False
 
 def remove_events_by_source(sourceName):
@@ -50,7 +50,7 @@ def remove_events_by_source(sourceName):
 		events.remove({'source':sourceName})
 		return True
 	except:
-		print 'Unable to remove events from source',sourceName
+		print 'DB: Unable to remove events from source',sourceName
 		return False
 
 def remove_all_events():
@@ -59,10 +59,10 @@ def remove_all_events():
 	"""
 	try:
 		events.drop()
-		print 'Dropped events DB'
+		print 'DB: Dropped events DB'
 		return True
 	except:
-		print 'Unable to drop events DB'
+		print 'DB: Unable to drop events DB'
 		return False
 
 """
@@ -70,12 +70,12 @@ MENU DB METHODS
 """
 def populate_static_menus():
 	try:
-		print "Populating static menus"
+		print "DB: Populating static menus"
 		populate_static_menu("static/summerfields_menu.csv",summerfields_menu)
 		populate_static_menu("static/late_night.csv",late_night_menu)
 		return True
 	except:
-		print "Populating static menus failed"
+		print "DB: Populating static menus failed"
 		return False
 
 def populate_static_menu(csv_file,target_db):
@@ -155,7 +155,7 @@ def add_usdan_day(day_item):
 		day_time = datetime.datetime.strptime(raw_day_time,'%a, %d %b %Y')
 		
 		# if we already have the item, can stop.
-		print usdan_menus.find({'time':day_time}).count()
+		# print usdan_menus.find({'time':day_time}).count()
 		if usdan_menus.find({'time':day_time}).count() != 0:
 			return True
 
@@ -177,7 +177,7 @@ def add_usdan_day(day_item):
 		usdan_menus.insert(processed_day_item)
 		return True
 	except:
-		print "Unable to add usdan day,",day_item
+		print "DB: Unable to add usdan day,",day_item
 		return False
 
 def remove_all_menus():
@@ -188,10 +188,10 @@ def remove_all_menus():
 		usdan_menus.drop()
 		summerfields_menu.drop()
 		late_night_menu.drop()
-		print 'Dropped Menus DB'
+		print 'DB: Dropped Menus DB'
 		return True
 	except:
-		print 'Unable to drop menus DB'
+		print 'DB: Unable to drop menus DB'
 		return False
 
 """
@@ -199,20 +199,20 @@ FILM SERIES METHODS
 """
 def add_film_event(film_event):
 	if film_series.find(film_event).count() != 0:
-		print "Have film, done."
+		# print "Have film, done."
 		return True
 	try:
 		film_series.insert(film_event)
 		return True
 	except:
-		print 'Unable to add film event, can\'t add to db',film_event
+		print 'DB: Unable to add film event, can\'t add to db',film_event
 		return False
 
 def remove_all_films():
 	try:
 		film_series.drop()
-		print 'Dropped Film Series DB'
+		print 'DB: Dropped Film Series DB'
 		return True
 	except:
-		print 'Unable to drop Film Series DB'
+		print 'DB: Unable to drop Film Series DB'
 		return False

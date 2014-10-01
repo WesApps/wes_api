@@ -32,7 +32,6 @@ def initialize():
 def scrape_wesleying():
     wesleying_events = []
     wesleying_feed = xml_parser()
-    # print "LEN WESLEYING FEED:",len(wesleying_feed)
     for item in wesleying_feed:
         name = no_unicode(item["title"])
         try:

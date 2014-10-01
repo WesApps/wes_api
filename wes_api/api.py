@@ -151,15 +151,13 @@ def format_mongo_objs(mongo_objs):
 		try:
 			mongo_obj.pop('_id')
 		except:
-			print "mongo_obj has no _id, panic!"
+			print "API: mongo_obj has no _id, panic!"
 			
 		old_time = mongo_obj.get('time')
 		if not old_time:
-			# print "mongo_obj",mongo_obj,"has no time"
 			continue
 		mongo_obj['time'] = old_time.isoformat()
 	return mongo_objs 
-	# return {"Result Count":len(mongo_objs),"Results":mongo_objs}
 
 
 @api.route('/events/today',methods=['GET'])

@@ -17,7 +17,7 @@ def scrape_film_series():
 	processed_week_pages = process_week_pages(raw_week_pages)
 	return processed_week_pages
 	# except:
-	print "Unable to scrape film series."
+	print "FILM: Unable to scrape film series."
 	return None
 
 def get_week_pages():
@@ -31,7 +31,7 @@ def get_week_pages():
 	for link in all_links:
 		link_text = link.get('href')
 		if not link_text:
-			print "NO LINK TEXT??",link
+			print "FILM: NO LINK TEXT??",link
 			continue
 		for month in months:
 			if month in link_text and "archive" not in link_text:

@@ -35,7 +35,7 @@ def get_events(numEvents,source=None):
 	else:
 		results = db.events.find()
 	if results.count() == 0:
-		print "Found no events"
+		print "SEARCH: Found no events"
 		return None
 	sorted_results = results.sort('time',pymongo.DESCENDING)
 	return limit_results(numEvents,sorted_results)
@@ -46,7 +46,7 @@ def get_events_today():
 	tomorrow = today + datetime.timedelta(days=1)
 	search_results = events.find({"time":{"$gte":today,"$lt":tomorrow}})
 	if search_results.count() == 0:
-		print "Found no events for today."
+		print "SEARCH: Found no events for today."
 		return None
 	return list(search_results)
 
@@ -94,7 +94,7 @@ def search_events(numResults,title_query,location_query,
 	else:
 		search_results = db.events.find()
 	if not search_results:
-		print "NO events found in search events"
+		print "SEARCH: NO events found in search events"
 		return None
 
 	# Category Filter
@@ -177,7 +177,7 @@ def get_usdan(numResults,time_from=None,time_until=None):
 	else:
 		usdan_results = usdan_menus.find()
 	if usdan_results.count() == 0:
-		print "Found no usdan meals"
+		print "SEARCH: Found no usdan meals"
 		return None
 	sorted_results = usdan_results.sort('time',pymongo.DESCENDING)
 
@@ -194,10 +194,9 @@ def get_static_menu(target_db):
 	Not worried about time here since these menus
 	don't change on a daily basis.
 	"""
-	print target_db
 	results = target_db.find()
 	if results.count() == 0:
-		print "Found no static meals"
+		print "SEARCH: Found no static meals"
 		return None
 	return list(results)
 
@@ -207,7 +206,7 @@ FILM SERIES SEARCH
 def get_film_series_all():
 	search_results = film_series.find()
 	if search_results.count() == 0:
-		print "Found no film series at all...?"
+		print "SEARCH: Found no film series at all...?"
 		return None
 	return list(search_results)
 
@@ -217,6 +216,6 @@ def get_film_series_today():
 	tomorrow = today + datetime.timedelta(days=1)
 	search_results = film_series.find({"time":{"$gte":today,"$lt":tomorrow}})
 	if search_results.count() == 0:
-		print "Found no film for today."
+		print "SEARCH: Found no film for today."
 		return None
 	return list(search_results)

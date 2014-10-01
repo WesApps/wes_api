@@ -25,19 +25,24 @@ body {
     background: black;
 }
 .navbar a:hover {
-    /*color: white;*/
     text-decoration: none;
 }
+#activeMenuItem {
+    background: black;
+}
+#activeMenuItem a {
+    color: white;
+}
 #title {
-    text-align: center;
     font-size: 3.8em;
+    text-align: center;
 }
 #title > h1 {
     /*font-family: 'Merriweather Sans', serif;*/
     font-family: 'Lato', sans-serif;
     font-weight: lighter;
 }
-#titleimg {
+#titleimgs {
     width: 133px;
     vertical-align: -13px;
 }
