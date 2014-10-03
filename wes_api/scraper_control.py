@@ -31,8 +31,11 @@ def scrape_all_sources():
 	print "SCRAPER: Scraping Film Series"
 	result4 = scrape_film_series()
 	if not result1 and result2 and result3 and result4:
+		#TODO: Update status db
 		print "SCRAPER: ERROR, UNABLE TO SCRAPE ALL SOURCES"
 		return False
+	#TODO: Update status db
+	print "SCRAPER: Successfully scraped all sources"
 	return True
 
 def clear_all_sources():

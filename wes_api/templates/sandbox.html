@@ -19,24 +19,25 @@
                 </li>
             </ul>
         </nav>
-        <form method="get" action="" class="forms">
+        <form id="subtypeSelect">
             <fieldset>
                 <legend>Select an API option</legend>
                 <div id="radioHolder">
-                    <label for="subtypeSelect">Today</label>
-                    <input type="radio" name="subtypeSelect" id="radio-1">
+                    <label for="eventsLatestRadio">Latest</label>
+                    <input type="radio" name="radio-subtype" id="eventsLatest" checked>
                 </div>
                 <div id="radioHolder">
-                    <label for="subtypeSelect">Latest</label>
-                    <input type="radio" name="subtypeSelect" id="radio-1">
+                    <label for="radio-subtype">Today</label>
+                    <input type="radio" name="radio-subtype" id="eventsToday">
                 </div>
                 <div id="radioHolder">
-                    <label for="subtypeSelect">Search</label>
-                    <input type="radio" name="subtypeSelect" id="radio-1">
+                    <label for="eventsSearchRadio">Search</label>
+                    <input type="radio" name="radio-subtype" id="eventsSearch">
                 </div>
             </fieldset>
-
-            <fieldset id="eventsLatest">
+        </form>
+        <form method="get" action="api/events/latest" class="forms" id="eventsLatestForm">
+            <fieldset>
                 <legend>Optional Fields</legend>
                 <label>
                     Source
@@ -45,8 +46,19 @@
                 </label>
                 <label>
                     Max Results
-                    <input type="text" name="maxResults" class="width-50" />
+                    <input type="text" name="maxresults" class="width-50" />
                     <div class="forms-desc">Enter a number from 1-100. Default is 30?</div>
+                </label>
+            </fieldset>
+            <p>
+                <input type="submit" class="btn" value="Submit" />
+            </p>
+        </form>
+        <form method="get" action="api/events/today" hidden="true" class="forms" id="eventsTodayForm">
+            <fieldset>
+                <legend>Fields</legend>
+                <label>
+                    No fields for this option.
                 </label>
             </fieldset>
             <p>
