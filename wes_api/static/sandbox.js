@@ -11,7 +11,7 @@ function initialize_sandbox() {
         'eventsSearch': $("#eventsSearchForm")
     }
     previous_form = subtype_forms['eventsLatest'];
-    
+
     //set click listeners
     set_on_click_listeners();
 
@@ -19,14 +19,15 @@ function initialize_sandbox() {
     for (s in subtype_forms) {
         subtype_forms[s].submit(function(e) {
             var form = $(this);
-            console.log(form);
+            // console.log(form.attr('action'))
             $.ajax({
                 url: form.attr('action'),
                 type: form.attr('method'),
                 data: form.serialize(), // data to be submitted
                 success: function(response) {
-                    console.log(response);
+                    console.log(response,this);
                     display_json_result(response); // do what you like with the response
+                    set_current_api_url(this.url)
                 }
             });
             return false;
@@ -34,7 +35,9 @@ function initialize_sandbox() {
     }
 }
 
-
+function set_current_api_url(url){
+    $("#apiUrl").text("http://wesapi.com"+url)
+}
 
 
 function load_subtype_form(subtype) {
@@ -42,19 +45,25 @@ function load_subtype_form(subtype) {
         console.log("Uh oh. Bad subtype.");
         return;
     }
-    // hide 
-    console.log(previous_form)
+    // hide previous form
     if (previous_form) {
         previous_form.hide();
     }
+    // Clear Results
+    $("#json").text("");
     console.log(subtype_forms);
     previous_form = subtype_forms[subtype];
-    previous_form.show()
+    previous_form.show();
 
 }
 
 function set_on_click_listeners() {
-    // events
+    //API type listeners
+    $(".nav-tabs li").on('click',function(e) {
+        load_api(e.target.id)
+    })
+
+    // subtype listeners
     $("#subtypeSelect input").on('click', function(e) {
         load_subtype_form(e.target.id);
     })
