@@ -25,9 +25,9 @@ function initialize_sandbox() {
                 type: form.attr('method'),
                 data: form.serialize(), // data to be submitted
                 success: function(response) {
-                    console.log(response,this);
+                    console.log(this);
                     display_json_result(response); // do what you like with the response
-                    set_current_api_url(this.url)
+                    set_current_api_url(this.url);
                 }
             });
             return false;
@@ -35,8 +35,12 @@ function initialize_sandbox() {
     }
 }
 
-function set_current_api_url(url){
-    $("#apiUrl").text("http://wesapi.com"+url)
+function set_current_api_url(url) {
+    $("#resultUrl").val("http://wesapi.com/" + url);
+}
+
+function clear_current_api_url() {
+     $("#resultUrl").val("");
 }
 
 
@@ -51,15 +55,14 @@ function load_subtype_form(subtype) {
     }
     // Clear Results
     $("#json").text("");
-    console.log(subtype_forms);
+    clear_current_api_url();
     previous_form = subtype_forms[subtype];
     previous_form.show();
-
 }
 
 function set_on_click_listeners() {
     //API type listeners
-    $(".nav-tabs li").on('click',function(e) {
+    $(".nav-tabs li").on('click', function(e) {
         load_api(e.target.id)
     })
 

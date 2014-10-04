@@ -27,11 +27,15 @@ __          __                  _____ _____
          	Summerfields Static Menu: https://github.com/weshack/FoodyCall
 	
 	TODO (high priority):
+    -Convert and store times as UNIX timestamp where appropriate
+    -Store a set of categories used by events, make a route for it
+    -Store a "Last Updated" time for every source 
 		-Build basic frontend to showcase API, have a few interactive examples
+    -Documentation, including some code samples
 		-WesMaps data
 		-Wesleyan Hours of Operations
 	
 	TODO (lower priority):
+    -Integrate caching system
 		-Determine how to collect and parse the menu emails sent out by Bon Appetite. May require using SendGrid.
-		-Doxygen docs
 		
