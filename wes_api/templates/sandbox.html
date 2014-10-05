@@ -39,7 +39,7 @@
                         <input type="radio" name="radio-subtype" id="menusToday" checked>
                     </div>
                     <div id="radioHolder">
-                        <label for="eventsSearchRadio">All</label>
+                        <label for="radio-subtype">All</label>
                         <input type="radio" name="radio-subtype" id="menusLatest">
                     </div>
                 </fieldset>
@@ -47,7 +47,7 @@
             <form method="get" action="api/menus/latest" class="forms" id="menusLatestForm" hidden="true">
                 <fieldset>
                     <legend>Optional Fields</legend>
-                  <!--   <label>
+                    <!--   <label>
                         Source
                         <input type="text" name="source" class="width-50" />
                         <div class="forms-desc">Choose from Wesleying or Wesleyan Events. Default is both.</div>
@@ -79,7 +79,7 @@
                 <fieldset>
                     <legend>Select an API option</legend>
                     <div id="radioHolder">
-                        <label for="eventsLatestRadio">Latest</label>
+                        <label for="radio-subtype">Latest</label>
                         <input type="radio" name="radio-subtype" id="eventsLatest">
                     </div>
                     <div id="radioHolder">
@@ -87,7 +87,7 @@
                         <input type="radio" name="radio-subtype" id="eventsToday" checked>
                     </div>
                     <div id="radioHolder">
-                        <label for="eventsSearchRadio">Search</label>
+                        <label for="radio-subtype">Search</label>
                         <input type="radio" name="radio-subtype" id="eventsSearch">
                     </div>
                 </fieldset>
@@ -163,6 +163,65 @@
                         <input type="submit" class="btn" value="Submit" />
                     </p>
                 </fieldset>
+            </form>
+        </div>
+        <div id="filmseriesAPI" hidden="true">
+            <form id="subtypeSelect">
+                <fieldset>
+                    <legend>Select an API option</legend>
+                    <div id="radioHolder">
+                        <label for="radio-subtype">Today</label>
+                        <input type="radio" name="radio-subtype" id="filmseriesToday" checked>
+                    </div>
+                    <div id="radioHolder">
+                        <label for="radio-subtype">Latest</label>
+                        <input type="radio" name="radio-subtype" id="filmseriesAll">
+                    </div>
+                </fieldset>
+            </form>
+            <form method="get" action="api/filmseries/all" class="forms" id="filmseriesAllForm" hidden="true">
+                <fieldset>
+                    <legend>Fields</legend>
+                    <label>
+                        No fields for this option.
+                    </label>
+                </fieldset>
+                <p>
+                    <input type="submit" class="btn" value="Submit" />
+                </p>
+            </form>
+            <form method="get" action="api/filmseries/today" class="forms" id="filmseriesTodayForm">
+                <fieldset>
+                    <legend>Fields</legend>
+                    <label>
+                        No fields for this option.
+                    </label>
+                </fieldset>
+                <p>
+                    <input type="submit" class="btn" value="Submit" />
+                </p>
+            </form>
+        </div>
+        <div id="wesMapsAPI" hidden="true">
+            <form id="subtypeSelect">
+                <fieldset>
+                    <legend>Select an API option</legend>
+                    <div id="radioHolder">
+                        <label for="radio-subtype">Search</label>
+                        <input type="radio" name="radio-subtype" id="wesMapsSearch" checked>
+                    </div>
+                </fieldset>
+            </form>
+            <form method="get" action="api/wesMaps/search" class="forms" id="wesMapsSearchForm" hidden="true">
+                <fieldset>
+                    <legend>Fields</legend>
+                    <label>
+                        Coming Soon
+                    </label>
+                </fieldset>
+                <p>
+                    <input type="submit" class="btn" value="Submit" />
+                </p>
             </form>
         </div>
         <fieldset id="results" hidden="true">

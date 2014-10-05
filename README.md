@@ -30,6 +30,7 @@ __          __                  _____ _____
     -Convert and store times as UNIX timestamp where appropriate
     -Store a set of categories used by events, make a route for it
     -Store a "Last Updated" time for every source 
+    -Sort filmseries in time descending order.
 		-Build basic frontend to showcase API, have a few interactive examples
     -Documentation, including some code samples
 		-WesMaps data

@@ -14,7 +14,7 @@ function initialize_sandbox() {
         'menusToday': $("#menusTodayForm"),
         'menusLatest': $("#menusLatestForm"),
         'filmseriesToday': $("#filmseriesTodayForm"),
-        'filmseriesLatest': $("#filmseriesLatestForm"),
+        'filmseriesAll': $("#filmseriesAllForm"),
         'wesMapsSearch': $("#wesMapsSearchForm")
 
     }
@@ -77,7 +77,6 @@ function load_subtype_form(subtype) {
         console.log("Uh oh. Bad subtype.");
         return;
     }
-    console.log(subtype, "SUB")
         // hide previous form
     if (previous_form) {
         previous_form.hide();
