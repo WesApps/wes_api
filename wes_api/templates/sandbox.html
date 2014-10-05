@@ -12,110 +12,131 @@
     <div id="maincontainer">
         <nav class="nav-tabs">
             <ul>
-                <li id="menusAPI"><a href="#menus">Menus</a>
+                <li>
+                    <a id="menusAPITab" href="#menus">Menus</a>
+                    <span id="menusAPITab" class="hiddenAPI">Menus</span>
                 </li>
-                <li id="eventsAPI">
-                    <a href="#events"></a>
-                    <span>Events</span>
+                <li>
+                    <a id="eventsAPITab" class="hiddenAPI" href="#events">Events</a>
+                    <span id="eventsAPITab">Events</span>
                 </li>
-                <li id="filmseriesAPI">
-                    <a href="#filmseries">Film Series</a>
+                <li>
+                    <a id="filmseriesAPITab" href="#filmseries">Film Series</a>
+                    <span id="filmseriesAPITab" class="hiddenAPI">Film Series</span>
                 </li>
-                <li id="wesmapsAPI">
-                    <a href="#wesmaps">Wes Maps</a>
+                <li>
+                    <a id="wesMapsAPITab" href="#wesmaps">Wes Maps</a>
+                    <span id="wesMapsAPITab" class="hiddenAPI">Wes Maps</span>
                 </li>
             </ul>
         </nav>
-        <form id="subtypeSelect">
-            <fieldset>
-                <legend>Select an API option</legend>
-                <div id="radioHolder">
-                    <label for="eventsLatestRadio">Latest</label>
-                    <input type="radio" name="radio-subtype" id="eventsLatest" checked>
-                </div>
-                <div id="radioHolder">
-                    <label for="radio-subtype">Today</label>
-                    <input type="radio" name="radio-subtype" id="eventsToday">
-                </div>
-                <div id="radioHolder">
-                    <label for="eventsSearchRadio">Search</label>
-                    <input type="radio" name="radio-subtype" id="eventsSearch">
-                </div>
-            </fieldset>
-        </form>
-        <form method="get" action="api/events/latest" class="forms" id="eventsLatestForm">
-            <fieldset>
-                <legend>Optional Fields</legend>
-                <label>
-                    Source
-                    <input type="text" name="source" class="width-50" />
-                    <div class="forms-desc">Choose from Wesleying or Wesleyan Events. Default is both.</div>
-                </label>
-                <label>
-                    Max Results
-                    <input type="text" name="maxresults" class="width-50" />
-                    <div class="forms-desc">Enter a number from 1-100. Default is 30?</div>
-                </label>
-            </fieldset>
-            <p>
-                <input type="submit" class="btn" value="Submit" />
-            </p>
-        </form>
-        <form method="get" action="api/events/today" hidden="true" class="forms" id="eventsTodayForm">
-            <fieldset>
-                <legend>Fields</legend>
-                <label>
-                    No fields for this option.
-                </label>
-            </fieldset>
-            <p>
-                <input type="submit" class="btn" value="Submit" />
-            </p>
-        </form>
-        <form method="get" action="api/events/search" class="forms" id="eventsSearchForm" hidden="true">
-            <fieldset>
-                <legend>Optional Fields</legend>
-                <label>
-                    Source
-                    <input type="text" name="source" class="width-50" />
-                    <div class="forms-desc">Choose from Wesleying or Wesleyan Events. Default is both.</div>
-                </label>
-                <label>
-                    Max Results
-                    <input type="text" name="maxresults" class="width-50" />
-                    <div class="forms-desc">Enter a number from 1-100. Default is 30?</div>
-                </label>
-                <label>
-                    Title
-                    <input type="text" name="title" class="width-50" />
-                    <div class="forms-desc">Search by title</div>
-                </label>
-                <label>
-                    Location
-                    <input type="text" name="location" class="width-50" />
-                    <div class="forms-desc">Search by location</div>
-                </label>
-                <label>
-                    Time From
-                    <input type="text" name="timeFrom" class="width-50" />
-                    <div class="forms-desc">Return only results equal or more recent than the given time</div>
-                </label>
-                <label>
-                    Time Until
-                    <input type="text" name="timeUntil" class="width-50" />
-                    <div class="forms-desc">Return only results equal or older than the given time</div>
-                </label>
-                <label>
-                    Category (TODO GIVE CATEGORIES?)
-                    <input type="text" name="category" class="width-50" />
-                    <div class="forms-desc">Search by Category</div>
-                </label>
-            </fieldset>
-            <p>
-                <input type="submit" class="btn" value="Submit" />
-            </p>
-        </form>
-        <fieldset id="results">
+        <div id="menusAPI" hidden="true">
+            <form id="subtypeSelect">
+                <fieldset>
+                    <legend>Select an API option</legend>
+                    <div id="radioHolder">
+                        <label for="radio-subtype">Today</label>
+                        <input type="radio" name="radio-subtype" id="menusToday">
+                    </div>
+                    <div id="radioHolder">
+                        <label for="eventsSearchRadio">All</label>
+                        <input type="radio" name="radio-subtype" id="menusAll">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div id="eventsAPI">
+            <form id="subtypeSelect">
+                <fieldset>
+                    <legend>Select an API option</legend>
+                    <div id="radioHolder">
+                        <label for="eventsLatestRadio">Latest</label>
+                        <input type="radio" name="radio-subtype" id="eventsLatest">
+                    </div>
+                    <div id="radioHolder">
+                        <label for="radio-subtype">Today</label>
+                        <input type="radio" name="radio-subtype" id="eventsToday" checked>
+                    </div>
+                    <div id="radioHolder">
+                        <label for="eventsSearchRadio">Search</label>
+                        <input type="radio" name="radio-subtype" id="eventsSearch">
+                    </div>
+                </fieldset>
+            </form>
+            <form method="get" action="api/events/latest" class="forms" id="eventsLatestForm" hidden="true">
+                <fieldset>
+                    <legend>Optional Fields</legend>
+                    <label>
+                        Source
+                        <input type="text" name="source" class="width-50" />
+                        <div class="forms-desc">Choose from Wesleying or Wesleyan Events. Default is both.</div>
+                    </label>
+                    <label>
+                        Max Results
+                        <input type="text" name="maxresults" class="width-50" />
+                        <div class="forms-desc">Enter a number from 1-100. Default is 30?</div>
+                    </label>
+                </fieldset>
+                <p>
+                    <input type="submit" class="btn" value="Submit" />
+                </p>
+            </form>
+            <form method="get" action="api/events/today" hidden="true" class="forms" id="eventsTodayForm">
+                <fieldset>
+                    <legend>Fields</legend>
+                    <label>
+                        No fields for this option.
+                    </label>
+                </fieldset>
+                <p>
+                    <input type="submit" class="btn" value="Submit" />
+                </p>
+            </form>
+            <form method="get" action="api/events/search" class="forms" id="eventsSearchForm" hidden="true">
+                <fieldset>
+                    <legend>Optional Fields</legend>
+                    <label>
+                        Source
+                        <input type="text" name="source" class="width-50" />
+                        <div class="forms-desc">Choose from Wesleying or Wesleyan Events. Default is both.</div>
+                    </label>
+                    <label>
+                        Max Results
+                        <input type="text" name="maxresults" class="width-50" />
+                        <div class="forms-desc">Enter a number from 1-100. Default is 30?</div>
+                    </label>
+                    <label>
+                        Title
+                        <input type="text" name="title" class="width-50" />
+                        <div class="forms-desc">Search by title</div>
+                    </label>
+                    <label>
+                        Location
+                        <input type="text" name="location" class="width-50" />
+                        <div class="forms-desc">Search by location</div>
+                    </label>
+                    <label>
+                        Time From
+                        <input type="text" name="timeFrom" class="width-50" />
+                        <div class="forms-desc">Return only results equal or more recent than the given time</div>
+                    </label>
+                    <label>
+                        Time Until
+                        <input type="text" name="timeUntil" class="width-50" />
+                        <div class="forms-desc">Return only results equal or older than the given time</div>
+                    </label>
+                    <label>
+                        Category (TODO GIVE CATEGORIES?)
+                        <input type="text" name="category" class="width-50" />
+                        <div class="forms-desc">Search by Category</div>
+                    </label>
+                    <p>
+                        <input type="submit" class="btn" value="Submit" />
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+        <fieldset id="results" hidden="true">
             <legend>Results</legend>
             <label>
                 Request URL

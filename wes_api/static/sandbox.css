@@ -12,3 +12,6 @@
 	margin-right: 30px;
 	text-align: center;
 }
+.hiddenAPI {
+    display: none !important;
+}

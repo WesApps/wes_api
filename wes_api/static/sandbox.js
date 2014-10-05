@@ -1,16 +1,31 @@
 $(document).ready(initialize_sandbox);
 
 subtype_forms = {}
+apis = {}
 previous_form = null;
+previous_API = null;
 
 function initialize_sandbox() {
     // Define dict of subtype forms here
     subtype_forms = {
-        'eventsToday': $("#eventsTodayForm"),
-        'eventsLatest': $("#eventsLatestForm"),
-        'eventsSearch': $("#eventsSearchForm")
-    }
-    previous_form = subtype_forms['eventsLatest'];
+            'eventsToday': $("#eventsTodayForm"),
+            'eventsLatest': $("#eventsLatestForm"),
+            'eventsSearch': $("#eventsSearchForm")
+        }
+        // Define API types
+    apis = {
+            'menusAPITab': $("#menusAPI"),
+            'eventsAPITab': $("#eventsAPI"),
+            'filmseriesAPITab': $("#filmseriesAPI"),
+            'wesMapsAPITab': $("#wesMapsAPI")
+        }
+        //Default API and subtype
+    previous_form = subtype_forms['eventsToday'];
+    previous_API = apis['eventsAPI'];
+
+    //Load default API and subtype
+    load_api("eventsAPITab");
+    load_subtype_form("eventsToday");
 
     //set click listeners
     set_on_click_listeners();
@@ -19,13 +34,12 @@ function initialize_sandbox() {
     for (s in subtype_forms) {
         subtype_forms[s].submit(function(e) {
             var form = $(this);
-            // console.log(form.attr('action'))
             $.ajax({
                 url: form.attr('action'),
                 type: form.attr('method'),
                 data: form.serialize(), // data to be submitted
                 success: function(response) {
-                    console.log(this);
+                    show_results();
                     display_json_result(response); // do what you like with the response
                     set_current_api_url(this.url);
                 }
@@ -40,9 +54,8 @@ function set_current_api_url(url) {
 }
 
 function clear_current_api_url() {
-     $("#resultUrl").val("");
+    $("#resultUrl").val("");
 }
-
 
 function load_subtype_form(subtype) {
     if (!(subtype in subtype_forms)) {
@@ -58,6 +71,42 @@ function load_subtype_form(subtype) {
     clear_current_api_url();
     previous_form = subtype_forms[subtype];
     previous_form.show();
+    hide_results();
+}
+
+function load_api(api) {
+    if (!(api in apis)) {
+        console.log("Uh oh. Bad API.", api);
+        return;
+    }
+    //Hide the old API
+    if (previous_API) {
+        previous_API.hide();
+        console.log(previous_API[0].id, "ADASDSAD");
+        //Change api menu bar
+        var menuEl = $("li #" + previous_API[0].id+"Tab");
+        console.log(menuEl);
+        menuEl[0].className = "";
+        menuEl[1].className = "hiddenAPI";
+    }
+
+    //Load the new API
+    previous_API = apis[api];
+    previous_API.show();
+
+    //Change api menu bar
+    var menuEl = $("li #" + api);
+    console.log(menuEl);
+    menuEl[0].className = "hiddenAPI";
+    menuEl[1].className = "";
+
+
+    //Set the current API option
+
+
+    //Hide results
+    hide_results();
+
 }
 
 function set_on_click_listeners() {
@@ -70,6 +119,14 @@ function set_on_click_listeners() {
     $("#subtypeSelect input").on('click', function(e) {
         load_subtype_form(e.target.id);
     })
+}
+
+function show_results() {
+    $("#results").show();
+}
+
+function hide_results() {
+    $("#results").hide();
 }
 
 function display_json_result(json) {
