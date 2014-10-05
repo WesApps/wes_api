@@ -36,6 +36,7 @@ __          __                  _____ _____
 		-Wesleyan Hours of Operations
 	
 	TODO (lower priority):
+    -Weswings static menu + specials from RSS
     -Integrate caching system
-		-Determine how to collect and parse the menu emails sent out by Bon Appetite. May require using SendGrid.
+	-Determine how to collect and parse the menu emails sent out by Bon Appetite. May require using SendGrid.
 		

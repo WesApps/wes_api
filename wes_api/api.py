@@ -244,7 +244,7 @@ def get_sources():
 """
 MENUS
 
-/all --gets everything, default maxresults = 7 days, 
+/latest --gets everything, default maxresults = 7 days, 
 			default both usdan and summerfields
 /today --gets everything, default both usdan and summerfields
 """
@@ -284,7 +284,7 @@ def get_menus(min_res,max_res,today=False):
 				"Results":final_objs}
 	return json.dumps(response)
 
-@api.route('/menus/all',methods=['GET'])
+@api.route('/menus/latest',methods=['GET'])
 def get_menus_all():
 	return get_menus(1,100)
 

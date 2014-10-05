@@ -8,24 +8,39 @@ previous_API = null;
 function initialize_sandbox() {
     // Define dict of subtype forms here
     subtype_forms = {
-            'eventsToday': $("#eventsTodayForm"),
-            'eventsLatest': $("#eventsLatestForm"),
-            'eventsSearch': $("#eventsSearchForm")
-        }
-        // Define API types
+        'eventsToday': $("#eventsTodayForm"),
+        'eventsLatest': $("#eventsLatestForm"),
+        'eventsSearch': $("#eventsSearchForm"),
+        'menusToday': $("#menusTodayForm"),
+        'menusLatest': $("#menusLatestForm"),
+        'filmseriesToday': $("#filmseriesTodayForm"),
+        'filmseriesLatest': $("#filmseriesLatestForm"),
+        'wesMapsSearch': $("#wesMapsSearchForm")
+
+    }
+
+    // Define API types
     apis = {
-            'menusAPITab': $("#menusAPI"),
-            'eventsAPITab': $("#eventsAPI"),
-            'filmseriesAPITab': $("#filmseriesAPI"),
-            'wesMapsAPITab': $("#wesMapsAPI")
-        }
-        //Default API and subtype
+        'menusAPITab': $("#menusAPI"),
+        'eventsAPITab': $("#eventsAPI"),
+        'filmseriesAPITab': $("#filmseriesAPI"),
+        'wesMapsAPITab': $("#wesMapsAPI")
+    }
+
+    defaults = {
+        'menusAPITab': "menusToday",
+        'eventsAPITab': "eventsToday",
+        'filmseriesAPITab': "filmseriesToday",
+        'wesMapsAPITab': "wesMapsSearch"
+    }
+
+    //Default API and subtype
     previous_form = subtype_forms['eventsToday'];
     previous_API = apis['eventsAPI'];
 
     //Load default API and subtype
     load_api("eventsAPITab");
-    load_subtype_form("eventsToday");
+    load_subtype_form(defaults['eventsAPITab']);
 
     //set click listeners
     set_on_click_listeners();
@@ -62,7 +77,8 @@ function load_subtype_form(subtype) {
         console.log("Uh oh. Bad subtype.");
         return;
     }
-    // hide previous form
+    console.log(subtype, "SUB")
+        // hide previous form
     if (previous_form) {
         previous_form.hide();
     }
@@ -82,10 +98,8 @@ function load_api(api) {
     //Hide the old API
     if (previous_API) {
         previous_API.hide();
-        console.log(previous_API[0].id, "ADASDSAD");
-        //Change api menu bar
-        var menuEl = $("li #" + previous_API[0].id+"Tab");
-        console.log(menuEl);
+        //Change api menu bar for previous API
+        var menuEl = $("li #" + previous_API[0].id + "Tab");
         menuEl[0].className = "";
         menuEl[1].className = "hiddenAPI";
     }
@@ -94,19 +108,20 @@ function load_api(api) {
     previous_API = apis[api];
     previous_API.show();
 
-    //Change api menu bar
+    //Change api menu bar to show current api tab
     var menuEl = $("li #" + api);
-    console.log(menuEl);
     menuEl[0].className = "hiddenAPI";
     menuEl[1].className = "";
 
+    //Load the default subtype for this API
+    load_subtype_form(defaults[api]);
 
-    //Set the current API option
-
+    //Check the radio button for that default API
+    console.log($("#" + defaults[api]))
+    $("#" + defaults[api])[0].checked = true;
 
     //Hide results
     hide_results();
-
 }
 
 function set_on_click_listeners() {

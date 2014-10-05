@@ -36,13 +36,42 @@
                     <legend>Select an API option</legend>
                     <div id="radioHolder">
                         <label for="radio-subtype">Today</label>
-                        <input type="radio" name="radio-subtype" id="menusToday">
+                        <input type="radio" name="radio-subtype" id="menusToday" checked>
                     </div>
                     <div id="radioHolder">
                         <label for="eventsSearchRadio">All</label>
-                        <input type="radio" name="radio-subtype" id="menusAll">
+                        <input type="radio" name="radio-subtype" id="menusLatest">
                     </div>
                 </fieldset>
+            </form>
+            <form method="get" action="api/menus/latest" class="forms" id="menusLatestForm" hidden="true">
+                <fieldset>
+                    <legend>Optional Fields</legend>
+                  <!--   <label>
+                        Source
+                        <input type="text" name="source" class="width-50" />
+                        <div class="forms-desc">Choose from Wesleying or Wesleyan Events. Default is both.</div>
+                    </label> -->
+                    <label>
+                        Max Results
+                        <input type="text" name="maxresults" class="width-50" />
+                        <div class="forms-desc">Enter a number from 1-100. Default is 100?</div>
+                    </label>
+                </fieldset>
+                <p>
+                    <input type="submit" class="btn" value="Submit" />
+                </p>
+            </form>
+            <form method="get" action="api/menus/today" class="forms" id="menusTodayForm">
+                <fieldset>
+                    <legend>Fields</legend>
+                    <label>
+                        No fields for this option.
+                    </label>
+                </fieldset>
+                <p>
+                    <input type="submit" class="btn" value="Submit" />
+                </p>
             </form>
         </div>
         <div id="eventsAPI">
