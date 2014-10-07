@@ -29,17 +29,21 @@ def parse_day_item(item):
 	item_time = item.title
 
 	#weekday, breakfast,lunch,dinner
+	# or brunch, lunch, dinner (weird mistake case)
+	# TODO: Generalize this for any set of meals, even if unlikely?
+	meal_tags = [m.text for m in meals]
 	if len(meals) == 3:
-		breakfast = meals[0]
-		if not breakfast.text == "Breakfast":
-			print "FILM: Umm... Usdan haz no breakfast. Should we be concerned?"
-			return
-		breakfast_items = get_food_items_until(breakfast,"Lunch")
+		first_meal = meals[0]
+		first_meal_items = {}
+		if first_meal.text in ["Breakfast","Brunch"]:
+			first_meal_items = get_food_items_until(first_meal,"Lunch")
+		else:
+			print "MENUS: Umm... Usdan haz no breakfast or brunch. Should we be concerned?"
 		lunch_items = get_food_items_until(meals[1],"Dinner")
 		dinner_items = get_food_items_until(meals[2],"")
-		
+
 		items_obj = {"time":item_time,
-					 "breakfast":breakfast_items,
+					 first_meal.text:first_meal_items,
 					 "lunch":lunch_items,
 					 "dinner":dinner_items
 					 }
@@ -49,7 +53,7 @@ def parse_day_item(item):
 	elif len(meals) == 2:
 		brunch = meals[0]
 		if not brunch.text == "Brunch":
-			print "FILM: Umm... Usdan haz no brunch. Should we be concerned?"
+			print "MENUS: Umm... Usdan haz no brunch. Should we be concerned?"
 			return
 		brunch_items = get_food_items_until(brunch,"Dinner")
 		dinner_items = get_food_items_until(meals[1],"")
@@ -60,7 +64,7 @@ def parse_day_item(item):
 					 }
 		return items_obj
 	else:
-		print "FILM: PANIC, usdan does not have 2 or 3 meals."
+		print "MENUS: PANIC, usdan does not have 2 or 3 meals."
 		
 	# else:
 	# 	#Summerfields case
@@ -100,7 +104,7 @@ def get_food_items_until(bs_obj,stop):
 		try:
 			category,title = h4_text.split('[')[1].split(']')
 		except:
-			print "FILM: Unable to get the category + food title. Sadface."
+			print "MENUS: Unable to get the category + food title. Sadface."
 			continue
 
 		items.append([category,title,p_text])
