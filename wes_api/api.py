@@ -159,6 +159,9 @@ def format_mongo_objs(mongo_objs):
 		mongo_obj['time'] = old_time.isoformat()
 	return mongo_objs 
 
+@api.route('/status',methods=['GET'])
+def get_status():
+	return json.dumps(format_mongo_objs(search.get_status()))
 
 @api.route('/events/today',methods=['GET'])
 def get_today_events():

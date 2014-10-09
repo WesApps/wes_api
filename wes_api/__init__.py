@@ -16,6 +16,11 @@ def index():
 	print os.listdir('wes_api/templates')
 	return render_template('index.html')
 
+@app.route('/home')
+def home():
+	print os.listdir('wes_api/templates')
+	return render_template('index.html')
+
 @app.route('/sandbox')
 def sandbox_route():
 	print os.listdir('wes_api/templates')

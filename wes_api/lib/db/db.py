@@ -4,11 +4,38 @@ import csv
 
 client = MongoClient()
 db = client.wes_api
+
+status = db.status
+
 events = db.events
 usdan_menus = db.usdan_menus
 late_night_menu = db.late_night_menu
 summerfields_menu = db.summerfields_menu
 film_series = db.film_series
+
+"""
+GENERAL DB METHODS
+"""
+def update_status(apis):
+	"""
+	Upserts the last updated times and statuses for the APIs.
+	"""
+	for i in apis:
+		try:
+			#check if scrape succeeded.
+			#Note: it IS possible for a None time value to exist here.
+			if not apis[i]:
+				api_status = False 
+			else:
+				api_status = True
+			if status.find({"name":i}).count() == 0:
+				print "INSERTING"
+				status.insert({"name":i,"time":apis[i],"status":api_status})
+			else:
+				print status.update({'name':i},{"$set":{"time":apis[i],"status":api_status}})
+		except:
+			print "DB: Unable to update 'update status' for",i
+
 
 """
 EVENT DB METHODS
@@ -24,7 +51,7 @@ def add_event(event):
 		print 'DB: Unable to upsert event, no name',event
 		return False
 	try:
-		events.update({'name':name},event,True)
+		print "ADD EVENT",events.update({'name':name},event,True)
 		return True
 	except:
 		print 'DB: Unable to upsert event, can\'t add to db',event

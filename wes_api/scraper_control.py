@@ -3,6 +3,8 @@ from lib.scraping.wesleyanEvents import wesleyanEvents
 from lib.scraping.wesleyanMenus import usdanMenus
 from lib.scraping.filmSeries import film_series
 from lib.db import db
+import time
+import datetime
 
 SCRAPE_WESLEYING = True
 SCRAPE_WESLEYAN_EVENTS = True
@@ -10,33 +12,76 @@ SCRAPE_USDAN = True
 SCRAPE_STATIC_MENUS = True
 SCRAPE_FILM_SERIES = True
 
+
+# For now, everything will be scraped every 10 minutes.
+# TODO: Implement smarter timing system so that things 
+# like events are scraped often, menus scraped daily, 
+# and film series, wesmaps, hours, etc. scraped only 
+# once a day or week or even only on specific days or
+# times.
+SLEEP_TIME = 600
+
 def initialize():
 	clear_all_sources()
-	scrape_all_sources()
 	populate_static_menus()
+	scrape_all_sources(continuous=False)
 
-def scrape_all_sources():
+
+
+"""
+events = db.events
+usdan_menus = db.usdan_menus
+late_night_menu = db.late_night_menu
+summerfields_menu = db.summerfields_menu
+film_series = db.film_series
+"""
+
+def scrape_all_sources(continuous=True):
 	"""
 	Calls all of the scraping methods from all 
 	of the scraping sources imported above.
 	TODO: Multi-threading
 	"""
-	print "SCRAPER: Scraping all sources"
-	print "SCRAPER: Scraping Wesleying"
-	result1 = scrape_wesleying()
-	print "SCRAPER: Scraping Wesleyan Events"
-	result2 = scrape_wesleyan_events()
-	print "SCRAPER: Scraping Usdan Menus"
-	result3 = scrape_usdan_menus()
-	print "SCRAPER: Scraping Film Series"
-	result4 = scrape_film_series()
-	if not result1 and result2 and result3 and result4:
+	while continuous:
+		print "SCRAPER: Scraping all sources"
+		print "SCRAPER: Scraping Wesleying"
+		result1 = scrape_wesleying()
+		print "SCRAPER: Scraping Wesleyan Events"
+		result2 = scrape_wesleyan_events()
+		events_time = datetime.datetime.now()
+		print "SCRAPER: Scraping Usdan Menus"
+		result3 = scrape_usdan_menus()
+		menus_time = datetime.datetime.now()
+		print "SCRAPER: Scraping Film Series"
+		result4 = scrape_film_series()
+		film_series_time = datetime.datetime.now()
+
+		#status: if None, failed to update, will be 
+		#noted as an offline API until it works. Otherwise,
+		#last updated time will update to time given as value.
+		status = {"events":None,"menus":None,"film_series":None}
+		if result1 and result2:
+			status["events"] = events_time
+		if result3:
+			status["menus"] = menus_time
+		if result4:
+			status["film_series"] = film_series_time
+		print status
+		db.update_status(status)
+
+		if not result1 and result2 and result3 and result4:
+			#TODO: Update status db
+			print "SCRAPER: ERROR, UNABLE TO SCRAPE ALL SOURCES"
+			continue
+
 		#TODO: Update status db
-		print "SCRAPER: ERROR, UNABLE TO SCRAPE ALL SOURCES"
-		return False
-	#TODO: Update status db
-	print "SCRAPER: Successfully scraped all sources"
-	return True
+		print "SCRAPER: Successfully scraped all sources at:",datetime.datetime.today()
+		if not continuous:
+			return
+		else:
+			print "SCRAPER: Waiting..."
+			time.sleep(SLEEP_TIME)
+
 
 def clear_all_sources():
 	"""
@@ -150,4 +195,4 @@ def remove_all_films():
 
 # if running from cmd line, scrape.
 if __name__ == "__main__":
-	scrape_all_sources()
+	scrape_all_sources(continuous=True)

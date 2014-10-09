@@ -14,6 +14,13 @@ late_night_menu = db.late_night_menu
 film_series = db.film_series
 
 """
+GENERAL METHODS
+"""
+def get_status():
+	return list(db.status.find())
+
+
+"""
 EVENTS SEARCH
 """
 
