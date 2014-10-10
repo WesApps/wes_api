@@ -2,23 +2,70 @@ $(document).ready(initialize_index)
 
 function initialize_index() {
     get_film_today();
+    get_status();
+}
+
+function get_status() {
+    var data = $.getJSON("/api/status", function(res) {
+        if (!(res)) {
+            return {};
+        } else {
+            return populate_status(res);
+        }
+    })
+}
+
+function populate_status(response) {
+    console.log(response);
+
+    var apis = {
+        "events": [$("#events_status")[0], $("#events_updated")[0]],
+        "film_series": [$("#film_series_status")[0], $("#film_series_updated")[0]],
+        "menus": [$("#menus_status")[0], $("#menus_updated")[0]],
+        "hours": [$("#hours_status")[0], $("#hours_updated")[0]],
+        "wesmaps": [$("#wesmaps_status")[0], $("#wesmaps_updated")[0]]
+    }
+
+    // ignores things that aren't in the status response,
+    // so hour and wesmaps are hardcoded offline now,
+    // but events, film_series, and menus are dynamic.
+    for (i in apis) {
+        if (response[i]) {
+            if (response[i]["status"]) {
+                apis[i][0].innerHTML = "nominal";
+                apis[i][0].className = "label label-outline label-green";
+            } else {
+                apis[i][0].innerHTML = "offline";
+                apis[i][0].className = "label label-outline label-red";
+            }
+            if (response[i]["time"]) {
+                formatted_date = new Date(response[i]["time"]).toLocaleString();
+                apis[i][1].innerHTML = "Last Updated: "+formatted_date;
+            } else {
+                apis[i][1].innerHTML = "Last Updated: Never";
+            }
+        }
+    }
+
+
+
+
 }
 
 function get_film_today() {
     var data = $.getJSON("/api/filmseries/today", function(res) {
-            if (!(res)) {
-                return {};
-            } else {
-                return film_callback(res);
-            }
-        })
-        // console.log(data)
+        if (!(res)) {
+            return {};
+        } else {
+            return film_callback(res);
+        }
+    })
 }
 
 function time_from_string(str_time) {
     var msec = Date.parse(str_time);
     var d = new Date(msec);
-    return d.toDateString()+", "+d.toLocaleTimeString();
+    return d.toDateString() + ", " + d.toLocaleTimeString();
 }
 
 function film_callback(response) {

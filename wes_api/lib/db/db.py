@@ -23,7 +23,9 @@ def update_status(apis):
 	for i in apis:
 		try:
 			#check if scrape succeeded.
-			#Note: it IS possible for a None time value to exist here.
+			#Note: it IS possible for a None time value to exist here
+			#if the API hasn't ever succeeded before.
+			#Normally, the time should be equal to the last successful scrape.
 			if not apis[i]:
 				api_status = False 
 			else:
@@ -32,7 +34,11 @@ def update_status(apis):
 				print "INSERTING"
 				status.insert({"name":i,"time":apis[i],"status":api_status})
 			else:
-				print status.update({'name':i},{"$set":{"time":apis[i],"status":api_status}})
+				#if have new time, overwrite old. else keep old.
+				if api_status:
+					status.update({'name':i},{"$set":{"time":apis[i],"status":api_status}})
+				else:
+					status.update({'name':i},{"$set":{"status":api_status}})
 		except:
 			print "DB: Unable to update 'update status' for",i
 

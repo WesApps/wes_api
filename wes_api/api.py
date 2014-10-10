@@ -136,10 +136,6 @@ def validate_search_results(search_results):
 	return json.dumps(response)
 
 
-
-"""
-EVENTS
-"""
 def format_mongo_objs(mongo_objs):
 	"""
 	Formats python datetime into isoformat for each mongo_obj
@@ -159,10 +155,21 @@ def format_mongo_objs(mongo_objs):
 		mongo_obj['time'] = old_time.isoformat()
 	return mongo_objs 
 
+def format_status(status):
+	return dict((i["name"],{"time":i["time"],"status":i["status"]}) for i in status)
+
+"""
+GENERAL ROUTES
+"""
 @api.route('/status',methods=['GET'])
 def get_status():
-	return json.dumps(format_mongo_objs(search.get_status()))
+	tmp = format_mongo_objs(search.get_status())
+	return json.dumps(format_status(tmp))
 
+
+"""
+EVENTS
+"""
 @api.route('/events/today',methods=['GET'])
 def get_today_events():
 	return get_events(True)
