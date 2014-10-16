@@ -39,17 +39,16 @@ function populate_status(response) {
                 apis[i][0].className = "label label-outline label-red";
             }
             if (response[i]["time"]) {
-                formatted_date = new Date(response[i]["time"]).toLocaleString();
-                apis[i][1].innerHTML = "Last Updated: "+formatted_date;
+                var r_date = new Date(response[i]["time"]);
+                var f_date = new Date(r_date.getUTCFullYear(), r_date.getUTCMonth(),
+                    r_date.getUTCDate(), r_date.getUTCHours(),
+                    r_date.getUTCMinutes(), r_date.getUTCSeconds());
+                apis[i][1].innerHTML = "Last Updated: " + f_date.toLocaleString();
             } else {
                 apis[i][1].innerHTML = "Last Updated: Never";
             }
         }
     }
-
-
-
-
 }
 
 function get_film_today() {

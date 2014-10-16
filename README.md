@@ -27,9 +27,7 @@ __          __                  _____ _____
          	Summerfields Static Menu: https://github.com/weshack/FoodyCall
 	
 	TODO (high priority):
-    -Convert and store times as UNIX timestamp where appropriate
     -Store a set of categories used by events, make a route for it
-    -Store a "Last Updated" time for every source 
     -Sort filmseries in time descending order.
 		-Build basic frontend to showcase API, have a few interactive examples
     -Documentation, including some code samples
@@ -37,6 +35,7 @@ __          __                  _____ _____
 		-Wesleyan Hours of Operations
 	
 	TODO (lower priority):
+    -Store a "Last Updated" time for every source 
     -Weswings static menu + specials from RSS
     -Integrate caching system
 	-Determine how to collect and parse the menu emails sent out by Bon Appetite. May require using SendGrid.
