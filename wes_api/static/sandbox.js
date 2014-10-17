@@ -6,6 +6,13 @@ previous_form = null;
 previous_API = null;
 
 function initialize_sandbox() {
+    // Initialize datepickers
+    $("#eventSearchTimeFrom").datepicker({
+        format: "mm-dd-yyyy"
+    });
+    $("#eventSearchTimeUntil").datepicker({
+        format: "mm-dd-yyyy"
+    });
     // Define dict of subtype forms here
     subtype_forms = {
         'eventsToday': $("#eventsTodayForm"),
@@ -77,7 +84,7 @@ function load_subtype_form(subtype) {
         console.log("Uh oh. Bad subtype.");
         return;
     }
-        // hide previous form
+    // hide previous form
     if (previous_form) {
         previous_form.hide();
     }
@@ -116,7 +123,7 @@ function load_api(api) {
     load_subtype_form(defaults[api]);
 
     //Check the radio button for that default API
-    console.log($("#" + defaults[api]))
+    // console.log($("#" + defaults[api]))
     $("#" + defaults[api])[0].checked = true;
 
     //Hide results

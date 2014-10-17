@@ -1,6 +1,8 @@
 {% extends "layout.html" %} {% set active_page = "sandbox" %} {% block title %}Sandbox{% endblock %} {% block head %} {{ super() }}
 <script src="/static/sandbox.js"></script>
-<link rel="stylesheet" href="/static/sandbox.css">{% endblock %} {% block content %}
+<script src="/static/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" href="/static/sandbox.css">
+<link rel="stylesheet" href="/static/datepicker.css">{% endblock %} {% block content %}
 
 <body>
     <div id="title">
@@ -146,12 +148,12 @@
                     </label>
                     <label>
                         Time From
-                        <input type="text" name="timeFrom" class="width-50" />
+                        <input type="text" name="timeFrom" class="width-50" id="eventSearchTimeFrom"/>
                         <div class="forms-desc">Return only results equal or more recent than the given time</div>
                     </label>
                     <label>
                         Time Until
-                        <input type="text" name="timeUntil" class="width-50" />
+                        <input type="text" name="timeUntil" class="width-50" id="eventSearchTimeUntil"/>
                         <div class="forms-desc">Return only results equal or older than the given time</div>
                     </label>
                     <label>
