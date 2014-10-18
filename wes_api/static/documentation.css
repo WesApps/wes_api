@@ -1,0 +1,33 @@
+#title > h2 {
+    font-weight: 100;
+    font-family: Lato;
+}
+.subtitle {
+	font-style: italic;
+}
+#apiNav {
+    padding-left: 40px;
+    font-size: 1.3em;
+}
+#apiNav > ul {
+    line-height: 200%;
+    font-family: Lato;
+}
+.active {
+    text-decoration: underline !important;
+}
+.inactive {
+    text-decoration: none !important;
+}
+.docsTitle {
+    font-family: Lato;
+    font-weight: 500;
+    font-style: italic;
+}
+#docsContainer {
+    font-size: 1.35em;
+    max-width: 900px;
+}
+.hiddenDoc {
+    display: none !important;
+}

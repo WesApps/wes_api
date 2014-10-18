@@ -1,10 +1,85 @@
 {% extends "layout.html" %} {% set active_page = "documentation" %} {% block title %}Documentation{% endblock %} {% block head %} {{ super() }}
-<!-- <link rel="stylesheet" href="/static/sandbox.css"> -->
-{% endblock %} {% block content %}
+<script src="/static/documentation.js"></script>
+<link rel="stylesheet" href="/static/documentation.css">{% endblock %} {% block content %}
 
 <body>
     <div id="title">
-        <h1>Docs coming soon</h1>
+        <h2>Documentation</h2>
+    </div>
+    <div class="units-row">
+        <nav class="nav unit-25" id="apiNav">
+            <ul>
+                <li><a id="navGeneral" class="active" href="#General">General Usage</a>
+                </li>
+                <li><a id="navStatus" class="inactive" href="#Status">Status</a>
+                </li>
+                <li><a id="navEvents" class="inactive" href="#Events">Events</a>
+                </li>
+                <li><a id="navMenus" class="inactive" href="#Menus">Menus</a>
+                </li>
+                <li><a id="navFilmSeries" class="inactive" href="#FilmSeries">Film Series</a>
+                </li>
+                <li><a id="navHours" class="inactive" href="#Hours">Hours</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="unit-60" id="docsContainer">
+            <div id="docsGeneral">
+                <h1 class="docsTitle">General Usage</h1>
+                <div>
+                    <p>
+                        Welcome to the docs! Here you'll find lots information and examples regarding how to use the API along with any specific details you should know about each part of the API.
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <h4 class="subtitle">API Types</h4>
+                        Some of the sources in the Wes API are fairly static, meaning they only require a once-per-semester data fetch. Other sources are constantly being updated and as a result require more regular fetches. You can find out more about this in the description section of any particular API type.
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <h4 class="subtitle">Rate Limits</h4>
+                        For the time being, the Wes API is not rate limited, so please be kind to our server and limit unnecessary requests by storing reusable data on the client side.
+                    </p>
+                </div>
+            </div>
+            <div id="docsStatus">
+                <div>
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+            <div id="docsEvents">
+                <div>
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+            <div id="docsMenus">
+                <div>
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+            <div id="docsFilmSeries">
+                <div>
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+            <div id="docsHours">
+                <div>
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

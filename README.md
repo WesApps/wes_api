@@ -27,12 +27,15 @@ __          __                  _____ _____
          	Summerfields Static Menu: https://github.com/weshack/FoodyCall
 	
 	TODO (high priority):
-    -Store a set of categories used by events, make a route for it
+    -Give status a 'last modified' field so people can check to see if they need to grab new data.
+    -Upgrade the random api component on home page
     -Documentation, including some code samples
-		-WesMaps data
-		-Wesleyan Hours of Operations
-	
-	TODO (lower priority):
+    -Wesleyan Hours of Operations
+    -WesMaps data
+    
+    TODO (lower priority):
+    -Store a set of categories used by events, make a route for it
+    -Styling on home page.
     -Store a "Last Updated" time for every source 
     -Weswings static menu + specials from RSS
     -Integrate caching system
