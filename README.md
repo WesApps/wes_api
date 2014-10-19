@@ -27,6 +27,10 @@ __          __                  _____ _____
          	Summerfields Static Menu: https://github.com/weshack/FoodyCall
 	
 	TODO (high priority):
+    -Reduce Menus API static menu redundancy by
+    making another route to just get the static menus and another just for usdan.
+    menus/usdan
+    menus/static
     -Give status a 'last modified' field so people can check to see if they need to grab new data.
     -Upgrade the random api component on home page
     -Documentation, including some code samples

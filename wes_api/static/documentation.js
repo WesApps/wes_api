@@ -19,7 +19,6 @@ function initialize_docs() {
     set_on_click_listeners();
 }
 
-
 function set_on_click_listeners() {
     $("#apiNav li").on('click', function(e) {
         console.log(e.target)
@@ -37,7 +36,7 @@ function load_doc(doc) {
     if (previous_doc) {
         previous_doc.hide();
         //Change doc menu bar for previous doc
-        console.log(previous_doc)
+        // console.log(previous_doc)
         var menuEl = $("#" + previous_menu_item);
         menuEl[0].className = "inactive";
     }
@@ -46,6 +45,7 @@ function load_doc(doc) {
     previous_doc = docs[doc];
     previous_menu_item = doc;
     previous_doc.show();
+    console.log(previous_doc,doc);
 
     //Change api menu bar to show current api tab
     var menuEl = $("li #" + doc);
