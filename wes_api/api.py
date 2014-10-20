@@ -1,5 +1,5 @@
 from lib.search import search
-from flask import Blueprint, request, Flask, make_response, request, current_app
+from flask import Blueprint, make_response, request, current_app
 import json
 import time
 import datetime
@@ -234,16 +234,19 @@ EVENTS
 
 
 @api.route('/events/today', methods=['GET'])
+@crossdomain(origin='*')
 def get_today_events():
     return get_events(True)
 
 
 @api.route('/events/latest', methods=['GET'])
+@crossdomain(origin='*')
 def get_latest_events():
     return get_events()
 
 
 @api.route('/events/search', methods=['GET'])
+@crossdomain(origin='*')
 def search_events_route():
     return search_events()
 
@@ -314,6 +317,7 @@ def get_events(today=False):
 
 
 @api.route('/events/sources', methods=['GET'])
+@crossdomain(origin='*')
 def get_sources():
     return json.dumps(EVENT_SOURCES)
 
@@ -365,6 +369,7 @@ def get_menus(min_res, max_res, today=False):
 
 
 @api.route('/menus/latest', methods=['GET'])
+@crossdomain(origin='*')
 def get_menus_all():
     return get_menus(1, 100)
 
@@ -391,10 +396,12 @@ def get_film_series(today=False):
 
 
 @api.route('/filmseries/all')
+@crossdomain(origin='*')
 def get_film_series_all():
     return get_film_series()
 
 
 @api.route('/filmseries/today')
+@crossdomain(origin='*')
 def get_film_series_today():
     return get_film_series(True)
