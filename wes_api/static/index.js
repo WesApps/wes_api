@@ -1,7 +1,7 @@
 $(document).ready(initialize_index)
 
 function initialize_index() {
-    get_film_today();
+    get_film_upcoming();
     get_status();
 }
 
@@ -22,12 +22,11 @@ function populate_status(response) {
         "events": [$("#events_status")[0], $("#events_updated")[0]],
         "film_series": [$("#film_series_status")[0], $("#film_series_updated")[0]],
         "menus": [$("#menus_status")[0], $("#menus_updated")[0]],
-        "hours": [$("#hours_status")[0], $("#hours_updated")[0]],
-        "wesmaps": [$("#wesmaps_status")[0], $("#wesmaps_updated")[0]]
+        "directory": [$("#directory_status")[0], $("#directory_updated")[0]]
     }
 
     // ignores things that aren't in the status response,
-    // so hour and wesmaps are hardcoded offline now,
+    // so directory is hardcoded offline now,
     // but events, film_series, and menus are dynamic.
     for (i in apis) {
         if (response[i]) {
@@ -51,8 +50,8 @@ function populate_status(response) {
     }
 }
 
-function get_film_today() {
-    var data = $.getJSON("/api/filmseries/today", function(res) {
+function get_film_upcoming() {
+    var data = $.getJSON("/api/filmseries/all", function(res) {
         if (!(res)) {
             return {};
         } else {

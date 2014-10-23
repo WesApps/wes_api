@@ -27,8 +27,8 @@
                     <span id="filmseriesAPITab" class="hiddenAPI">Film Series</span>
                 </li>
                 <li>
-                    <a id="wesMapsAPITab" href="#wesmaps">Wes Maps</a>
-                    <span id="wesMapsAPITab" class="hiddenAPI">Wes Maps</span>
+                    <a id="directoryAPITab" href="#directory">Directory</a>
+                    <span id="directoryAPITab" class="hiddenAPI">Directory</span>
                 </li>
             </ul>
         </nav>
@@ -176,7 +176,7 @@
                         <input type="radio" name="radio-subtype" id="filmseriesToday" checked>
                     </div>
                     <div id="radioHolder">
-                        <label for="radio-subtype">Latest</label>
+                        <label for="radio-subtype">All</label>
                         <input type="radio" name="radio-subtype" id="filmseriesAll">
                     </div>
                 </fieldset>
@@ -204,17 +204,17 @@
                 </p>
             </form>
         </div>
-        <div id="wesMapsAPI" hidden="true">
+        <div id="directoryAPI" hidden="true">
             <form id="subtypeSelect">
                 <fieldset>
                     <legend>Select an API option</legend>
                     <div id="radioHolder">
-                        <label for="radio-subtype">Search</label>
-                        <input type="radio" name="radio-subtype" id="wesMapsSearch" checked>
+                        <label for="radio-subtype">All</label>
+                        <input type="radio" name="radio-subtype" id="directoryAll" checked>
                     </div>
                 </fieldset>
             </form>
-            <form method="get" action="api/wesMaps/search" class="forms" id="wesMapsSearchForm" hidden="true">
+            <form method="get" action="api/directory/all" class="forms" id="directoryAllForm" hidden="true">
                 <fieldset>
                     <legend>Fields</legend>
                     <label>

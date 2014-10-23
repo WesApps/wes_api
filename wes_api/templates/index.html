@@ -12,32 +12,15 @@
     </div>
     <div class="units-row units-padding" id="maincontainer">
         <div class="unit-50">
-            <h3 id="headerexplain">What does it do?</h3>
+            <h3 class="sectionHeader">What does it do?</h3>
             <p>
-                Wes API scrapes, aggregates, and provides standardized programmatic access to data from sources including <i><a href="http://wesleying.org/">Wesleying</a>, <a href="http://events.wesleyan.edu/">Wesleyan Events</a>, <a href="http://www.wesleyan.edu/filmseries/">Wesleyan Film Series</a>, <a href="http://wesleyan.cafebonappetit.com/">Usdan</a>,<a href="http://wesleyan.cafebonappetit.com/"> Summerfields</a>, <a href="https://iasext.wesleyan.edu/regprod/!wesmaps_page.html">WesMaps</a></i>, and various others. For more information about what exactly is going on under the hood, check out the <a href="/about">about page</a>.
+                Wes API scrapes, aggregates, and provides standardized programmatic access to data from sources including <i><a href="http://wesleying.org/">Wesleying</a>, <a href="http://events.wesleyan.edu/">Wesleyan Events</a>, <a href="http://www.wesleyan.edu/filmseries/">Wesleyan Film Series</a>, <a href="http://wesleyan.cafebonappetit.com/">Usdan</a>,<a href="http://wesleyan.cafebonappetit.com/"> Summerfields</a>,</i> and many others. For more information about what exactly is going on under the hood, check out the <a href="/about">about page</a>.
             </p>
 
             <!-- <p>Wes API scrapes, aggregates, and serves data from sources including Wesleying, Wesleyan Events, Wesleyan Film Series, Usdan, Summerfields</p> -->
         </div>
-        <div class="unit-push-right unit-40" id="userreviews">
-            <h3><i>What are users saying?</i>
-            </h3>
-            <blockquote>
-                Lonnie: Much data.
-                <br>Prancer: So data.
-                <br>Crinkles: Very data.
-                <br>Wilfred: Such consensus.
-                <br>Puddles: Wow.
-            </blockquote>
-        </div>
-    </div>
-    <div class="units-row units-padding" id="maincontainer">
-        <div class="unit-50">
-            <h3 class="randomDataTitle" id="headerexplain">Here's: Tonight's Film (RANDOM BUTTON?)</h3>
-            <div class="randomData"></div>
-        </div>
         <div class="unit-push-right unit-40" id="statusometer">
-            <h2>STATUS-O-METER!</h2>
+            <h2 class="sectionHeader">STATUS-O-METER!</h2>
             <div class="statusdiv">
                 <h4>Events:</h4>
                 <span id="events_status" class="label label-outline label-green">Nominal</span>
@@ -54,15 +37,27 @@
                 <div id="menus_updated"></div>
             </div>
             <div class="statusdiv">
-                <h4>Hours:</h4>
-                <span id="hours_status" class="label label-outline label-red">Offline</span>
-                <div id="hours_updated"></div>
+                <h4>Directory:</h4>
+                <span id="directory_status" class="label label-outline label-red">Offline</span>
+                <div id="directory_updated"></div>
             </div>
-            <div class="statusdiv">
-                <h4>WesMaps:</h4>
-                <span id="wesmaps_status" class="label label-outline label-red">Offline</span>
-                <div id="wesmaps_updated"></div>
-            </div>
+        </div>
+    </div>
+    <div class="units-row units-padding" id="maincontainer">
+        <div class="unit-50">
+            <h3 class="sectionHeader">Here's: The Next Film Series</h3>
+            <div class="randomData"></div>
+        </div>
+        <div class="unit-push-right unit-40" id="userreviews">
+            <h3 class="sectionHeader"><i>What are users saying?</i>
+            </h3>
+            <blockquote>
+                Lonnie: Much data.
+                <br>Prancer: So data.
+                <br>Crinkles: Very data.
+                <br>Wilfred: Such consensus.
+                <br>Puddles: Wow.
+            </blockquote>
         </div>
     </div>
     {% endblock %}

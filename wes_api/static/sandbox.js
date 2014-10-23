@@ -22,7 +22,7 @@ function initialize_sandbox() {
         'menusLatest': $("#menusLatestForm"),
         'filmseriesToday': $("#filmseriesTodayForm"),
         'filmseriesAll': $("#filmseriesAllForm"),
-        'wesMapsSearch': $("#wesMapsSearchForm")
+        'directoryAll': $("#directoryAllForm")
 
     }
 
@@ -31,14 +31,14 @@ function initialize_sandbox() {
         'menusAPITab': $("#menusAPI"),
         'eventsAPITab': $("#eventsAPI"),
         'filmseriesAPITab': $("#filmseriesAPI"),
-        'wesMapsAPITab': $("#wesMapsAPI")
+        'directoryAPITab': $("#directoryAPI")
     }
 
     defaults = {
         'menusAPITab': "menusToday",
         'eventsAPITab': "eventsToday",
         'filmseriesAPITab': "filmseriesToday",
-        'wesMapsAPITab': "wesMapsSearch"
+        'directoryAPITab': "directoryAll"
     }
 
     //Default API and subtype
@@ -81,7 +81,8 @@ function clear_current_api_url() {
 
 function load_subtype_form(subtype) {
     if (!(subtype in subtype_forms)) {
-        console.log("Uh oh. Bad subtype.");
+        console.log("Uh oh. Bad subtype.",subtype
+            );
         return;
     }
     // hide previous form
