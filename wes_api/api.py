@@ -344,7 +344,8 @@ MENUS
 @crossdomain(origin='*')
 def get_menus_all():
     sources = {
-        "summerfields": [], "weswings": [], "redandblack": [], "latenight": []}
+        "summerfields": [], "weswings": [], "redandblack": [],
+        "latenight": [], "starandcrescent": []}
     for i in sources:
         sources[i] = format_mongo_objs(search.get_menu_static(i))
     print sources, "sources"
@@ -356,6 +357,37 @@ def get_menus_all():
 @crossdomain(origin='*')
 def get_menus_usdan():
     return json.dumps({"Results": format_mongo_objs(search.get_menu_usdan())})
+
+
+@api.route('/menus/starandcrescent', methods=['GET'])
+@crossdomain(origin='*')
+def get_menus_starandcrescent():
+    return json.dumps({"Results": format_mongo_objs(search.get_menu_static("sandc"))})
+
+
+@api.route('/menus/redandblack', methods=['GET'])
+@crossdomain(origin='*')
+def get_menus_redandblack():
+    return json.dumps({"Results": format_mongo_objs(search.get_menu_static("redandblack"))})
+
+
+@api.route('/menus/weswings', methods=['GET'])
+@crossdomain(origin='*')
+def get_menus_weswings():
+    return json.dumps({"Results": format_mongo_objs(search.get_menu_static("weswings"))})
+
+
+@api.route('/menus/summerfields', methods=['GET'])
+@crossdomain(origin='*')
+def get_menus_summerfields():
+    return json.dumps({"Results": format_mongo_objs(search.get_menu_static("summerfields"))})
+
+
+@api.route('/menus/latenight', methods=['GET'])
+@crossdomain(origin='*')
+def get_menus_latenight():
+    return json.dumps({"Results": format_mongo_objs(search.get_menu_static("latenight"))})
+
 
 """
 FILM SERIES METHODS
