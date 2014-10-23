@@ -8,9 +8,9 @@ from functools import update_wrapper
 
 api = Blueprint('api', __name__, template_folder='templates')
 EVENT_SOURCES = ["wesleying", "wesleyanEvents"]
-MENU_SOURCES = ["usdan"]
 
 """
+Cross domain
 http://flask.pocoo.org/snippets/56/
 """
 
@@ -184,6 +184,9 @@ def validate_request(request_obj, min_results, max_results, accepted_sources=Non
 
 
 def validate_search_results(search_results):
+    """
+    Expects a list of mongo objects
+    """
     if not search_results:
         return json.dumps({"Result Count": 0, "Results": []})
 
@@ -199,6 +202,8 @@ def format_mongo_objs(mongo_objs):
     if the obj has a time.
     Also strips out object ID
     """
+    if not mongo_objs:
+        return []
     for mongo_obj in mongo_objs:
         # remove object_id
         try:
@@ -207,9 +212,8 @@ def format_mongo_objs(mongo_objs):
             print "API: mongo_obj has no _id, panic!"
 
         old_time = mongo_obj.get('time')
-        if not old_time:
-            continue
-        mongo_obj['time'] = old_time.isoformat()
+        if old_time:
+            mongo_obj['time'] = old_time.isoformat()
     return mongo_objs
 
 
@@ -325,61 +329,33 @@ def get_sources():
 """
 MENUS
 
-/latest --gets everything, default maxresults = 7 days, 
-			default both usdan and summerfields
-/today --gets everything, default both usdan and summerfields
+/all    --gets everything
+/usdan  --only holds the daily menu (future?)
+/starandcrescent  --holds the weekly menu
+/redandblack  --static
+/weswings   --static
+/summerfields   --static
+/latenight      --static
+
 """
 
 
-def get_menus(min_res, max_res, today=False):
-    # default
-    MIN_RESULTS = min_res
-    MAX_RESULTS = max_res
-
-    validation_result = validate_request(request, MIN_RESULTS, MAX_RESULTS)
-    if not validation_result[0]:
-        return validation_result[1]
-    else:
-        req_max_results = validation_result[1]['max_results']
-
-    # Now search, check, and respond
-    if today:
-        search_results = search.get_menus_today()
-    else:
-        search_results = search.get_menus_all(req_max_results)
-    # only need to validate the usdan ones.
-    usdan_results = search_results.get('usdan')
-    if not usdan_results:
-        return json.dumps({"Result Count": 0, "Results": []})
-
-    # get late night and summerfields.
-    # this method will return all or nothing,
-    # so if usdan fails, you get nothing.
-    # ALSO, number of results is tied to usdan results
-    summerfields = format_mongo_objs(search_results.get('summerfields'))
-    late_night = format_mongo_objs(search_results.get('late_night'))
-    usdan = format_mongo_objs(usdan_results)
-    final_objs = {"usdan": usdan,
-                  "summerfields": summerfields,
-                  "late_night": late_night}
-
-    response = {"Result Count": len(usdan),
-                "Results": final_objs}
-    return json.dumps(response)
-
-
-@api.route('/menus/latest', methods=['GET'])
+@api.route('/menus/all', methods=['GET'])
 @crossdomain(origin='*')
 def get_menus_all():
-    return get_menus(1, 100)
+    sources = {
+        "summerfields": [], "weswings": [], "redandblack": [], "latenight": []}
+    for i in sources:
+        sources[i] = format_mongo_objs(search.get_menu_static(i))
+    print sources, "sources"
+    sources["usdan"] = format_mongo_objs(search.get_menu_usdan())
+    return json.dumps({"Results": sources})
 
 
-@api.route('/menus/today', methods=['GET'])
-def get_menus_today():
-    """
-    Only source argument accepted here.
-    """
-    return get_menus(1, 1, True)
+@api.route('/menus/usdan', methods=['GET'])
+@crossdomain(origin='*')
+def get_menus_usdan():
+    return json.dumps({"Results": format_mongo_objs(search.get_menu_usdan())})
 
 """
 FILM SERIES METHODS

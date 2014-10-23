@@ -27,21 +27,17 @@ __          __                  _____ _____
          	Summerfields Static Menu: https://github.com/weshack/FoodyCall
 	
 	TODO (high priority):
-    -Reduce Menus API static menu redundancy by
-    making another route to just get the static menus and another just for usdan.
-    menus/usdan
-    menus/static
-    -Give status a 'last modified' field so people can check to see if they need to grab new data.
+    -Get data for Red and Black and Weswings
+    -Write Wesleying scraper for S&C
     -Upgrade the random api component on home page
+    to include more sources
     -Documentation, including some code samples
     -Wesleyan Hours of Operations
-    -WesMaps data
+    -Write tests. 
     
     TODO (lower priority):
+    -Give status a 'last modified' field in so people can check to see if they need to grab new data.
     -Store a set of categories used by events, make a route for it
     -Styling on home page.
     -Store a "Last Updated" time for every source 
-    -Weswings static menu + specials from RSS
     -Integrate caching system
-	-Determine how to collect and parse the menu emails sent out by Bon Appetite. May require using SendGrid.
-		

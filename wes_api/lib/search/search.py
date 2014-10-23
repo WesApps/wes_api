@@ -10,6 +10,9 @@ events = db.events
 usdan_menus = db.usdan_menus
 summerfields_menu = db.summerfields_menu
 late_night_menu = db.late_night_menu
+red_and_black_menu = db.red_and_black_menu
+weswings_menu = db.weswings_menu
+s_and_c_menu = db.s_and_c_menu
 film_series = db.film_series
 
 """
@@ -167,29 +170,15 @@ MENUS SEARCH
 """
 
 
-def get_menus_all(numResults):
-    usdan = get_usdan(numResults)
-    summerfields = get_summerfields_menu()
-    late_night = get_late_night_menu()
-    return {"usdan": usdan,
-            "summerfields": summerfields,
-            "late_night": late_night}
-
-
-def get_menus_today():
+def get_menu_usdan():
     now = datetime.datetime.today()
     today = datetime.datetime(now.year, now.month, now.day)
     tomorrow = today + datetime.timedelta(days=1)
-    usdan = get_usdan(1, today, tomorrow)
-
-    summerfields = get_summerfields_menu()
-    late_night = get_late_night_menu()
-    return {"usdan": usdan,
-            "summerfields": summerfields,
-            "late_night": late_night}
+    usdan = get_menu_usdan_search(1, today, tomorrow)
+    return list(usdan)
 
 
-def get_usdan(numResults, time_from=None, time_until=None):
+def get_menu_usdan_search(numResults, time_from=None, time_until=None):
     # grab time_from to present
     if time_from and not time_until:
         usdan_results = usdan_menus.find({"time": {"$gte": time_from}})
@@ -214,22 +203,23 @@ def get_usdan(numResults, time_from=None, time_until=None):
     return limit_results(numResults, sorted_results)
 
 
-def get_summerfields_menu():
-    return get_static_menu(summerfields_menu)
-
-
-def get_late_night_menu():
-    return get_static_menu(late_night_menu)
-
-
-def get_static_menu(target_db):
+def get_menu_static(target):
     """
     Not worried about time here since these menus
     don't change on a daily basis.
     """
+    dbs = {"summerfields": summerfields_menu,
+           "redandblack": red_and_black_menu,
+           "weswings": weswings_menu,
+           "sandc": s_and_c_menu,
+           "latenight": late_night_menu}
+    target_db = dbs.get(target)
+    if not target_db:
+        print "SEARCH: Found no such static menu:",target
+        return None
     results = target_db.find()
     if results.count() == 0:
-        print "SEARCH: Found no static meals"
+        print "SEARCH: Found no static meals for:",target
         return None
     return list(results)
 
