@@ -66,7 +66,7 @@ def add_event(event):
         print 'DB: Unable to upsert event, no name', event
         return False
     try:
-        print "ADD EVENT", events.update({'name': name}, event, True)
+        events.update({'name': name}, event, True)
         return True
     except:
         print 'DB: Unable to upsert event, can\'t add to db', event
