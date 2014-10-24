@@ -14,6 +14,7 @@ red_and_black_menu = db.red_and_black_menu
 weswings_menu = db.weswings_menu
 s_and_c_menu = db.s_and_c_menu
 film_series = db.film_series
+directory = db.directory
 
 """
 GENERAL METHODS
@@ -215,11 +216,11 @@ def get_menu_static(target):
            "latenight": late_night_menu}
     target_db = dbs.get(target)
     if not target_db:
-        print "SEARCH: Found no such static menu:",target
+        print "SEARCH: Found no such static menu:", target
         return None
     results = target_db.find()
     if results.count() == 0:
-        print "SEARCH: Found no static meals for:",target
+        print "SEARCH: Found no static meals for:", target
         return None
     return list(results)
 
@@ -244,5 +245,17 @@ def get_film_series_today():
         {"time": {"$gte": today, "$lt": tomorrow}})
     if search_results.count() == 0:
         print "SEARCH: Found no film for today."
+        return None
+    return list(search_results)
+
+
+"""
+DIRECTORY SEARCH
+"""
+
+def get_directory():
+    search_results = directory.find()
+    if search_results.count() == 0:
+        print "SEARCH: Found no directory results."
         return None
     return list(search_results)

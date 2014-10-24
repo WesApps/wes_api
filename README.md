@@ -32,7 +32,7 @@ __          __                  _____ _____
     -Upgrade the random api component on home page
     to include more sources
     -Documentation, including some code samples
-    -Wesleyan Hours of Operations
+    -Add more info to Directory
     -Write tests. 
     
     TODO (lower priority):

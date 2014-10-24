@@ -348,7 +348,6 @@ def get_menus_all():
         "latenight": [], "starandcrescent": []}
     for i in sources:
         sources[i] = format_mongo_objs(search.get_menu_static(i))
-    print sources, "sources"
     sources["usdan"] = format_mongo_objs(search.get_menu_usdan())
     return json.dumps({"Results": sources})
 
@@ -413,3 +412,12 @@ def get_film_series_all():
 @crossdomain(origin='*')
 def get_film_series_today():
     return get_film_series(True)
+
+
+"""
+DIRECTORY METHODS
+"""
+@api.route('/directory')
+@crossdomain(origin='*')
+def get_directory():
+    return validate_search_results(search.get_directory())
