@@ -1,33 +1,4 @@
 {
-    "WesWings": {
-        "hours": ["Lunch: 11am-2pm, Daily", "Dinner: 5pm-8pm, Daily"],
-        "category": "dining"
-    },
-    "Red & Black Cafe": {
-        "hours": ["Monday - Friday, 9am - 8pm",
-            "Saturday & Sunday, 9am - 5pm"
-        ],
-        "category": "dining"
-    },
-    "Weshop": {
-        "hours": ["Sunday - Thursday, 12pm - 12am",
-            "Friday & Saturday, 2pm - 6pm"
-        ],
-        "category": "dining"
-    },
-    "Summerfields": {
-        "hours": ["Lunch: Monday - Friday, 11am - 2pm",
-            "Dinner: Daily, 5:30 - 9pm"
-        ],
-        "category": "dining"
-    },
-    "Pi Cafe": {
-        "hours": ["Monday - Thurs, 8am - 9pm",
-            "Friday, 8am - 5pm",
-            "Saturday & Sunday, 1pm - 6pm"
-        ],
-        "category": "dining"
-    },
     "Usdan Marketplace": {
         "hours": ["Breakfast: Monday - Friday, 8am - 10:30pm",
             "Lunch: Monday - Friday, 11am - 3pm",
@@ -42,21 +13,57 @@
         ],
         "category": "dining"
     },
+    "Daniel Family Commons": {
+        "hours": ["Monday - Friday,11:30am - 1:30pm"],
+        "category": "dining"
+    },
     "Late Night": {
         "hours": ["Daily, 9:30pm - 1am"],
         "info": ["Text-To-Order: 860-724-2526"],
+        "category": "dining"
+    },
+    "Summerfields": {
+        "hours": ["Lunch: Monday - Friday, 11am - 2pm",
+            "Dinner: Daily, 5:30 - 9pm"
+        ],
+        "info": ["Text-To-Order: 860-759-9700"],
+        "category": "dining"
+    },
+    "WesWings": {
+        "hours": ["Lunch: 11am-2pm, Daily", "Dinner: 5pm-8pm, Daily"],
+        "category": "dining"
+    },
+    "Star and Crescent":{
+        "hours": ["Lunch: Tuesday - Thursday, 12pm - 12:50pm",
+            "Dinner: Monday - Thursday, 5pm - 6:45pm"],
+        "info": ["First three freshmen eat for free!"],
+        "category": "dining"
+    },
+    "Weshop": {
+        "hours": ["Sunday - Thursday, 12pm - 12am",
+            "Friday & Saturday, 2pm - 6pm"
+        ],
+        "category": "dining"
+    },
+    "Pi Cafe": {
+        "hours": ["Monday - Thurs, 8am - 9pm",
+            "Friday, 8am - 5pm",
+            "Saturday & Sunday, 1pm - 6pm"
+        ],
+        "category": "dining"
+    },
+    "Red & Black Cafe": {
+        "hours": ["Monday - Friday, 9am - 8pm",
+            "Saturday & Sunday, 9am - 5pm"
+        ],
         "category": "dining"
     },
     "Espwesso": {
         "hours": ["Sunday - Thursday, 9pm - 1am"],
         "category": "dining"
     },
-    "Daniel Family Commons": {
-        "hours": ["Monday - Friday,11:30am - 1:30pm"],
-        "category": "dining"
-    },
     "Usdan Upstairs Postal Service Window": {
-        "hours": ["Monday - Friday, 11am - 3pm"],
+        "hours": ["Monday - Friday, 12pm - 3pm"],
         "category": "other"
     },
     "Usdan Downstairs Postal Service Window": {
@@ -79,6 +86,24 @@
         "info": ["Main number: 860-685-4000",
             "Email: helpdesk@wesleyan.edu"
         ],
+        "category": "other"
+    },
+    "Career Center": {
+        "hours": ["Drop-In Hours:",
+            "Monday - Friday, 12:30pm - 4:30pm",
+            "Tuesday Evenings, 4:30pm - 6:30pm",
+            "Office Hours:",
+            "Monday - Friday, 9am - 5pm",
+            "Tuesday Evenings, 5pm - 7pm"
+        ],
+        "info": ["Phone: 860-685-2180"],
+        "category": "other"
+    },
+    "Broad Street Books": {
+        "hours": ["Monday - Friday, 9am - 8pm",
+            "Saturday - Sunday, 9am - 5pm"
+        ],
+        "info": ["Phone: 860-685-7338"],
         "category": "other"
     },
     "Olin Library": {
@@ -112,5 +137,32 @@
             "Sunday, 1pm - 11pm"
         ],
         "category": "library"
+    },
+    "Public Safety": {
+        "info": ["Emergency Phone: 860-685-3333",
+            "Non-Emergency Phone: 860-685-2345"],
+        "category": "health"
+    },
+    "Davison Health Center": {
+        "hours": ["Open for appointments:",
+            "Monday - Thursday, 9am - 6pm",
+            "Friday, 9am - 5pm",
+            "Open for urgent care (call ahead):",
+            "Saturday, 10am - 2pm"
+        ],
+        "info": ["Phone: 860-685-2470"],
+        "category": "health"
+    },
+    "Counseling and Psychological Services (CAPS) Office": {
+        "hours": ["Monday - Friday, 9am - 5pm"],
+        "info": ["Phone: 860-685-2910"],
+        "category": "health"
+    },
+    "Freeman Athletic Center - Fitness Center": {
+        "hours": ["Monday - Friday, 6:45am - 8:45pm",
+            "Saturday, 8am - 8:45pm",
+            "Sunday, 11am - 5:45pm"
+        ],
+        "category": "health"
     }
 }
