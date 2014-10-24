@@ -5,6 +5,7 @@ from lib.scraping.filmSeries import film_series
 from lib.db import db
 import time
 import datetime
+import sys
 
 SCRAPE_WESLEYING = True
 SCRAPE_WESLEYAN_EVENTS = True
@@ -23,13 +24,14 @@ SCRAPE_STATIC_DIRECTORY = True
 SLEEP_TIME = 600
 
 
-def initialize():
-    clear_all_sources()
+def initialize(clear=True):
+    if clear:
+        clear_all_sources()
     curr_time = datetime.datetime.now()
     result1 = populate_static_menus()
     result2 = populate_static_directory()
-    #really only need to update the directory here since
-    # menus will be updated right after. 
+    # really only need to update the directory here since
+    # menus will be updated right after.
     # These static items really shouldn't fail...
     status = {"menus": None, "directory": None}
     if result1:
@@ -220,5 +222,24 @@ def remove_all_films():
 # scrape Wesleyan Hours
 
 # if running from cmd line, scrape.
+about = (
+    "Options: 'init' to initialize without clearing db,"
+    " 'init-clear' to clear and initialize, 'rm' to clear db, "
+    " 'once' to scrape once, 'continuous' to scrape forever.")
+
 if __name__ == "__main__":
-    scrape_all_sources(continuous=True)
+    if len(sys.argv) > 1:
+        if sys.argv[1] == 'init':
+            initialize(clear=False)
+        elif sys.argv[1] == 'init-clear':
+            initialize(clear=True)
+        elif sys.argv[1] == 'rm':
+            clear_all_sources()
+        elif sys.argv[1] == 'once':
+            scrape_all_sources(continuous=False)
+        elif sys.argv[1] == 'continuous':
+            scrape_all_sources(continuous=True)
+        else:
+            print about
+    else:
+        print about
