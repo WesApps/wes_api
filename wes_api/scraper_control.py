@@ -11,6 +11,7 @@ SCRAPE_WESLEYAN_EVENTS = True
 SCRAPE_USDAN = True
 SCRAPE_STATIC_MENUS = True
 SCRAPE_FILM_SERIES = True
+SCRAPE_STATIC_DIRECTORY = True
 
 
 # For now, everything will be scraped every 10 minutes.
@@ -25,6 +26,7 @@ SLEEP_TIME = 600
 def initialize():
     clear_all_sources()
     populate_static_menus()
+    populate_static_directory()
     scrape_all_sources(continuous=False)
 
 
@@ -43,7 +45,8 @@ def scrape_all_sources(continuous=True):
     of the scraping sources imported above.
     TODO: Multi-threading
     """
-    while continuous:
+    proceed = True
+    while proceed:
         print "SCRAPER: Scraping all sources"
         print "SCRAPER: Scraping Wesleying"
         result1 = scrape_wesleying()
@@ -78,7 +81,7 @@ def scrape_all_sources(continuous=True):
         # TODO: Update status db
         print "SCRAPER: Successfully scraped all sources at:", datetime.datetime.today()
         if not continuous:
-            return
+            proceed = False
         else:
             print "SCRAPER: Waiting..."
             time.sleep(SLEEP_TIME)
@@ -91,7 +94,8 @@ def clear_all_sources():
     result1 = db.remove_all_events()
     result2 = db.remove_all_menus()
     result3 = db.remove_all_films()
-    if not result1 and result2 and result3:
+    result4 = db.remove_directory_entries()
+    if not result1 and result2 and result3 and result4:
         print "SCRAPER: Unable to clear all sources"
         return False
     return True
@@ -165,10 +169,23 @@ def scrape_usdan_menus():
     return True
 
 
+def populate_static_directory():
+    try:
+        if db.populate_static_directory():
+            return True
+        else:
+            return False
+    except:
+        print "SCRAPER: Unable to populate static directory"
+        return False
+
+
 def populate_static_menus():
     try:
-        db.populate_static_menus()
-        return True
+        if db.populate_static_menus():
+            return True
+        else:
+            return False
     except:
         print "SCRAPER: Unable to populate static menus"
         return False
