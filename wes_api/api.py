@@ -417,6 +417,8 @@ def get_film_series_today():
 """
 DIRECTORY METHODS
 """
+
+
 @api.route('/directory')
 @crossdomain(origin='*')
 def get_directory():

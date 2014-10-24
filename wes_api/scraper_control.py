@@ -25,18 +25,19 @@ SLEEP_TIME = 600
 
 def initialize():
     clear_all_sources()
-    populate_static_menus()
-    populate_static_directory()
+    curr_time = datetime.datetime.now()
+    result1 = populate_static_menus()
+    result2 = populate_static_directory()
+    #really only need to update the directory here since
+    # menus will be updated right after. 
+    # These static items really shouldn't fail...
+    status = {"menus": None, "directory": None}
+    if result1:
+        status["menus"] = curr_time
+    if result2:
+        status["directory"] = curr_time
+    db.update_status(status)
     scrape_all_sources(continuous=False)
-
-
-"""
-events = db.events
-usdan_menus = db.usdan_menus
-late_night_menu = db.late_night_menu
-summerfields_menu = db.summerfields_menu
-film_series = db.film_series
-"""
 
 
 def scrape_all_sources(continuous=True):
@@ -74,7 +75,6 @@ def scrape_all_sources(continuous=True):
         db.update_status(status)
 
         if not result1 and result2 and result3 and result4:
-            # TODO: Update status db
             print "SCRAPER: ERROR, UNABLE TO SCRAPE ALL SOURCES"
             continue
 
