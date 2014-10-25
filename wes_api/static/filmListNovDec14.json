@@ -1,0 +1,120 @@
+{
+    "Pink Flamingoes": {
+        "day": ["Wednesday"],
+        "date": ["November 5"],
+        "imdb": ["http://www.imdb.com/title/tt0069089/"],
+        "short": ["1972. USA. Dir: John Waters. With Divine, David Lochary. 93 min."],
+    	"long": ["Yes, Divine does eat dog shit at the end, but Waters' cult classic has many more playful perversions up its sleeve. This black comedy chronicles a fight for the obscene, as an upper middle class couple scheme to steal a trash-talking drag queen's title of 'The Filthiest Person Alive.'"]
+    },
+    "Alumni Filmmakers: Screening and Q&A": {
+        "day": ["Thursday"],
+        "date": ["November 6"],
+    	"long": ["The Brothers Byrne - Connor '11 and Tyler '09 - have been using their post-Wes years to create a series of distinctive short films and music videos. We'll screen their short FOUR EYES and other works, then provide an opportunity for current and prospective majors (or other future filmmakers) to pick the brains of two recent alumni off to a great start."]
+    },
+    "Sprited Away": {
+        "day": ["Friday"],
+        "date": ["November 7"],
+        "imdb": ["http://www.imdb.com/title/tt0245429/"],
+        "short": ["2001. Japan. Dir: Hayao Miyazaki. Animated. 125 min."],
+    	"long": ["When her family takes a fateful detour en route to their new home, a moody ten-year-old becomes trapped in a spirit world inhabited by witches, gots, and monsters - to whom she must tend at the local bathhouse while she tries to divine an escape. Miyazaki crafts a hand-drawn dream steeped in awe and whimsy, fear and beauty."]
+    },
+    "Zazie Dans Le Métro": {
+        "day": ["Saturday"],
+        "date": ["November 8"],
+        "imdb": ["http://www.imdb.com/title/tt0054494/?ref_=fn_al_tt_1"],
+        "short": ["1960. France. Dir: Louis Malle. With Catherine Demongeot. 89 min."],
+    	"long": ["A young girl is left in the custody of her uncle for a weekend, but he soon loses her to the beckoning streets and subways of Paris. This is Malle at his most uninhibited, using the city as a playground for visual experimentation, exemplifying a distinctly 1960's excitement for the uncharted possibilities of the film medium."]
+    }, 
+    "We Are the Best!": {
+        "day": ["Wednesday"],
+        "date": ["November 12"],
+        "imdb": ["http://www.imdb.com/title/tt2364975/?ref_=nv_sr_1"],
+        "short": ["2013. Sweden. Dir: Lukas Moodysson. With Mira Barkhammar. 102 min."],
+    	"long": ["Stockholm, 1982: Punk is dead, but no one told Bobo and Klara, two best friends who decide to form a band despite their obvious lack of ability. Together the girls muddle through typical tween hassles - friends, parents, music, boys - in this genuine and sweetly fun paen to rebellious self-expression. If you found BOYHOOD empty and dull (you're not alone), make girlhood your antidote."]
+    },
+    "American Promise": {
+        "day": ["Thursday"],
+        "date": ["November 13"],
+        "imdb": ["http://www.imdb.com/title/tt2545088/?ref_=nv_sr_1"],
+        "short": ["2013. USA. Dir: Joe Brewster, Michele Stephenson. Documentary. 135 min."],
+    	"long": ["This intimate, contemplative doc tracks two African-Amerian boys and their families over 13 years, as they navigate the opportunities of coming of age on issues of race, class, and privilege. The directors - parents of one of the young men - thoroughly explore the boys' experiences at a prestigious NYC private school with a new commitment to 'diversity.'"]
+    },
+    "Back to the Future": {
+        "day": ["Friday"],
+        "date": ["November 14"],
+        "imdb": ["http://www.imdb.com/title/tt0088763/?ref_=nv_sr_1"],
+        "short": ["1985. USA. Dir: Robert Zemeckis. With Michael J. Fox, Christopher Lloyd. 116 min."],
+    	"long": ["Fire up the flus capacitor and take a trip back with this quintessential time-travel tale. Shenanigans (and near-incest) ensue when slacker Marty accidentally finds himself 30 years in the past. Can he return to the future before he prevents his own existence? Man, this is heavy."]
+    },
+    "I Was Born, But...": {
+        "day": ["Saturday"],
+        "date": ["November 15"],
+        "imdb": ["http://www.imdb.com/title/tt0023634/?ref_=fn_al_tt_1"],
+        "short": ["1932. Japan. Dir: Yasujiro Ozu. WIth Tatsuo Saito, Tomio Aoki. 100 min."],
+    	"long": ["This self-describd 'picture book for grownups' follows two young brothers making a name for themselves as leaders of the neighborhood gang. Meanwhile, their father sits amongst the dregs of the business world as a lowly office clerk. Revered director Ozu offers a tender reminder of the richness in Japan's largely unseen silent filmmaking tradition."]
+    },
+    "Planet of the Apes": {
+        "day": ["Wednesday"],
+        "date": ["November 19"],
+        "imdb": ["http://www.imdb.com/title/tt0133152/?ref_=nv_sr_1"],
+        "short": ["1968. USA. Dir: Franklin J. Schaffner. With Charlton Heston. 112 min."],
+    	"long": ["After four sequels, two reboots, and this summer's sequel to the latest reboot, these apes have gone through quite the evolution. It's time to get back to the basics: Chuck Heston growling at people in rubber masks amidst desolate landscapes. All jokes aside, this sci-fi landmark remains bold, entertaining, and a teeny bit philosophical - setting the stage for everything since."]
+    },
+    "Mother of George": {
+        "day": ["Thursday"],
+        "date": ["November 20"],
+        "imdb": ["http://www.imdb.com/title/tt2094890/?ref_=nv_sr_1"],
+        "short": ["2013. Nigeria/USA. Dir: Andrew Dosunmu. With Danai Gurira. 107 min."],
+    	"long": ["Newlywed Nigerian immigrants living in Brooklyn face teh pressures of marriage and cultural expectations as they struggle to conceive a child. Stunning visual style situates this tense, emotional story of matrimonial strife in a dreamily reimagined and richly realized New York City."]
+    },
+    "O Brother, Where Art Thou?": {
+        "day": ["Friday"],
+        "date": ["November 21"],
+        "imdb": ["http://www.imdb.com/title/tt0190590/?ref_=nv_sr_1"],
+        "short": ["2000. USA. Dir: Joel and Ethan Coen. With George Clooney. 106 min."],
+    	"long": ["Three dopey cons flee a chain gang to claim a buried treasure, beginning a hilarious journey on which they encounter blind prophets, sexy sirens, overnight radio fame, and John Goodman. It's THE ODYSSEY meets the Depression-era rural South meets musical-adventure-satire, with a killer folky soundtrack to boot."]
+    },
+    "Zaytoun": {
+        "day": ["Saturday"],
+        "date": ["November 22"],
+        "imdb": ["http://www.imdb.com/title/tt2131698/?ref_=nv_sr_1"],
+        "short": ["2012. Israel/UK/France. Dir: Eran Riklis. With Stephen Dorff. 110 min."],
+    	"long": ["During the 1982 Lebanon War, a captured Israeli pilot fors a tentative pact with a Palestinian boy to escape back over the border. Q&A with director Riklis."]
+    },
+    "The Warriors": {
+        "day": ["Saturday"],
+        "date": ["November 22, midnight"],
+        "imdb": ["http://www.imdb.com/title/tt2131698/?ref_=nv_sr_1"],
+        "short": ["1979. USA. Dir: Walter Hill. With Michael Beck, James Remar. 93 min."],
+    	"long": ["'Warriors... Come out to playeeyay!'"]
+    },
+    "The City of Lost Children": {
+        "day": ["Wednesday"],
+        "date": ["December 3"],
+        "imdb": ["http://www.imdb.com/title/tt0112682/?ref_=nv_sr_1"],
+        "short": ["1995. France. Dir: Jean-Pierre Jeunet. With Ron Perlman. 112 min."],
+    	"long": ["In a darkly surreal storybook world, an orphaned girl and her gentle giant confront a mad scientist who abducts tiny tots to steal their dreams. Before the sweetness of AMÉLIE, Jeunet had a healthy appetite for the macabre, and the kinds of twisted fairy tales that children are perhaps not really meant to see..."]
+    },
+    "An Oversimplification of Her Beauty": {
+        "day": ["Thursday"],
+        "date": ["December 4"],
+        "imdb": ["http://www.imdb.com/title/tt2073520/?ref_=nv_sr_1"],
+        "short": ["2012. USA. Dir: Terence Nance. With Nance, Namik Minter. 93 min."],
+    	"long": ["After a date bails at the last minute, Nance does what any of us would: obsessively overanalyze the situation, his past dating history, and his perceived personal flaws. Unlike you, his introspection takes the form of a poetic and engaginly vivid hybrid of doc, fiction, and animation. Q&A with director Nance."]
+    },
+    "Die Hard": {
+        "day": ["Friday"],
+        "date": ["December 5"],
+        "imdb": ["http://www.imdb.com/title/tt0095016/?ref_=nv_sr_1"],
+        "short": ["1988. USA. Dir: John McTiernan. With Bruce Willis, Alan Rickman. 131 min."],
+    	"long": ["The action film that launched a thousand knock-offs might also b one of the finest Christmas movies ever made. When a scenery-chewing Professor Snape takes an office tower hostage, good ol' Bruce must shimmy up the chimney (er... elevator shaft) to reach his wife and save the holidays. It'll have you shouting 'Yippee-ki-yay!'"]
+    },
+    "Christmas in Connecticut": {
+        "day": ["Saturday"],
+        "date": ["December 6"],
+        "imdb": ["http://www.imdb.com/title/tt0037595/?ref_=nv_sr_2"],
+        "short": ["1945. USA. Dir: Peter Godfrey. With Barbara Stanwyck. 102 min."],
+    	"long": ["Bachelor gal Stanwyk is a domestic lifestyle colomnist who's been faking it her whole career. But when a veteran is invited to spend Christmas with her, she must pretend to be the perfect housewife she's only written about. Ask any prof - this is exactly the kind of feel-good farcical fun that happens here while we're on break."]
+    }        
+}
+
