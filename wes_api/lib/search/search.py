@@ -253,6 +253,7 @@ def get_film_series_today():
 DIRECTORY SEARCH
 """
 
+
 def get_directory():
     search_results = directory.find()
     if search_results.count() == 0:

@@ -34,7 +34,8 @@ __          __                  _____ _____
     -Documentation, including some code samples
     -Add more info to Directory
     -Write tests. 
-    
+    -Add logging for scraping.
+
     TODO (lower priority):
     -Give status a 'last modified' field in so people can check to see if they need to grab new data.
     -Store a set of categories used by events, make a route for it
