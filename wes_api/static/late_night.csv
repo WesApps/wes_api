@@ -1,3 +1,4 @@
+item,price,rating_avg,description,rater_count,filter,side,menu
 Plain jane,7.5,0,burger with lettuce and tomato ,0,none,0,ln 
 Plain jane with cheese,7.95,0,"burger with lettuce, tomato, and american cheese",0,none,0,ln
 Plain jane with mushroom,8.25,0,"burger with lettuce, tomato, sauteed mushrooms, and swiss cheese",0,none,0,ln

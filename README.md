@@ -27,7 +27,8 @@ __          __                  _____ _____
          	Summerfields Static Menu: https://github.com/weshack/FoodyCall
 	
 	TODO (high priority):
-    -Write methods to put static data from R&B, Swings, Directory, Film series into DB, add routes
+    -Write methods to put static data from Swings into DB, add routes
+    -Standardize menu output data
     -Figure out best way of getting S&C data
     -Upgrade the random api component on home page
     to include more sources

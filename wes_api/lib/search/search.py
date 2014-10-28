@@ -242,7 +242,7 @@ def get_film_series_today():
     today = datetime.datetime(now.year, now.month, now.day)
     tomorrow = today + datetime.timedelta(days=1)
     search_results = film_series.find(
-        {"time": {"$gte": today, "$lt": tomorrow}})
+        {"data.time": {"$gte": today, "$lt": tomorrow}})
     if search_results.count() == 0:
         print "SEARCH: Found no film for today."
         return None
@@ -261,3 +261,4 @@ def get_directory():
         return None
     print search_results[0]
     return list(search_results)
+

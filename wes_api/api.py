@@ -214,6 +214,15 @@ def format_mongo_objs(mongo_objs):
         old_time = mongo_obj.get('time')
         if old_time:
             mongo_obj['time'] = old_time.isoformat()
+
+        #Case for times nested in "data" field, for static json
+        data = mongo_obj.get('data')
+        if data:
+            old_time_2 = data.get('time')
+            if old_time_2:
+                print mongo_obj['data']['time'][0]
+                mongo_obj['data']['time'][0] = old_time_2[0].isoformat()
+
     return mongo_objs
 
 
@@ -422,4 +431,7 @@ DIRECTORY METHODS
 @api.route('/directory')
 @crossdomain(origin='*')
 def get_directory():
+    print search.get_directory()
     return validate_search_results(search.get_directory())
+
+

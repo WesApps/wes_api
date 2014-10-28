@@ -12,12 +12,35 @@ events = db.events
 usdan_menus = db.usdan_menus
 late_night_menu = db.late_night_menu
 summerfields_menu = db.summerfields_menu
+red_and_black_menu = db.red_and_black_menu
 film_series = db.film_series
 directory = db.directory
+
+
+json_directory = "static/wesleyanDirectory.json"
+json_filmseries = "static/filmListNovDec14.json"
+json_red_and_black = "static/RedandBlack.json"
+# json_s_and_c = "static/wesleyanDirectory.json"
+# json_weswings = "static/wesleyanDirectory.json"
 
 """
 GENERAL DB METHODS
 """
+
+
+def populate_from_json(json_obj, target_db):
+    """
+    json_obj: a json obj ( from json.loads(file("foo.json").read())) )
+    target_db: the db object to add to
+    modification_fn: if modification_fn, applies it to the json. Ex: could be 
+    """
+    for i in json_obj:
+        if not target_db.find({"name": i}).count() != 0:
+            target_db.insert({"name": i, "data": json_obj[i]})
+        else:
+            target_db.update(
+                {'name': i}, {"$set": {"data": json_obj[i]}})
+    return True
 
 
 def update_status(apis):
@@ -118,11 +141,19 @@ MENU DB METHODS
 def populate_static_menus():
     try:
         print "DB: Populating static menus"
+        #summerfields
         populate_static_menu("static/summerfields_menu.csv", summerfields_menu)
+        #late night
         populate_static_menu("static/late_night.csv", late_night_menu)
+        
+        #red and black
+        json_obj = json.loads(file(json_red_and_black).read())
+        populate_from_json(json_obj, red_and_black_menu)
         return True
-    except:
+
+    except Exception, e:
         print "DB: Populating static menus failed"
+        print e
         return False
 
 
@@ -146,6 +177,10 @@ def populate_static_menu(csv_file, target_db):
             "price": price
         }
         # if it does not exist, insert it.
+        if csv_file == "static/late_night.csv":
+            print target_db.count()
+            print obj
+            print line['item']
         if target_db.find(obj).count() == 0:
             target_db.insert(obj)
 
@@ -226,8 +261,9 @@ def add_usdan_day(day_item):
         }
         usdan_menus.insert(processed_day_item)
         return True
-    except:
+    except Exception,e:
         print "DB: Unable to add usdan day,", day_item
+        print e
         return False
 
 
@@ -239,10 +275,12 @@ def remove_all_menus():
         usdan_menus.drop()
         summerfields_menu.drop()
         late_night_menu.drop()
+        red_and_black_menu.drop()
         print 'DB: Dropped Menus DB'
         return True
-    except:
+    except Exception,e:
         print 'DB: Unable to drop menus DB'
+        print e
         return False
 
 """
@@ -250,19 +288,39 @@ FILM SERIES METHODS
 """
 
 
-def add_film_event(film_event):
-    if film_series.find(film_event).count() != 0:
-        # print "Have film, done."
-        return True
+def populate_static_filmseries():
+    """
+    Populates film series data from file
+    """
     try:
-        film_series.insert(film_event)
+        # Read in file to json
+        json_obj = json.loads(file(json_filmseries).read())
+        year = datetime.datetime.now().year
+        for i in json_obj:
+            data = json_obj[i]
+            c_date = data.get("date")[0]
+            c_day = data.get("day")[0]
+            if not c_date and c_day:
+                print "DB: No date for film series item", i
+                return False
+            # Convert the day and date fields to one datetime
+            new_time = datetime.datetime.strptime(
+                c_day + ", " + c_date + " "+str(year), "%A, %B %d %Y")
+            data["time"] = [new_time]
+
+            # remove old day and dates
+            data.pop("date")
+            data.pop("day")
+
+        # add to db
+        populate_from_json(json_obj, film_series)
         return True
-    except:
-        print 'DB: Unable to add film event, can\'t add to db', film_event
+    except Exception, e:
+        print "DB: populate static film error", e
         return False
 
 
-def remove_all_films():
+def remove_all_filmseries():
     try:
         film_series.drop()
         print 'DB: Dropped Film Series DB'
@@ -283,21 +341,11 @@ def populate_static_directory():
     and adds new entries to the db
     """
     try:
-        directory_data = json.loads(
-            file("static/wesleyanDirectory.json").read())
-        for i in directory_data:
-            if not directory.find({"name": i}).count() != 0:
-                directory.insert({"name": i, "data": directory_data[i]})
-            else:
-                # status.update(
-                #         {'name': i}, {"$set": {"time": apis[i], "status": api_status}})
-                directory.update(
-                    {'name': i}, {"$set": {"data": directory_data[i]}})
-                # directory.update({'name': i}, directory_data[i], True)
+        json_obj = json.loads(file(json_directory).read())
+        populate_from_json(json_obj, directory)
         return True
     except Exception, e:
-        print e
-        print "DB: Unable to populate static directory."
+        print e,
         return False
 
 

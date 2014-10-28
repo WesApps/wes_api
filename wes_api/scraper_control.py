@@ -1,18 +1,19 @@
 from lib.scraping.wesleying import wesleying
 from lib.scraping.wesleyanEvents import wesleyanEvents
 from lib.scraping.wesleyanMenus import usdanMenus
-from lib.scraping.filmSeries import film_series
+# from lib.scraping.filmSeries import film_series
 from lib.db import db
 import time
 import datetime
 import sys
 
+# Controls, set to false and add in/check conditionals below to skip.
 SCRAPE_WESLEYING = True
 SCRAPE_WESLEYAN_EVENTS = True
 SCRAPE_USDAN = True
-SCRAPE_STATIC_MENUS = True
-SCRAPE_FILM_SERIES = True
-SCRAPE_STATIC_DIRECTORY = True
+STATIC_MENUS = True
+STATIC_FILM_SERIES = True
+STATIC_DIRECTORY = True
 
 
 # For now, everything will be scraped every 10 minutes.
@@ -30,14 +31,18 @@ def initialize(clear=True):
     curr_time = datetime.datetime.now()
     result1 = populate_static_menus()
     result2 = populate_static_directory()
+    result3 = populate_static_filmseries()
     # really only need to update the directory here since
     # menus will be updated right after.
     # These static items really shouldn't fail...
-    status = {"menus": None, "directory": None}
+    status = {"menus": None, "directory": None, "film_series": None}
     if result1:
         status["menus"] = curr_time
     if result2:
         status["directory"] = curr_time
+    if result3:
+        status["film_series"] = curr_time
+    print status
     db.update_status(status)
     scrape_all_sources(continuous=False)
 
@@ -59,24 +64,19 @@ def scrape_all_sources(continuous=True):
         print "SCRAPER: Scraping Usdan Menus"
         result3 = scrape_usdan_menus()
         menus_time = datetime.datetime.now()
-        print "SCRAPER: Scraping Film Series"
-        result4 = scrape_film_series()
-        film_series_time = datetime.datetime.now()
 
         # status: if None, failed to update, will be
         # noted as an offline API until it works. Otherwise,
         # last updated time will update to time given as value.
-        status = {"events": None, "menus": None, "film_series": None}
+        status = {"events": None, "menus": None}
         if result1 and result2:
             status["events"] = events_time
         if result3:
             status["menus"] = menus_time
-        if result4:
-            status["film_series"] = film_series_time
         print status
         db.update_status(status)
 
-        if not result1 and result2 and result3 and result4:
+        if not result1 and result2 and result3:
             print "SCRAPER: ERROR, UNABLE TO SCRAPE ALL SOURCES"
             continue
 
@@ -95,7 +95,7 @@ def clear_all_sources():
     """
     result1 = db.remove_all_events()
     result2 = db.remove_all_menus()
-    result3 = db.remove_all_films()
+    result3 = db.remove_all_filmseries()
     result4 = db.remove_directory_entries()
     if not result1 and result2 and result3 and result4:
         print "SCRAPER: Unable to clear all sources"
@@ -172,6 +172,8 @@ def scrape_usdan_menus():
 
 
 def populate_static_directory():
+    if not STATIC_DIRECTORY:
+        return True
     try:
         if db.populate_static_directory():
             return True
@@ -183,6 +185,8 @@ def populate_static_directory():
 
 
 def populate_static_menus():
+    if not STATIC_MENUS:
+        return True
     try:
         if db.populate_static_menus():
             return True
@@ -193,40 +197,31 @@ def populate_static_menus():
         return False
 
 
-def scrape_film_series():
-    if not SCRAPE_FILM_SERIES:
+def populate_static_filmseries():
+    if not STATIC_FILM_SERIES:
         return True
     try:
-        film_series_results = film_series.scrape_film_series()
+        if db.populate_static_filmseries():
+            return True
+        else:
+            return False
     except:
-        print "SCRAPER: Unable to scrape film series"
+        print "SCRAPER: Unable to populate static filmseries"
         return False
-    if not film_series_results:
-        print "SCRAPER: No film series results"
-        return False
-    for item in film_series_results:
-        result = db.add_film_event(item)
-        if not result:
-            print "SCRAPER:", item, "failed to add to db"
-    return True
 
 
-def remove_all_films():
-    if not db.remove_all_films():
+def remove_all_filmseries():
+    if not db.remove_all_filmseries():
         print "SCRAPER: Unable to remove all film series"
         return False
     return True
 
-# scrape WesMaps
-
-# scrape Wesleyan Hours
-
-# if running from cmd line, scrape.
 about = (
     "Options: 'init' to initialize without clearing db,"
     " 'init-clear' to clear and initialize, 'rm' to clear db, "
     " 'once' to scrape once, 'continuous' to scrape forever.")
 
+# cmd line args
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] == 'init':
