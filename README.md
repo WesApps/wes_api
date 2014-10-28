@@ -27,12 +27,11 @@ __          __                  _____ _____
          	Summerfields Static Menu: https://github.com/weshack/FoodyCall
 	
 	TODO (high priority):
-    -Get data for Red and Black and Weswings
-    -Write Wesleying scraper for S&C
+    -Write methods to put static data from R&B, Swings, Directory, Film series into DB, add routes
+    -Figure out best way of getting S&C data
     -Upgrade the random api component on home page
     to include more sources
     -Documentation, including some code samples
-    -Add more info to Directory
     -Write tests. 
     -Add logging for scraping.
 

@@ -259,4 +259,5 @@ def get_directory():
     if search_results.count() == 0:
         print "SEARCH: Found no directory results."
         return None
+    print search_results[0]
     return list(search_results)

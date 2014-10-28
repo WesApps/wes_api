@@ -283,14 +283,20 @@ def populate_static_directory():
     and adds new entries to the db
     """
     try:
-        directory_data = json.loads(file("static/wesleyanDirectory.json").read())
+        directory_data = json.loads(
+            file("static/wesleyanDirectory.json").read())
         for i in directory_data:
             if not directory.find({"name": i}).count() != 0:
                 directory.insert({"name": i, "data": directory_data[i]})
             else:
-                directory.update({'name': i}, directory_data[i], True)
+                # status.update(
+                #         {'name': i}, {"$set": {"time": apis[i], "status": api_status}})
+                directory.update(
+                    {'name': i}, {"$set": {"data": directory_data[i]}})
+                # directory.update({'name': i}, directory_data[i], True)
         return True
-    except:
+    except Exception, e:
+        print e
         print "DB: Unable to populate static directory."
         return False
 
