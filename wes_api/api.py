@@ -431,7 +431,6 @@ DIRECTORY METHODS
 @api.route('/directory')
 @crossdomain(origin='*')
 def get_directory():
-    print search.get_directory()
     return validate_search_results(search.get_directory())
 
 
