@@ -234,7 +234,7 @@ def get_film_series_all():
     if search_results.count() == 0:
         print "SEARCH: Found no film series at all...?"
         return None
-    return list(search_results.sort('time', pymongo.DESCENDING))
+    return list(search_results.sort('data.time', pymongo.ASCENDING))
 
 
 def get_film_series_today():

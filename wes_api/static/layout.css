@@ -16,6 +16,7 @@ body {
 }
 .menuitem {
     color: black;
+    transition: .1s ease-out;
 }
 .navbar-pills a {
     /*text-transform: */
