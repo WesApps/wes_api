@@ -163,7 +163,7 @@ def scrape_usdan_menus():
     usdan_items = usdan_results.get('Usdan')
     if not usdan_items:
         print "SCRAPER: No usdan items from fetch"
-        return False
+        return True
     for item in usdan_items:
         result = db.add_usdan_day(item)
         if not result:
