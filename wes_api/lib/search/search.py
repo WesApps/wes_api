@@ -176,6 +176,8 @@ def get_menu_usdan():
     today = datetime.datetime(now.year, now.month, now.day)
     tomorrow = today + datetime.timedelta(days=1)
     usdan = get_menu_usdan_search(1, today, tomorrow)
+    if not usdan:
+        return []
     return list(usdan)
 
 
