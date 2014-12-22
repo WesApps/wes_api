@@ -18,8 +18,7 @@ function initialize_sandbox() {
         'eventsToday': $("#eventsTodayForm"),
         'eventsLatest': $("#eventsLatestForm"),
         'eventsSearch': $("#eventsSearchForm"),
-        'menusToday': $("#menusTodayForm"),
-        'menusLatest': $("#menusLatestForm"),
+        'menusAll': $("#menusAllForm"),
         'filmseriesToday': $("#filmseriesTodayForm"),
         'filmseriesAll': $("#filmseriesAllForm"),
         'directoryAll': $("#directoryAllForm")
@@ -35,7 +34,7 @@ function initialize_sandbox() {
     }
 
     defaults = {
-        'menusAPITab': "menusToday",
+        'menusAPITab': "menusAll",
         'eventsAPITab': "eventsToday",
         'filmseriesAPITab': "filmseriesToday",
         'directoryAPITab': "directoryAll"

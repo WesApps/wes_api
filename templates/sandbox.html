@@ -37,16 +37,12 @@
                 <fieldset>
                     <legend>Select an API option</legend>
                     <div id="radioHolder">
-                        <label for="radio-subtype">Today</label>
-                        <input type="radio" name="radio-subtype" id="menusToday" checked>
-                    </div>
-                    <div id="radioHolder">
                         <label for="radio-subtype">All</label>
-                        <input type="radio" name="radio-subtype" id="menusLatest">
+                        <input type="radio" name="radio-subtype" id="menusAll">
                     </div>
                 </fieldset>
             </form>
-            <form method="get" action="api/menus/all" class="forms" id="menusLatestForm" hidden="true">
+            <form method="get" action="api/menus/all" class="forms" id="menusAllForm" hidden="true">
                 <fieldset>
                     <legend>Optional Fields</legend>
                     <!--   <label>
@@ -58,17 +54,6 @@
                         Max Results
                         <input type="text" name="maxresults" class="width-50" />
                         <div class="forms-desc">Enter a number from 1-100. Default is 100?</div>
-                    </label>
-                </fieldset>
-                <p>
-                    <input type="submit" class="btn" value="Submit" />
-                </p>
-            </form>
-            <form method="get" action="api/menus/today" class="forms" id="menusTodayForm">
-                <fieldset>
-                    <legend>Fields</legend>
-                    <label>
-                        No fields for this option.
                     </label>
                 </fieldset>
                 <p>
@@ -214,11 +199,11 @@
                     </div>
                 </fieldset>
             </form>
-            <form method="get" action="api/directory/all" class="forms" id="directoryAllForm" hidden="true">
+            <form method="get" action="api/directory" class="forms" id="directoryAllForm" hidden="true">
                 <fieldset>
                     <legend>Fields</legend>
                     <label>
-                        Coming Soon
+                        No fields for this option.
                     </label>
                 </fieldset>
                 <p>
