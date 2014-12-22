@@ -25,7 +25,7 @@ __          __                  _____ _____
         Data scrapers have been collected and modified from:
          	Wesleying and Wesleyan event data scrapers: https://github.com/WesAppGroup/
          	Summerfields Static Menu: https://github.com/weshack/FoodyCall
-            Manually entered data for 
+            Manually entered data for Film Series and 
 	
 	TODO (high priority):
     -Integrate caching system on backend and set cache headers on responses
