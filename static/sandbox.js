@@ -71,7 +71,7 @@ function initialize_sandbox() {
 }
 
 function set_current_api_url(url) {
-    $("#resultUrl").val("http://wesapi.com/" + url);
+    $("#resultUrl").val("http://wesapi.org/" + url);
 }
 
 function clear_current_api_url() {
