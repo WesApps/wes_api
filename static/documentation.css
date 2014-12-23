@@ -3,7 +3,7 @@
     font-family: Lato;
 }
 .subtitle {
-	font-style: italic;
+    font-style: italic;
 }
 #apiNav {
     padding-left: 40px;
@@ -21,13 +21,38 @@
 }
 .docsTitle {
     font-family: Lato;
-    font-weight: 500;
+    font-weight: 600;
     font-style: italic;
+    font-size: 2.5em;
 }
 #docsContainer {
-    font-size: 1.35em;
     max-width: 900px;
+    font-size: 1.35em;
 }
 .hiddenDoc {
     display: none !important;
+}
+.smallcode {
+    overflow: auto;
+    padding: 6px;
+    margin-top: 7px
+}
+.div-language {
+    margin-top: 10px;
+    font-variant: small-caps;
+}
+.codeblock {
+    padding: 6px !important;
+    width: 800px;
+}
+#example-1 {
+    padding-top: 20px;
+    padding-bottom: 0px;
+    display: inline-block;
+}
+.text-link {
+    text-decoration: none;
+    color: rgb(150, 135, 135);
+    font-style: italic;
+    /*st*/
 }

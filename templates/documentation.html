@@ -1,6 +1,8 @@
 {% extends "layout.html" %} {% set active_page = "documentation" %} {% block title %}Documentation{% endblock %} {% block head %} {{ super() }}
 <script src="/static/documentation.js"></script>
-<link rel="stylesheet" href="/static/documentation.css">{% endblock %} {% block content %}
+<script src="/static/prism.js"></script>
+<link rel="stylesheet" href="/static/documentation.css">
+<link href="/static/prism.css" rel="stylesheet" />{% endblock %} {% block content %}
 
 <body>
     <div id="title">
@@ -33,22 +35,53 @@
                 </div>
                 <div>
                     <p>
-                        <h4 class="subtitle">Querying</h4>
-                        All API options can be accessed under the route:
-                        <code>http://wesapi.org/api/...</code>
+                        <h4 class="subtitle">Querying</h4> All API options are in <a class="text-link" target="_blank" href="http://en.wikipedia.org/wiki/JSON">JSON format</a> and can be accessed under the route:
+                        <br>
+                        <code class="smallcode">http://wesapi.org/api/...</code>
                         <br><i>Note: All requests must be of type GET.</i>
                     </p>
                 </div>
                 <div>
                     <p>
-                        <h4 class="subtitle">API Types</h4>
-                        Some of the sources in the Wes API are fairly static, meaning they only require a once-per-semester data fetch. Other sources are constantly being updated and as a result require more regular fetches. You can find out more about this in the description section of any particular API type.
+                        <h4 class="subtitle">Example</h4>
+                        <i>Fetching all films</i>
+                        <br>
+                        <div class="div-language"><b>javascript</b>
+                        </div>
+                        <code class="language-javascript codeblock">function get_films() {
+var data = $.getJSON("http://wesapi.org/api/filmseries/all", function(res) {
+        if (!(res)) {
+            alert("No response");
+        } else {
+            alert("Got response");
+            return res;
+        }
+    });
+}</code>
+
+                        <div class="div-language"><b>python</b>
+                        </div>
+                        <code class="language-python codeblock">import requests
+r = requests.get("http://wesapi.org/api/filmseries/all")
+if r.status_code == 200:
+    try:
+        json_data = r.json()
+        print json_data
+    except:
+        print "Unable to jsonify request data"
+else:
+    print "Request error: code =",r.status_code</code>
+                        <br>
                     </p>
                 </div>
                 <div>
                     <p>
-                        <h4 class="subtitle">Rate Limits</h4>
-                        For the time being, the Wes API is not rate limited, so please be kind to our server and limit unnecessary requests by storing reusable data on the client side.
+                        <h4 class="subtitle">API Types</h4> Some of the sources in the Wes API are fairly static, meaning they only require a once-per-semester data fetch. Other sources are constantly being updated and as a result require more regular fetches. You can find out more about this in the description section of any particular API type.
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <h4 class="subtitle">Rate Limits</h4> For the time being, the Wes API is not rate limited, so please be kind to our server and limit unnecessary requests by storing reusable data on the client side.
                     </p>
                 </div>
             </div>
@@ -63,7 +96,16 @@
                     <p>
                         <h4 class="subtitle">/api/status</h4>
                         <h6>Description</h6>
-                        <p>Returns the last update time for each API as</p>
+                        <p>Returns information regarding the status of each API option.</p>
+                        <h6>Format</h6>
+                        <p><code class="smallcode">{API_NAME:{'status':BOOL,'time':TIME_STRING},...}
+                        </code>
+                        <h6>Fields</h6>
+                        <samp>API_NAME</samp> is a <var>STRING</var> key representing one of the API options (<i>directory, menus, events</i>, and <i>filmseries</i>).
+                        <br>
+                        <samp>'status'</samp> is a <var>STRING</var> key with a <var>BOOLEAN</var> value indicating whether or not the API_NAME source was successfully scraped.
+                        <br>
+                        <samp>'time'</samp> is a <var>STRING</var> key with a <var>STRING</var> time value representing the the last successful scraping/manual update time of the API_NAME source.</p>
                     </p>
                 </div>
             </div>
