@@ -5,6 +5,8 @@
 .subtitle {
     font-style: italic;
     font-size: 1.3em;
+    padding: 3px;
+    display: table;;
 }
 #apiNav {
     padding-left: 40px;
@@ -28,7 +30,7 @@
 }
 #docsContainer {
     max-width: 900px;
-    font-size: 1.35em;
+    font-size: 1.2em;
 }
 .hiddenDoc {
     display: none !important;
@@ -63,12 +65,17 @@
     font-style: italic;
 }
 .main-container {
-    padding-left: 30px; 
+    padding-left: 30px;
     display: table;
 }
 .main-p {
     margin-bottom: 0.8em;
 }
+.main-p > b {
+    background: yellow;
+    padding: 3px;
+}
+
 .span-h6 {
     display: inline-block;
     float: left;
@@ -76,4 +83,8 @@
 .span-h6 > h6 {
     font-weight: 100;
     min-width: 100px;
+    letter-spacing: 0.05em;
+}
+.smallcode {
+    padding: 6px;
 }

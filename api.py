@@ -304,7 +304,7 @@ def search_events():
 def get_events(today=False):
     """
     Returns latest results.
-    Maxresults defaults to 30.
+    Maxresults defaults to 100.
     Max is 100
     Min is 1
     """

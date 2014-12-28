@@ -83,6 +83,11 @@ else:
                 </div>
                 <div>
                     <p>
+                        <h4 class="subtitle">Errors</h4> If a query is invalid or the server is for some reason unable to process it, you will receive a response in the form {ERROR: ERROR_MESSAGE}.
+                    </p>
+                </div>
+                <div>
+                    <p>
                         <h4 class="subtitle">Rate Limits</h4> For the time being, the Wes API is not rate limited, so please be kind to our server and limit unnecessary requests by storing reusable data on the client side.
                     </p>
                 </div>
@@ -129,67 +134,147 @@ else:
                     </p>
                 </div>
                 <div>
-                    <p>
-                        <h4 class="subtitle">/api/events/today</h4>
-                        <span class="span-h6"><h6>Description</h6></span>
-                        <div class="main-container">
-                            <p>Returns a list of today's events.</p>
-                        </div>
-                        <span class="span-h6"><h6>Format</h6></span>
-                        <div class="main-container">
-                            <p>
-                                <code id="json-events" class="json"></code>
-                            </p>
-                        </div>
-                        <span class="span-h6"><h6>Fields</h6></span>
-                        <div class="main-container">
-                            <p class="main-p">
-                                <b>Result Count</b> |
-                                <var>INTEGER</var>
-                                <br>The number of results in the response.
-                            </p>
-                            <p class="main-p">
-                                <b>Results</b> |
-                                <var>ARRAY</var>
-                                <br>Each element represents an event and has several fields, some of which are not guaranteed to be populated (more on that below) since parts of the event scrapers are based off Regular Expressions.
-                            </p>
-                            <p class="main-p">
-                                <b>category</b> |
-                                <var>STRING</var>
-                                <br>The category of the event (such as <i>theater, student group, sports, etc.</i>) as best classified by the event scrapers.
-                            </p>
-                            <p class="main-p">
-                                <b>description</b> |
-                                <var>STRING</var>
-                                <br>A short description found for the event. Note that these descriptions can vary significantly in length.
-                            </p>
-                            <p class="main-p">
-                                <b>source</b> |
-                                <var>STRING</var>
-                                <br>The source from which the event was scraped (either 'Wesleying' or 'Wesleyan Events').
-                            </p>
-                            <p class="main-p">
-                                <b>link</b> |
-                                <var>URL</var>
-                                <br>The original link to the blog post or story from which the event was scraped. Note: this field is not guaranteed to be populated.
-                            </p>
-                            <p class="main-p">
-                                <b>location</b> |
-                                <var>STRING</var>
-                                <br>The location of the event. Note: this field is not guaranteed to be populated or correct but is fairly reliable.
-                            </p>
-                            <p class="main-p">
-                                <b>time</b>  |
-                                <var>TIMESTRING</var>
-                                <br>The start time of the event.
-                            </p>
-                            <p class="main-p">
-                                <b>name</b> | 
-                                <var>STRING</var>
-                                <br>The name of the event.
-                            </p>
-                    </p>
+                    <h4 class="subtitle">/api/events/today</h4>
+                    <span class="span-h6"><h6>Description</h6></span>
+                    <div class="main-container">
+                        <p>Returns a list of today's events.</p>
                     </div>
+                    <span class="span-h6"><h6>Format</h6></span>
+                    <div class="main-container">
+                        <p>
+                            <code id="json-events" class="json"></code>
+                        </p>
+                    </div>
+                    <span class="span-h6"><h6>Fields</h6></span>
+                    <div class="main-container">
+                        <p class="main-p">
+                            <b>Result Count</b> |
+                            <var>INTEGER</var>
+                            <br>The number of results in the response.
+                        </p>
+                        <p class="main-p">
+                            <b>Results</b> |
+                            <var>ARRAY</var>
+                            <br>Each element represents an event and has several fields, some of which are not guaranteed to be populated (more on that below) since parts of the event scrapers are based off Regular Expressions.
+                        </p>
+                        <p class="main-p">
+                            <b>category</b> |
+                            <var>STRING</var>
+                            <br>The category of the event (such as <i>theater, student group, sports, etc.</i>) as best classified by the event scrapers.
+                        </p>
+                        <p class="main-p">
+                            <b>description</b> |
+                            <var>STRING</var>
+                            <br>A short description found for the event. Note that these descriptions can vary significantly in length.
+                        </p>
+                        <p class="main-p">
+                            <b>source</b> |
+                            <var>STRING</var>
+                            <br>The source from which the event was scraped (either 'Wesleying' or 'Wesleyan Events').
+                        </p>
+                        <p class="main-p">
+                            <b>link</b> |
+                            <var>URL</var>
+                            <br>The original link to the blog post or story from which the event was scraped. Note: this field is not guaranteed to be populated.
+                        </p>
+                        <p class="main-p">
+                            <b>location</b> |
+                            <var>STRING</var>
+                            <br>The location of the event. Note: this field is not guaranteed to be populated or correct but is fairly reliable.
+                        </p>
+                        <p class="main-p">
+                            <b>time</b> |
+                            <var>TIMESTRING</var>
+                            <br>The start time of the event.
+                        </p>
+                        <p class="main-p">
+                            <b>name</b> |
+                            <var>STRING</var>
+                            <br>The name of the event.
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <h4 class="subtitle">/api/events/latest</h4>
+                <span class="span-h6"><h6>Description</h6></span>
+                <div class="main-container">
+                    <p>Returns a list of the latest events. Includes <b>optional</b> parameters to limit the number of results and limit results to one particular source.</p>
+                </div>
+                <span class="span-h6"><h6>Parameters</h6></span>
+                <div class="main-container">
+                    <p class="main-p">
+                        <b>source</b> |
+                        <var>STRING</var>
+                        <br>Restricts results to the specified source (either Wesleying or Wesleyan Events).
+                    </p>
+                    <p class="main-p">
+                        <b>maxresults</b> |
+                        <var>INTEGER</var>
+                        <br>The max number of results to return. This value is 100 by default but can be specified to be anything between 1-100.
+                    </p>
+                </div>
+                <span class="span-h6"><h6>Format</h6></span>
+                <div class="main-container">
+                    <p>Format follows format of <b>/api/events/today</b>
+                    </p>
+                </div>
+                <span class="span-h6"><h6>Fields</h6></span>
+                <div class="main-container">
+                    <p>Format follows fields of <b>/api/events/today</b>
+                    </p>
+                </div>
+                <h4 class="subtitle">/api/events/search</h4>
+                <span class="span-h6"><h6>Description</h6></span>
+                <div class="main-container">
+                    <p>Returns a list of events best matching search parameters. All parameters are <b>optional</b>.
+                    </p>
+                </div>
+                <span class="span-h6"><h6>Parameters</h6></span>
+                <div class="main-container">
+                    <p class="main-p">
+                        <b>source</b> |
+                        <var>STRING</var>
+                        <br>Restricts results to the specified source (either Wesleying or Wesleyan Events).
+                    </p>
+                    <p class="main-p">
+                        <b>maxresults</b> |
+                        <var>INTEGER</var>
+                        <br>The max number of results to return. This value is 100 by default but can be specified to be anything between 1-100.
+                    </p>
+                    <p class="main-p">
+                        <b>title</b> |
+                        <var>STRING</var>
+                        <br>The title of the event. Note: this field supports 'best matching' using Python's difflib SequenceMatcher so your queries do not have to be exact matches.
+                    </p>
+                    <p class="main-p">
+                        <b>location</b> |
+                        <var>STRING</var>
+                        <br>The title of the event. Note: this field supports 'best matching'.
+                    </p>
+                    <p class="main-p">
+                        <b>timefrom</b> |
+                        <var>TIME</var>
+                        <br>Filters out any events with times before timefrom. Format is mm-dd-yyyy. For example, 01-30-1970.
+                    </p>
+                    <p class="main-p">
+                        <b>timeuntil</b> |
+                        <var>TIME</var>
+                        <br>Filters out any events with times after timeuntil. Format is mm-dd-yyyy. Can be used in conjunction with timefrom to specify a time range.
+                    </p>
+                     <p class="main-p">
+                        <b>category</b> |
+                        <var>STRING</var>
+                        <br>Filters out any events not in the specified category. Currently, category searching is difficult unless you know the categories before hand or just guess. A future category api route is planned to support fetching all known categories.  Note: this field supports 'best matching'. 
+                    </p>
+                </div>
+                <span class="span-h6"><h6>Format</h6></span>
+                <div class="main-container">
+                    <p>Format follows format of <b>/api/events/today</b>
+                    </p>
+                </div>
+                <span class="span-h6"><h6>Fields</h6></span>
+                <div class="main-container">
+                    <p>Format follows fields of <b>/api/events/today</b>
                     </p>
                 </div>
             </div>

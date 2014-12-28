@@ -97,16 +97,17 @@ def search_events(numResults, title_query, location_query,
                   time_from, time_until, category_query, source):
     """
     To minimize total search space, search hierarchically.
-    This will do only exact matches. Since the amount of event
+    Using difflib SequenceMatcher to find best match for title, 
+    location, and category. Since the amount of event
     data (for now) is relatively small, people can just
     do whatever more-serious searching they want on the 
     front end once they have the data.
     Order of search:
-            -source
+            -source   
             -category_query
-            -time_from and time_until
-            -location_query
-            -title_query
+            -time_from and time_until   
+            -location_query     
+            -title_query        
     Then restrict results to numResults.
     """
     # Source Filter
@@ -127,7 +128,6 @@ def search_events(numResults, title_query, location_query,
 
     # Time Filter (by day)
     # So need the time floor
-
     if time_from and not time_until:
         search_results_3 = [
             i for i in search_results_2 if day_floor(i['time']) >= time_from]
@@ -263,4 +263,3 @@ def get_directory():
         return None
     print search_results[0]
     return list(search_results)
-

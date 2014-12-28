@@ -72,7 +72,7 @@ function jsonify(json) {
         }
     };
     var events = {
-        'Result Count': '2',
+        'Result Count': 2,
         'Results': [{
             "category ": "Performances ",
             "description": "Interested in the Romance Languages &#38; Literatures major? This is the open house for you:Would you like your undergraduate major to help you:· Acquire familiarity with another culture on that culture's terms?· Acquire the kind of linguistic and cross-cultural proficiency required for 21st-c. life and careers?· Put you into deep and meaningful contact with some of [...]",
