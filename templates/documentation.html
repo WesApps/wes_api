@@ -49,15 +49,17 @@
                         <div class="div-language"><b>javascript</b>
                         </div>
                         <code class="language-javascript codeblock">function get_films() {
-var data = $.getJSON("http://wesapi.org/api/filmseries/all", function(res) {
+    $.getJSON("http://wesapi.org/api/filmseries/all", function(res) {
         if (!(res)) {
             alert("No response");
+            return;
         } else {
             alert("Got response");
-            return res;
+            console.log(res)
         }
     });
-}</code>
+}
+</code>
 
                         <div class="div-language"><b>python</b>
                         </div>
@@ -93,27 +95,101 @@ else:
                     </p>
                 </div>
                 <div>
-                    <p>
-                        <h4 class="subtitle">/api/status</h4>
-                        <h6>Description</h6>
+                    <h4 class="subtitle">/api/status</h4>
+                    <span class="span-h6"><h6>Description</h6></span>
+                    <div class="main-container">
                         <p>Returns information regarding the status of each API option.</p>
-                        <h6>Format</h6>
-                        <p><code class="smallcode">{API_NAME:{'status':BOOL,'time':TIME_STRING},...}
-                        </code>
-                        <h6>Fields</h6>
-                        <samp>API_NAME</samp> is a <var>STRING</var> key representing one of the API options (<i>directory, menus, events</i>, and <i>filmseries</i>).
-                        <br>
-                        <samp>'status'</samp> is a <var>STRING</var> key with a <var>BOOLEAN</var> value indicating whether or not the API_NAME source was successfully scraped.
-                        <br>
-                        <samp>'time'</samp> is a <var>STRING</var> key with a <var>STRING</var> time value representing the the last successful scraping/manual update time of the API_NAME source.</p>
-                    </p>
+                    </div>
+                    <span class="span-h6"><h6>Format</h6></span>
+                    <div class="main-container"><code id="json-status" class="json"></code>
+                    </div>
+                    <br>
+                    <span class="span-h6"><h6>Fields</h6></span>
+                    <div class="main-container">
+                        <p class="main-p">The status response contains key for every API option (<i>directory, menus, events</i>, and <i>filmseries</i>).
+                        </p>
+                        <p class="main-p">
+                            <b>status</b> |
+                            <var>BOOLEAN</var>
+                            <br> Indicates whether or not the parent API source was successfully scraped.
+                        </p>
+                        <p class="main-p">
+                            <b>time</b> |
+                            <var>TIMESTRING</var>
+                            <br>The last successful scraping/manual update time of the parent API source. This can be parsed by most date libraries, including Javascript's 'Date' object.
+                        </p>
+                    </div>
                 </div>
             </div>
             <div id="docsEvents" hidden="true">
                 <h1 class="docsTitle">Events</h1>
                 <div>
                     <p>
-
+                        The Events API provides event data scraped regularly from <a class="text-link" href="wesleying.org">Wesleying</a> and <a class="text-link" href="http://events.wesleyan.edu/">Wesleyan Events</a>.
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <h4 class="subtitle">/api/events/today</h4>
+                        <span class="span-h6"><h6>Description</h6></span>
+                        <div class="main-container">
+                            <p>Returns a list of today's events.</p>
+                        </div>
+                        <span class="span-h6"><h6>Format</h6></span>
+                        <div class="main-container">
+                            <p>
+                                <code id="json-events" class="json"></code>
+                            </p>
+                        </div>
+                        <span class="span-h6"><h6>Fields</h6></span>
+                        <div class="main-container">
+                            <p class="main-p">
+                                <b>Result Count</b> |
+                                <var>INTEGER</var>
+                                <br>The number of results in the response.
+                            </p>
+                            <p class="main-p">
+                                <b>Results</b> |
+                                <var>ARRAY</var>
+                                <br>Each element represents an event and has several fields, some of which are not guaranteed to be populated (more on that below) since parts of the event scrapers are based off Regular Expressions.
+                            </p>
+                            <p class="main-p">
+                                <b>category</b> |
+                                <var>STRING</var>
+                                <br>The category of the event (such as <i>theater, student group, sports, etc.</i>) as best classified by the event scrapers.
+                            </p>
+                            <p class="main-p">
+                                <b>description</b> |
+                                <var>STRING</var>
+                                <br>A short description found for the event. Note that these descriptions can vary significantly in length.
+                            </p>
+                            <p class="main-p">
+                                <b>source</b> |
+                                <var>STRING</var>
+                                <br>The source from which the event was scraped (either 'Wesleying' or 'Wesleyan Events').
+                            </p>
+                            <p class="main-p">
+                                <b>link</b> |
+                                <var>URL</var>
+                                <br>The original link to the blog post or story from which the event was scraped. Note: this field is not guaranteed to be populated.
+                            </p>
+                            <p class="main-p">
+                                <b>location</b> |
+                                <var>STRING</var>
+                                <br>The location of the event. Note: this field is not guaranteed to be populated or correct but is fairly reliable.
+                            </p>
+                            <p class="main-p">
+                                <b>time</b>  |
+                                <var>TIMESTRING</var>
+                                <br>The start time of the event.
+                            </p>
+                            <p class="main-p">
+                                <b>name</b> | 
+                                <var>STRING</var>
+                                <br>The name of the event.
+                            </p>
+                    </p>
+                    </div>
                     </p>
                 </div>
             </div>

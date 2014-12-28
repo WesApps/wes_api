@@ -19,7 +19,7 @@ body {
     transition: .1s ease-out;
 }
 .navbar-pills a {
-    /*text-transform: */
+    letter-spacing: 0.08em;
 }
 .navbar-pills a:hover {
     color: white;

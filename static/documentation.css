@@ -4,6 +4,7 @@
 }
 .subtitle {
     font-style: italic;
+    font-size: 1.3em;
 }
 #apiNav {
     padding-left: 40px;
@@ -32,10 +33,16 @@
 .hiddenDoc {
     display: none !important;
 }
-.smallcode {
+.json {
     overflow: auto;
     padding: 6px;
-    margin-top: 7px
+    margin-top: 7px;
+}
+.jsonview .prop {
+    font-weight: inherit;
+}
+.jsonview {
+    font-size: 0.9em;
 }
 .div-language {
     margin-top: 10px;
@@ -52,7 +59,21 @@
 }
 .text-link {
     text-decoration: none;
-    color: rgb(150, 135, 135);
+    color: black;
     font-style: italic;
-    /*st*/
+}
+.main-container {
+    padding-left: 30px; 
+    display: table;
+}
+.main-p {
+    margin-bottom: 0.8em;
+}
+.span-h6 {
+    display: inline-block;
+    float: left;
+}
+.span-h6 > h6 {
+    font-weight: 100;
+    min-width: 100px;
 }
