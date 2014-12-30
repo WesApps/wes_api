@@ -180,7 +180,7 @@ function jsonify(json) {
         }]
     }
     var directory = {
-        "Result Count": 26,
+        "Result Count": 2,
         "Results": [{
             "data": {
                 "hours": [

@@ -1,11 +1,34 @@
 {% extends "layout.html" %} {% set active_page = "about" %} {% block title %}About{% endblock %} {% block head %} {{ super() }}
-<!-- <link rel="stylesheet" href="/static/sandbox.css"> -->
-{% endblock %} {% block content %}
+<link rel="stylesheet" href="/static/about.css"> {% endblock %} {% block content %}
 
 <body>
     <div id="title">
-        <h3>About! Why this exists, what problems it addresses, where this could go next, what this could inspire app wise, and who was involved, etc. What to add-- menus, etc. Event scraping based off "Weshappening", a WesHack project. Summerfields and Late Night used with permission from "FoodyCall", another WesHack project. Film Series data provided with permission from the Wesleyan Film Department. Directory information manually aggregated from all across the web. Code @github.. CONTACT via aplave@wesleyan.edu. Built and maintained by Aaron Plave, class of 2015, with contributions from.</h3>
+        <h1>About</h1>
     </div>
+    <div class="about-div">
+        <h2>#WhyWesAPI?</h2>
+        <p class="about-text">In short, Wesleyan related information is scattered all around the web and can often be very difficult to find and make sense of. Wes API exists to aggregate this data and provide it programmatically to anyone who wishes to use it. This API is also a potential building block for any other Wesleyan-related applications as it abstracts the problem of finding, parsing, and collecting Wesleyan data to one simple API call. <i>Yipee!</i>
+        </p>
+        <h2>#HowDoesItWork?</h2>
+        <p>Wes <b><a href="http://en.wikipedia.org/wiki/Application_programming_interface" target="_blank"><b class="red">A</b>pplication <b class="red">P</b>rogram <b class="red">I</b>nterface</a>
+            </b> is an open source web scraping system that lives on a server and delivers data to clients who make requests for data. The web scraper is collection of scripts to gather data from various sources on the web along with manually inputted data and store it all in a database. When a request comes to the server for information, the server queries the database for relevant data, formats this data, and responds with a message containing the data.</p>
+        <h2>#Contact</h2>
+        <p>For now, please send all questions, comments, and suggestions to aplave@wesleyan.edu</p>
+        <h2>#CanYouAdd...?</h2>
+        <p>Some things are difficult to scrape off the web or simply don't exist online, we we often manually enter them or just live without them. Currently, we don't offer menus for Star & Crescent and Wes Wings. Star & Crescent's information changes every week, making manual entry time consuming, and their menu post on Wesleying has proven tricky to identify and parse <i>(if you're up to the task of writing a scraper for the task, however, let us know!)</i>. The menu for Wes Wings is not available online but will be manually entered sometime in the near future.</p>
+        <h2>#ThisDataIsWrong!</h2>
+        <p>Sometimes manual data entry goes <b><a href="http://en.wikipedia.org/wiki/Etaoin_shrdlu" target="_blank"><i>etaoin shrdlu</i></a></b> and needs to be corrected, so let us know and we'll fix it right away!</p>
+        <h2>#I'mUpsetByThisDataAndWantItGone!</h2>
+        <p>Too bad.</p>
+        <p>Wes API is not responsible for the content of any of the information it scrapes since the sources from which it scrapes from are public and since Wes API is not authoring any of the content. Additionally, Wes API is not officially affiliated with Wesleyan University. However, if you have any privacy or copyright concerns, please don't hesitate to let us know and we can make the appropriate changes.</p>
+        <h2>#WhoMadeThis?</h2>
+        <p>Wes API was created by Aaron Plave '15, with contributions from Trisha Aurora '16, Lili Borland '16, and Matthew Stein '16. The event scraping is based off a <b><a href="http://weshappening.weshack.com/" target="_blank">WesHappening</a></b>, a <b><a href="http://weshack.com/" target="_blank">WesHack</a></b> project. Summerfields and Late Night static data was used with permission from <b><a href="http://foodycall.us/" target="_blank">FoodyCall</a></b> another <b><a href="http://weshack.com/" target="_blank">WesHack</a></b> project. Film Series static data is provided with permission from the Wesleyan Film Department. Directory information is manually aggregated from all across the web.</p>
+        <h2>#CanIHelp?</h2>
+        <p>Yup! We need people to maintain the site, fix bugs, and add features and sources. The web is constantly evolving so we'll need to write new scrapers for some sources as they change their formats. A certain project leader may also be leaving in a semester, so someone else will have to take over the reins. Check out this project on <b><a href="https://github.com/WesApps/wes_api" target="_blank">github.com/WesApps/wes_api</a></b>. If you're interested in contributing in any way, please let us know.
+    </div>
+    <br>
+    <br>
+    <br>
 </body>
 
 {% endblock %}
