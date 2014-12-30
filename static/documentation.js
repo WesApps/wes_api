@@ -161,10 +161,32 @@ function jsonify(json) {
             }]
         }
     }
+
+    var film_series = {
+        "Result Count": 1,
+        "Results": [{
+            "data": {
+                "short": [
+                    "1972. USA. Dir: John Waters. With Divine, David Lochary. 93 min."
+                ],
+                "imdb": [
+                    "http://www.imdb.com/title/tt0069089/"
+                ],
+                "long": [
+                    "Yes, Divine does eat dog shit at the end, but Waters' cult classic has many more playful perversions up its sleeve. This black comedy chronicles a fight for the obscene, as an upper middle class couple scheme to steal a trash-talking drag queen's title of 'The Filthiest Person Alive.'"
+                ],
+                "time": [
+                    "2014-11-05T00:00:00"
+                ]
+            },
+            "name": "Pink Flamingos"
+        }]
+    }
     var json_collection = {
         "#json-status": status,
         "#json-events": events,
-        "#json-menus": menus
+        "#json-menus": menus,
+        "#json-film_series": film_series
     };
 
     for (j in json_collection) {

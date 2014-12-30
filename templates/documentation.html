@@ -371,8 +371,62 @@ else:
                 <h1 class="docsTitle">Film Series</h1>
                 <div>
                     <p>
-
+                        The Film Series API provides manually entered semesterly data on the Wesleyan Film Series.
                     </p>
+                </div>
+                <div>
+                    <h4 class="subtitle">/api/filmseries/all</h4>
+                    <span class="span-h6"><h6>Description</h6></span>
+                    <div class="main-container">
+                        <p>Returns all films.</p>
+                    </div>
+                    <span class="span-h6"><h6>Format</h6></span>
+                    <div class="main-container"><code id="json-film_series" class="json"></code>
+                    </div>
+                    <br>
+                    <span class="span-h6"><h6>Fields</h6></span>
+                    <div class="main-container">
+                        <p class="main-p">
+                            <b>Result Count</b> |
+                            <var>INTEGER</var>
+                            <br>The number of results in the response.
+                        </p>
+                        <p class="main-p">
+                            <b>Results</b> |
+                            <var>ARRAY</var>
+                            <br>Each element represents a film and has two fields: 'name' and 'data'.
+                        </p>
+                        <p class="main-p">
+                            <b>name</b> |
+                            <var>STRING</var>
+                            <br>The title of the film.
+                        </p>
+                        <p class="main-p">
+                            <b>data</b> |
+                            <var>OBJECT</var>
+                            <br>An object containing several fields of information related to the film. All fields are guaranteed to be populated.
+                        </p>
+                        <p class="main-p">
+                            <b>short</b> |
+                            <var>OBJECT</var>
+                            <br>A short description of the film containing year of release, where the film is from, the director, the length of the film, and other small notes.
+                        </p>
+                        <p class="main-p">
+                            <b>imdb</b> |
+                            <var>URL</var>
+                            <br>A link to the imdb page for the film.
+                        </p>
+                        <p class="main-p">
+                            <b>long</b> |
+                            <var>STRING</var>
+                            <br>The Wesleyan Film Series description of the film.
+                        </p>
+                        <p class="main-p">
+                            <b>time</b> |
+                            <var>TIMESTRING</var>
+                            <br>The start time of the film.
+                        </p>
+                    </div>
                 </div>
             </div>
             <div id="docsHours" hidden="true">
