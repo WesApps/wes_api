@@ -21,7 +21,7 @@
                 </li>
                 <li><a id="navFilmSeries" class="inactive" href="#FilmSeries">Film Series</a>
                 </li>
-                <li><a id="navHours" class="inactive" href="#Hours">Hours</a>
+                <li><a id="navDirectory" class="inactive" href="#Directory">Directory</a>
                 </li>
             </ul>
         </nav>
@@ -408,7 +408,7 @@ else:
                         </p>
                         <p class="main-p">
                             <b>short</b> |
-                            <var>OBJECT</var>
+                            <var>STRING</var>
                             <br>A short description of the film containing year of release, where the film is from, the director, the length of the film, and other small notes.
                         </p>
                         <p class="main-p">
@@ -427,18 +427,78 @@ else:
                             <br>The start time of the film.
                         </p>
                     </div>
-                </div>
-            </div>
-            <div id="docsHours" hidden="true">
-                <h1 class="docsTitle">Hours</h1>
-                <div>
-                    <p>
-
+                    <h4 class="subtitle">/api/filmseries/today</h4>
+                    <span class="span-h6"><h6>Description</h6></span>
+                    <div class="main-container">
+                        <p>Returns today's film if one exists.</p>
+                    </div>
+                    <span class="span-h6"><h6>Format</h6></span>
+                    <p class="main-container">
+                        Follows format of <b>/api/filmseries/all</b>
+                    </p>
+                    <span class="span-h6"><h6>Fields</h6></span>
+                    <p class="main-container">
+                        Follows fields of <b>/api/filmseries/all</b>
                     </p>
                 </div>
             </div>
-        </div>
-    </div>
+            <div id="docsDirectory" hidden="true">
+                <h1 class="docsTitle">Directory</h1>
+                <div>
+                    <p>
+                        The Directory API provides manually collected hours of operation, phone numbers, and other information about Wesleyan services and facilities. Note: not all data guaranteed to exist and the data is not necessarily reliable for non-standard times of the year such as breaks and holidays.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="subtitle">/api/directory</h4>
+                    <span class="span-h6"><h6>Description</h6></span>
+                    <div class="main-container">
+                        <p>Returns all directory entries.</p>
+                    </div>
+                    <span class="span-h6"><h6>Format</h6></span>
+                    <div class="main-container"><code id="json-directory" class="json"></code>
+                    </div>
+                    <br>
+                    <span class="span-h6"><h6>Fields</h6></span>
+                    <div class="main-container">
+                        <p class="main-p">
+                            <b>Result Count</b> |
+                            <var>INTEGER</var>
+                            <br>The number of results in the response.
+                        </p>
+                        <p class="main-p">
+                            <b>Results</b> |
+                            <var>ARRAY</var>
+                            <br>Each element represents a directory item and has two fields: 'name' and 'data'.
+                        </p>
+                        <p class="main-p">
+                            <b>name</b> |
+                            <var>STRING</var>
+                            <br>The title of the directory item.
+                        </p>
+                        <p class="main-p">
+                            <b>data</b> |
+                            <var>OBJECT</var>
+                            <br>An object containing several fields of information related to the directory item. Not all fields are guaranteed to be populated due to the variable nature of the data.
+                        </p>
+                        <p class="main-p">
+                            <b>hours</b> |
+                            <var>ARRAY</var>
+                            <br>An array of strings, each representing a time-block of hours of operations, such as "Monday - Friday, 6:45am - 8:45pm".
+                        </p>
+                        <p class="main-p">
+                            <b>category</b> |
+                            <var>STRING</var>
+                            <br>The category of the directory item.
+                        </p>
+                        <p class="main-p">
+                            <b>info</b> |
+                            <var>ARRAY</var>
+                            <br>An array of strings, each being a piece of additional information such as a phone number or an email address.
+                        </p>
+                    </div>
+                </div>
+            </div>
 </body>
 
 {% endblock %}

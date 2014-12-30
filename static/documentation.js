@@ -12,7 +12,7 @@ function initialize_docs() {
         'navEvents': $("#docsEvents"),
         'navMenus': $("#docsMenus"),
         'navFilmSeries': $("#docsFilmSeries"),
-        'navHours': $("#docsHours")
+        'navDirectory': $("#docsDirectory")
     }
     previous_doc = docs['navGeneral'];
     previous_menu_item = 'navGeneral';
@@ -22,7 +22,6 @@ function initialize_docs() {
 
 function set_on_click_listeners() {
     $("#apiNav li").on('click', function(e) {
-        console.log(e.target)
         load_doc(e.target.id);
     })
 }
@@ -36,7 +35,6 @@ function load_doc(doc) {
     if (previous_doc) {
         previous_doc.hide();
         //Change doc menu bar for previous doc
-        // console.log(previous_doc)
         var menuEl = $("#" + previous_menu_item);
         menuEl[0].className = "inactive";
     }
@@ -45,7 +43,6 @@ function load_doc(doc) {
     previous_doc = docs[doc];
     previous_menu_item = doc;
     previous_doc.show();
-    console.log(previous_doc, doc);
 
     //Change api menu bar to show current api tab
     var menuEl = $("li #" + doc);
@@ -182,11 +179,35 @@ function jsonify(json) {
             "name": "Pink Flamingos"
         }]
     }
+    var directory = {
+        "Result Count": 26,
+        "Results": [{
+            "data": {
+                "hours": [
+                    "Daily, 9:30pm - 1am"
+                ],
+                "info": [
+                    "Text-To-Order: 860-724-2526"
+                ],
+                "category": "dining"
+            },
+            "name": "Late Night"
+        }, {
+            "data": {
+                "hours": [
+                    "Tuesday - Saturday, 10am - 4:30pm"
+                ],
+                "category": "other"
+            },
+            "name": "Usdan Box Office"
+        }]
+    }
     var json_collection = {
         "#json-status": status,
         "#json-events": events,
         "#json-menus": menus,
-        "#json-film_series": film_series
+        "#json-film_series": film_series,
+        "#json-directory": directory
     };
 
     for (j in json_collection) {
