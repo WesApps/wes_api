@@ -91,9 +91,80 @@ function jsonify(json) {
             "name": "Daniel Fishkin: Transcriptions"
         }]
     };
+    var menus = {
+        "Results": {
+            "summerfields": [{
+                "filter": "none",
+                "price": "6.99",
+                "description": "all burgers are served with french fries. If your topping choice is not available as a preset, indicate in special requests your topping...",
+                "title": "Regular burger"
+            }, {
+                "filter": "none",
+                "price": "6.99",
+                "description": "served with french fries",
+                "title": "Cheddar cheeseburger"
+            }],
+            "latenight": [{
+                "filter": "none",
+                "price": "7.5",
+                "description": "burger with lettuce and tomato ",
+                "title": "Plain jane"
+            }, {
+                "filter": "none",
+                "price": "7.95",
+                "description": "burger with lettuce, tomato, and american cheese",
+                "title": "Plain jane with cheese"
+            }],
+            "usdan": [{
+                "time": "2014-11-02T19:01:07.995000",
+                "breakfast": [{
+                    'classics': [{
+                        'extra': 'prepared with hoisin sauce, oyster sauce, soy sauce, fish sauce, garlic, ginger, sriracha, lemon grass, butter and pineapple',
+                        'title': ' spicy scallop stir fry;'
+                    }],
+                    'pastabilities': [{
+                        'extra': 'local tomatoes \nHorse Listeners Orchard',
+                        'title': ' meat sauce;'
+                    }, {
+                        'extra': '',
+                        'title': ' mushroom ragout;'
+                    }]
+                }],
+                "lunch": []
+            }],
+            "redandblack": [{
+                "data": {
+                    "info": [
+                        "American on white"
+                    ],
+                    "category": [
+                        "kids menu"
+                    ],
+                    "price": [
+                        "$3.95"
+                    ]
+                },
+                "name": "Grilled Cheese"
+            }, {
+                "data": {
+                    "info": [
+                        "Crisp romaine lettuce tossed with grilled chicken, homemade croutons, authentic Caesar dressing and grated Parmesan cheese."
+                    ],
+                    "category": [
+                        "salad"
+                    ],
+                    "price": [
+                        "$9.25"
+                    ]
+                },
+                "name": "Chicken Caesar Salad"
+            }]
+        }
+    }
     var json_collection = {
         "#json-status": status,
-        "#json-events": events
+        "#json-events": events,
+        "#json-menus": menus
     };
 
     for (j in json_collection) {

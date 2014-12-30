@@ -52,7 +52,6 @@
     $.getJSON("http://wesapi.org/api/filmseries/all", function(res) {
         if (!(res)) {
             alert("No response");
-            return;
         } else {
             alert("Got response");
             console.log(res)
@@ -261,10 +260,10 @@ else:
                         <var>TIME</var>
                         <br>Filters out any events with times after timeuntil. Format is mm-dd-yyyy. Can be used in conjunction with timefrom to specify a time range.
                     </p>
-                     <p class="main-p">
+                    <p class="main-p">
                         <b>category</b> |
                         <var>STRING</var>
-                        <br>Filters out any events not in the specified category. Currently, category searching is difficult unless you know the categories before hand or just guess. A future category api route is planned to support fetching all known categories.  Note: this field supports 'best matching'. 
+                        <br>Filters out any events not in the specified category. Currently, category searching is difficult unless you know the categories before hand or just guess. A future category api route is planned to support fetching all known categories. Note: this field supports 'best matching'.
                     </p>
                 </div>
                 <span class="span-h6"><h6>Format</h6></span>
@@ -282,8 +281,90 @@ else:
                 <h1 class="docsTitle">Menus</h1>
                 <div>
                     <p>
-
+                        The Menu API provides up-to-date menus from Usdan, Summerfields, Late Night, and Red & Black. Usdan data is scraped daily, meaning it is somewhat variable and will at times not provide any data. Summerfields, Late Night, and Red & Black are manually entered every semester and can always be expected to provide data. Includes an <b>optional</b> parameter to limit the number of Usdan results.</p>
                     </p>
+                </div>
+                <div>
+                    <h4 class="subtitle">/api/menus/all</h4>
+                    <span class="span-h6"><h6>Description</h6></span>
+                    <div class="main-container">
+                        <p>Returns all menus from both static and scraped sources.</p>
+                    </div>
+                    <span class="span-h6"><h6>Format</h6></span>
+                    <div class="main-container"><code id="json-menus" class="json"></code>
+                    </div>
+                    <br>
+                    <span class="span-h6"><h6>Parameters</h6></span>
+                    <div class="main-container">
+                        <p class="main-p">
+                            <b>maxresults</b> |
+                            <var>INTEGER</var>
+                            <br>The max number of Usdan results (i.e. days) to return. This value is 100 by default but can be specified to be anything between 1-100.
+                        </p>
+                    </div>
+                    <span class="span-h6"><h6>Fields</h6></span>
+                    <div class="main-container">
+                        <b><i>Usdan Data</i></b>
+                        <p class="main-p">
+                            <b>time</b> |
+                            <var>TIMESTRING</var>
+                            <br>The day of the menu.
+                        </p>
+                        <p class="main-p">
+                            <b>breakfast/brunch/lunch/dinner</b> |
+                            <var>ARRAY</var>
+                            <br>These keys are optional and depend on the day and time of year. Each one contains an array of menu categories. Each menu category has a key representing the name of the category, such as 'classics' or 'pastabilities'. The value of each category key is an array of menu items. Each menu item has two fields: 'title' and 'extra', representing the name of the item and any additional information associated with that item, respectively.
+                        </p>
+                        <br>
+                        <b><i>Summerfields & Late Night Data</i></b>
+                        <p class="main-p">
+                            <b>title</b> |
+                            <var>STRING</var>
+                            <br>The name of the item.
+                        </p>
+                        <p class="main-p">
+                            <b>filter</b> |
+                            <var>STRING</var>
+                            <br>Vegan, vegetarian, or none.
+                        </p>
+                        <p class="main-p">
+                            <b>price</b> |
+                            <var>STRING</var>
+                            <br>The price of the item.
+                        </p>
+                        <p class="main-p">
+                            <b>description</b> |
+                            <var>STRING</var>
+                            <br>A description of the item.
+                        </p>
+                        <br>
+                        <b><i>Red & Black Data</i></b>
+                        <p class="main-p">
+                            <b>name</b> |
+                            <var>STRING</var>
+                            <br>The name of the item
+                        </p>
+                        <p class="main-p">
+                            <b>data</b> |
+                            <var>OBJECT</var>
+                            <br>Contains various fields regarding the item, all of which are guaranteed to exist.
+                        </p>
+                        <p class="main-p">
+                            <b>info</b> |
+                            <var>STRING</var>
+                            <br>A description of the item.
+                        </p>
+                        <p class="main-p">
+                            <b>category</b> |
+                            <var>STRING</var>
+                            <br>The category of the item.
+                        </p>
+                        <p class="main-p">
+                            <b>price</b> |
+                            <var>STRING</var>
+                            <br>The price of the item.
+                        </p>
+                    </div>
                 </div>
             </div>
             <div id="docsFilmSeries" hidden="true">
