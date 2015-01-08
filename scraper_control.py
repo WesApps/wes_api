@@ -44,7 +44,7 @@ def initialize(clear=True):
         status["film_series"] = curr_time
     print status
     db.update_status(status)
-    scrape_all_sources(continuous=False)
+    scrape_all_sources(continuous=True)
 
 
 def scrape_all_sources(continuous=True):

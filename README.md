@@ -24,15 +24,15 @@ __          __                  _____ _____
 
         Data scrapers have been collected and modified from:
          	Wesleying and Wesleyan event data scrapers: https://github.com/WesAppGroup/
-         	Summerfields Static Menu: https://github.com/weshack/FoodyCall
-            Manually entered data for Film Series and 
+         	Summerfields and Late night Static Menus: https://github.com/weshack/FoodyCall
+            Manually entered data for Film Series
 	
 	TODO (high priority):
     -Integrate caching system on backend and set cache headers on responses
     -Write methods to put static data from Swings into DB, add routes
     -Figure out best way of getting S&C data
-    -Documentation, including some code samples
     -Add logging for scraping.
+    -Clean print statements, get rid of unused scripts and css
 
     TODO (lower priority):
     -Write tests. 
