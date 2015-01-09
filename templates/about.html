@@ -1,21 +1,5 @@
 {% extends "layout.html" %} {% set active_page = "about" %} {% block title %}About{% endblock %} {% block head %} {{ super() }}
-<link rel="stylesheet" href="/static/about.css">
-<script>
-(function(i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function() {
-        (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m)
-})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-ga('create', 'UA-58344670-1', 'auto');
-ga('send', 'pageview');
-</script>{% endblock %} {% block content %}
+<link rel="stylesheet" href="/static/about.css"> {% endblock %} {% block content %}
 
 <body>
     <div id="title">
@@ -38,7 +22,7 @@ ga('send', 'pageview');
         <p>Too bad.</p>
         <p>Wes API is not responsible for the content of any of the information it scrapes since the sources from which it scrapes from are public and since Wes API is not authoring any of the content. Additionally, Wes API is not officially affiliated with Wesleyan University. However, if you have any privacy or copyright concerns, please don't hesitate to let us know and we can make the appropriate changes.</p>
         <h2>#WhoMadeThis?</h2>
-        <p>Wes API was created by Aaron Plave '15, with contributions from Trisha Aurora '16, Lili Borland '16, and Matthew Stein '16. The event scraping is based off a <b><a href="http://weshappening.weshack.com/" target="_blank">WesHappening</a></b>, a <b><a href="http://weshack.com/" target="_blank">WesHack</a></b> project. Summerfields and Late Night static data was used with permission from <b><a href="http://foodycall.us/" target="_blank">FoodyCall</a></b> another <b><a href="http://weshack.com/" target="_blank">WesHack</a></b> project. Film Series static data is provided with permission from the Wesleyan Film Department. Directory information is manually aggregated from all across the web.</p>
+        <p>Wes API was created by Aaron Plave '15, with contributions from Trisha Arora '16, Lili Borland '16, and Matthew Stein '16. The event scraping is based off a <b><a href="http://weshappening.weshack.com/" target="_blank">WesHappening</a></b>, a <b><a href="http://weshack.com/" target="_blank">WesHack</a></b> project. Summerfields and Late Night static data was used with permission from <b><a href="http://foodycall.us/" target="_blank">FoodyCall</a></b> another <b><a href="http://weshack.com/" target="_blank">WesHack</a></b> project. Film Series static data is provided with permission from the Wesleyan Film Department. Directory information is manually aggregated from all across the web.</p>
         <h2>#CanIHelp?</h2>
         <p>Yup! We need people to maintain the site, fix bugs, and add features and sources. The web is constantly evolving so we'll need to write new scrapers for some sources as they change their formats. A certain project leader may also be leaving in a semester, so someone else will have to take over the reins. Check out this project on <b><a href="https://github.com/WesApps/wes_api" target="_blank">github.com/WesApps/wes_api</a></b>. If you're interested in contributing in any way, please let us know.
     </div>

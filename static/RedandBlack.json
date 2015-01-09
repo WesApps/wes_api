@@ -2,12 +2,12 @@
     "Red & Black Tuna": {
     	"info": ["All white meat tuna tossed with mayonnaise, Granny Smith apples and dried cranberries on ciabatta bread. Topped with lettuce and tomato."],
         "price": ["$8.95"],
-        "category": "sandwich"
+        "category": ["sandwich"]
     },
     "Paisano": {
     	"info": ["Fresh mozzarella cheese, prosciutto, tomato and fresh basil with a drizzle of olive oil on ciabatta bread."],
 		"price": ["$9.95"],
-		"category": "sandwich"
+		"category": ["sandwich"]
     },
     "Thanksgiving Turkey": {
     	"info": ["All white meat turkey breast with seasoned stuffing, cranberry mayonnaise & lettuce on ciabatta bread."],

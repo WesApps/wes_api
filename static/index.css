@@ -34,3 +34,15 @@ a {
     color: #505050;
     text-decoration: none;
 }
+.randomData {
+    padding-top: 0px;
+    padding-bottom: 8px;
+    font-size: 1.1em;
+    font-weight: 100;
+}
+.aboutdiv {
+    font-size: 1.3em;
+    font-weight: 100;
+    line-height: 1.8em;
+    
+}

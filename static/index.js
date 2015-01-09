@@ -76,10 +76,12 @@ function film_callback(response) {
         return;
     }
     var results = response['Results'][0];
-    var title = results.title;
-    var short_description = results.short_description;
-    var time = time_from_string(results.time);
-    var long_description = results.long_description;
+    var title = results["name"];
+    var results_data = results["data"]
+    var short_description = results_data["short"];
+    var time = time_from_string(results_data["time"]);
+    var long_description = results_data["long"];
+    console.log(response["Results"][0])
 
     var innerhtml = "<div id='film_title' class='randomData'><b>Title: </b>" + title + "</div>";
     innerhtml += "<div id='film_short_description' class='randomData'><b>Info: </b>" + short_description + "</div>";
