@@ -1,0 +1,144 @@
+{
+    "Chicken Wings - Traditional Bone-In": {
+        "info": ["Available Three Ways with your Favorite Sauce. Served with a Side of Celery and Bleu Cheese."],
+        "price": ["$11.95 (12), $19.95 (24), $27.95 (40)"],
+        "category": ["Chicken Wings"]
+    },
+    "Chicken Wings - Boneless Breaded Tenders": {
+        "info": ["Available Three Ways with your Favorite Sauce. Served with a Side of Celery and Bleu Cheese."],
+        "price": ["$10.95 (5), $17.95 (10)"],
+        "category": ["Chicken Wings"]
+    },
+    "Chicken Wings - Vegetarian Breaded Seitan": {
+        "info": ["Available Three Ways with your Favorite Sauce. Served with a Side of Celery and Bleu Cheese."],
+        "price": ["$10.95 (7-10), $17.95 (16-20)"],
+        "category": ["Chicken Wings"]
+    },
+    "Build Your Own Sandwich": {
+        "info": ["Choose your break, add a protein, add a cheese, choose your fillings, and choose a spread."],
+        "price": ["$9.95"],
+        "category": ["Sandwich"]
+    },
+    "Chicken Parmesan": {
+        "info": ["Chicken Tenders, Lightly Breaded and Deep Fried on a Fresh Grinder Roll with Melted Provolone and Our Own Marinara."],
+        "price": ["$10.95"],
+        "category": ["Sandwich"]
+    },
+    "Kickin' Chicken Club": {
+        "info": ["Breaded Chicken Tenders on a Triple Decker of Rye Toast with Lettuce, Tomato, Mayo, and Crisp Bacon."],
+        "price": ["$10.95"],
+        "category": ["Sandwich"]
+    },
+    "BLT": {
+        "info": ["Crisp Bacon, Piled High on Toasted White with Lettuce, Tomato, and Mayo."],
+        "price": ["$8.95"],
+        "category": ["Sandwich"]
+    },
+    "Turkey Club": {
+        "info": ["Triple Decker of Turkey Breast, Crisp Bacon with Lettuce, Tomato, and Mayo on Toasted Rye. "],
+        "price": ["$10.95"],
+        "category": ["Sandwich"]
+    },
+    "Garden Bagel Melt": {
+        "info": ["New York Style Bagel with Fresh Avacado, Red Roasted Peppers and Tomato, Topped with Melted Provolone. "],
+        "price": ["$7.95"],
+        "category": ["Sandwich"]
+    },
+    "Garden Bagel Melt": {
+        "info": ["New York Style Bagel with Fresh Avacado, Red Roasted Peppers and Tomato, Topped with Melted Provolone. "],
+        "price": ["$7.95"],
+        "category": ["Sandwich"]
+    },
+    "Grilled Chicken Sandwich": {
+        "info": ["Our Marinated and Flame Grilled Chicken with Lettuce and Tomato on a Soft Brioche Roll. With your choice of sauce."],
+        "price": ["$8.95"],
+        "category": ["Sandwich"]
+    },
+    "Country Club Chicken": {
+        "info": ["Grilled Chicken, Topped with Canadian Bacon, Cheddar, Lettuce, Tomato and Herb Mayo on a Soft Brioche Roll."],
+        "price": ["$9.95"],
+        "category": ["Sandwich"]
+    },
+    "Grilled Cheese Sandwich": {
+        "info": ["Add Tomato for $0.50."],
+        "price": ["$4.25"],
+        "category": ["Sandwich"]
+    },
+    "Steak Burger": {
+        "info": ["6oz Sirloin Steak Burger, Flame Grilled with Lettuce and Tomato on a Soft Brioche Roll."],
+        "price": ["$5.95"],
+        "category": ["Burger"]
+    },
+    "Cheese Burger": {
+        "info": [""],
+        "price": ["$6.75"],
+        "category": ["Burger"]
+    },
+    "Double Cheese Burger": {
+        "info": [""],
+        "price": ["$9.95"],
+        "category": ["Burger"]
+    },    
+    "BBQ Bacon Cheddar Burger": {
+        "info": [""],
+        "price": ["$8.95"],
+        "category": ["Burger"]
+    },
+    "Veggie Burger": {
+        "info": ["Veggie Patty Topped with Cheddar, Roasted Red Peppers and Pesto Mayo on a Soft Brioche Roll."],
+        "price": ["$7.25"],
+        "category": ["Burger"]
+    },
+    "Make Your Own Salads": {
+        "info": ["Choose from a Garden Salad or a Classic Caesar Salad. Add a Protein for $3.00. Add Extra Toppings and Dressing."],
+        "price": ["$6.95"],
+        "category": ["Burger"]
+    },
+    "Mediterranean Sampler": {
+        "info": ["Platter of Falafel, Vegetables, and Pita Wedges, Served with Hummus."],
+        "price": ["$9.95"],
+        "category": ["Appetizer"]
+    },
+    "American Sampler": {
+        "info": ["2 Chicken Tenders, 3 Mozzerella Sticks, Plus Spicey Fries."],
+        "price": ["$9.95"],
+        "category": ["Appetizer"]
+    },
+    "Fried Mozzerella Sticks": {
+        "info": [""],
+        "price": ["$7.25 (6), $10.95 (12)"],
+        "category": ["Appetizer"]
+    },
+    "Chicken Tenders": {
+        "info": [""],
+        "price": ["$8.25 (4), $11.25 (6)"],
+        "category": ["Appetizer"]
+    },
+    "French Fries": {
+        "info": [""],
+        "price": ["$3.75"],
+        "category": ["Sides"]
+    },
+    "Spicy Fries": {
+        "info": [""],
+        "price": ["$3.75"],
+        "category": ["Sides"]
+    },
+    "Soup": {
+        "info": [""],
+        "price": ["$4.25 (8oz), $5.25 (12oz)"],
+        "category": ["Sides"]
+    },
+    "Side Garden Salad": {
+        "info": [""],
+        "price": ["$4.95"],
+        "category": ["Sides"]
+    },
+    "Celery & Bleu CHeese": {
+        "info": [""],
+        "price": ["$3.25"],
+        "category": ["Sides"]
+    }
+}
+
+

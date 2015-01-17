@@ -13,6 +13,7 @@ usdan_menus = db.usdan_menus
 late_night_menu = db.late_night_menu
 summerfields_menu = db.summerfields_menu
 red_and_black_menu = db.red_and_black_menu
+weswings_menu = db.weswings_menu
 film_series = db.film_series
 directory = db.directory
 
@@ -20,8 +21,8 @@ directory = db.directory
 json_directory = "static/wesleyanDirectory.json"
 json_filmseries = "static/filmListJanFeb.json"
 json_red_and_black = "static/RedandBlack.json"
+json_weswings = "static/weswings_menu.json"
 # json_s_and_c = "static/wesleyanDirectory.json"
-# json_weswings = "static/wesleyanDirectory.json"
 
 """
 GENERAL DB METHODS
@@ -111,7 +112,7 @@ def remove_event_by_name(eventName):
 
 def remove_events_by_source(sourceName):
     """
-    Removes all event documets with source == sourceName
+    Removes all event documents with source == sourceName
     """
     try:
         events.remove({'source': sourceName})
@@ -149,6 +150,11 @@ def populate_static_menus():
         #red and black
         json_obj = json.loads(file(json_red_and_black).read())
         populate_from_json(json_obj, red_and_black_menu)
+
+        #weswings
+        json_obj2 = json.loads(file(json_weswings).read())
+        populate_from_json(json_obj2, weswings_menu)
+
         return True
 
     except Exception, e:
