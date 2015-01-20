@@ -15,103 +15,51 @@ def fetch_meals(source):
     fp = feedparser.parse(source)
     items = fp['items']
     parsed_items = []
+    print "NUM DAY ITEMS:", len(items)
     for item in items:
         parsed_items.append(parse_day_item(item))
     return parsed_items
 
 
 def parse_day_item(item):
-    # This parser will assume a few things about the structure
-    # of the data. If assumptions break, there will be no menu
-    # for that meal/day :(
-
-    # Assume: Usdan has 3 meals, Summerfields has only lunch and dinner.
     summary_text = item.summary
     soup = BeautifulSoup(summary_text)
-    meals = soup.findAll('h3')
+    meal_tags = soup.findAll('h3')
     item_time = item.title
+    meals = {"time": item_time}
 
-    #weekday, breakfast,lunch,dinner
-    # or brunch, lunch, dinner (weird mistake case)
-    # TODO: Generalize this for any set of meals, even if unlikely?
-    # meal_tags = [m.text for m in meals]
-    if len(meals) == 3:
-        first_meal = meals[0]
-        first_meal_items = {}
-        if first_meal.text in ["Breakfast", "Brunch"]:
-            first_meal_items = get_food_items_until(first_meal, "Lunch")
-        else:
-            print "MENUS: Umm... Usdan haz no breakfast or brunch. Should we be concerned?"
-        lunch_items = get_food_items_until(meals[1], "Dinner")
-        dinner_items = get_food_items_until(meals[2], "")
+    for i in meal_tags:
+        meals[i.text.lower()] = get_food_items(i)
 
-        items_obj = {"time": item_time,
-                     first_meal.text: first_meal_items,
-                     "lunch": lunch_items,
-                     "dinner": dinner_items
-                     }
-        return items_obj
-
-    #weekend, brunch, dinner
-    elif len(meals) == 2:
-        brunch = meals[0]
-        if not brunch.text == "Brunch":
-            print "MENUS: Umm... Usdan haz no brunch. Should we be concerned?"
-            return
-        brunch_items = get_food_items_until(brunch, "Dinner")
-        dinner_items = get_food_items_until(meals[1], "")
-
-        items_obj = {"time": item_time,
-                     "brunch": brunch_items,
-                     "dinner": dinner_items
-                     }
-        return items_obj
-    else:
-        print "MENUS: PANIC, usdan does not have 2 or 3 meals."
-
-    # else:
-    # Summerfields case
-    # 	lunch_items = get_food_items_until(meals[0],"Dinner")
-    # 	dinner_items = get_food_items_until(meals[1],"")
-    # 	items_obj = {"time":item_time,
-    # 				 "lunch":lunch_items,
-    # 				 "dinner":dinner_items
-    # 				 }
-    # 	return items_obj
+    print "MEALS", meals
+    return meals
 
 
-def get_food_items_until(bs_obj, stop):
-    """
-    Walks through the items in the BeautifulSoup object in format:
-    <h4>[ _category_ ] _title_ </h4>
-    <p> _extra-description_ </p>
-    ...
-    <h3>stop</h3>
-    """
+def get_food_items(bs_obj):
     items = []
     tags = bs_obj.fetchNextSiblings()
     i = 0
     while i < len(tags):
         current_tag = tags[i]
-        if str(current_tag)[0:4] == "<h3>":
-            # this means we found a meal tag! Probably!
-            if current_tag.text == stop:
-                # this means we're done here
-                break
+        if current_tag.name == "h3":
+            # this means we found a meal tag, probably, so end.
+            break
 
-        # now assume we're dealing with a food item, so grab this tag and the next one.
-        # and assume the first is h4, second is p
         h4_text = current_tag.text.replace("&nbsp", "")
         p_text = tags[i + 1].text.replace("&nbsp", "")
 
         # get the food category and title
-        try:
-            category, title = h4_text.split('[')[1].split(']')
-        except:
-            print "MENUS: Unable to get the category + food title. Sadface."
-            continue
+        # try:
+        # print h4_text,i,len(tags)
+        # print h4_text.split("[")[1].split("]")
+        category, title = h4_text.split('[')[1].split(']')
+        # except:
+        # print "MENUS: Unable to get the category + food title. Sadface."
+        # continue
 
         items.append([category, title, p_text])
         i += 2
 
     return items
+
+fetch_all()

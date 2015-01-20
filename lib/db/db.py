@@ -257,6 +257,7 @@ def add_usdan_day(day_item):
             if raw_meal:
                 dict_meal = flatten_meal_item(raw_meal)
                 processed_meals[meal] = dict_meal
+                print dict_meal,"DM"
 
         processed_day_item = {
             "time": day_time,
