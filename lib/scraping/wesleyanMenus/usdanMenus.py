@@ -15,7 +15,6 @@ def fetch_meals(source):
     fp = feedparser.parse(source)
     items = fp['items']
     parsed_items = []
-    print "NUM DAY ITEMS:", len(items)
     for item in items:
         parsed_items.append(parse_day_item(item))
     return parsed_items
@@ -31,7 +30,6 @@ def parse_day_item(item):
     for i in meal_tags:
         meals[i.text.lower()] = get_food_items(i)
 
-    print "MEALS", meals
     return meals
 
 
@@ -49,13 +47,7 @@ def get_food_items(bs_obj):
         p_text = tags[i + 1].text.replace("&nbsp", "")
 
         # get the food category and title
-        # try:
-        # print h4_text,i,len(tags)
-        # print h4_text.split("[")[1].split("]")
         category, title = h4_text.split('[')[1].split(']')
-        # except:
-        # print "MENUS: Unable to get the category + food title. Sadface."
-        # continue
 
         items.append([category, title, p_text])
         i += 2
