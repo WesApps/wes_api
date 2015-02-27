@@ -1,3 +1,6 @@
+.logo > a {
+    color: red !important;
+}
 .sectionHeader {
     font-size: 1.6125em;
     font-style: italic;
@@ -22,8 +25,6 @@
     float: right;
 }
 p {
-    /*font-family: 'Merriweather Sans', sans-serif;*/
-    font-family: 'Lato', sans-serif;
     font-size: 20px;
     font-weight: 400;
 }
@@ -37,12 +38,11 @@ a {
 .randomData {
     padding-top: 0px;
     padding-bottom: 8px;
-    font-size: 1.1em;
-    font-weight: 100;
+    font-size: 1.05em;
+    font-weight: 400;
 }
 .aboutdiv {
     font-size: 1.3em;
-    font-weight: 100;
+    font-weight: 400;
     line-height: 1.8em;
-    
 }

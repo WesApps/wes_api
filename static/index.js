@@ -16,8 +16,6 @@ function get_status() {
 }
 
 function populate_status(response) {
-    console.log(response);
-
     var apis = {
         "events": [$("#events_status")[0], $("#events_updated")[0]],
         "film_series": [$("#film_series_status")[0], $("#film_series_updated")[0]],
@@ -75,13 +73,71 @@ function film_callback(response) {
         data_div.innerHTML = err_div;
         return;
     }
-    var results = response['Results'][0];
+    // Make date obj
+    var dateObj = new Date();
+    var day = dateObj.getDate();
+    var month = dateObj.getMonth();
+    var today = new Date(dateObj.getFullYear(), month, day);
+    var m_names = new Array("January", "February", "March",
+        "April", "May", "June", "July", "August", "September",
+        "October", "November", "December");
+
+    // Find film closest to today, looking forward
+    var results = response['Results'];
+    var best_match;
+    for (var i in results) {
+        // There should really be an API route for getting the next film... this date 
+        // stuff is tricky and wasteful computation on the frontend.
+        curr_film = results[i];
+        var time;
+        if (curr_film["data"]["time"]){
+             time = curr_film["data"]["time"][0];
+        } else {
+            continue;
+        }
+        if (!(time)) {
+            continue;
+        }
+        var tmp_date = new Date(Date.parse(time));
+        var date = new Date(tmp_date.getUTCFullYear(),
+            tmp_date.getUTCMonth(), tmp_date.getUTCDate(),
+            tmp_date.getUTCHours(), tmp_date.getUTCMinutes(),
+            tmp_date.getUTCSeconds());
+
+        // Build the date string for the film
+        var curr_day = date.toString().split(" ")[0];
+        var curr_date = date.getDate();
+        var curr_month = date.getMonth();
+        time_str = curr_day + ", " + m_names[curr_month] + " " + curr_date;
+
+        // Add date to result
+        curr_film["data"]["date"] = date;
+        curr_film["data"]["time"] = time_str;
+
+        if (!(best_match)) {
+            best_match = curr_film;
+            continue;
+        }
+        // if curr film is ever today, it wins!
+        if (curr_film["data"]["date"].toISOString() === today.toISOString()) {
+            best_match = curr_film;
+            break;
+        }
+        //otherwise, if curr_film is closer to today than best_match
+        //film, replace best_match film with curr film
+        if ((curr_film["data"]["date"] - today) >= 0) {
+            if (Math.abs((curr_film["date"] - today)) < (Math.abs((best_match["date"]) - today))) {
+                best_match = curr_film;
+            }
+        }
+    }
+
+    var results = best_match;
     var title = results["name"];
     var results_data = results["data"]
     var short_description = results_data["short"];
     var time = time_from_string(results_data["time"]);
     var long_description = results_data["long"];
-    console.log(response["Results"][0])
 
     var innerhtml = "<div id='film_title' class='randomData'><b>Title: </b>" + title + "</div>";
     innerhtml += "<div id='film_short_description' class='randomData'><b>Info: </b>" + short_description + "</div>";

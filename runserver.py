@@ -39,14 +39,19 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/update')
-def update():
-    return json.dumps({"Success?": scraper_control.scrape_all_sources()})
+# @app.route('/update')
+# def update():
+#     return json.dumps({"Success?": scraper_control.scrape_all_sources()})
 
 
-@app.route('/clearAll')
-def clearAll():
-    return json.dumps({"Cleared?": scraper_control.clear_all_sources()})
+# @app.route('/clearAll')
+# def clearAll():
+#     return json.dumps({"Cleared?": scraper_control.clear_all_sources()})
+
+@app.after_request
+def add_header(response):
+    response.cache_control.max_age = 300
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True)

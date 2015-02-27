@@ -8,7 +8,6 @@ body {
     word-spacing: 0.12em;
     line-height: 1.56;
     font-family: 'Lato', sans-serif;
-    font-family: 'Merriweather Sans', sans-serif;
 }
 #menubar {
     background: white;
@@ -39,7 +38,6 @@ body {
     text-align: center;
 }
 #title > h1 {
-    /*font-family: 'Merriweather Sans', serif;*/
     font-family: 'Lato', sans-serif;
     font-weight: lighter;
 }
@@ -59,11 +57,3 @@ body {
     font-size: 1.4em;
     font-family: 'Lato', sans-serif;
 }
-/*font-style: normal;
-font-weight: 400;
-font-size: 13px;
-text-transform: none;
-text-decoration: none;
-letter-spacing: 0.063em;
-word-spacing: 0.12em;
-line-height: 1.56;*/
