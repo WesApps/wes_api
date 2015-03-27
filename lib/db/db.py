@@ -19,7 +19,7 @@ directory = db.directory
 
 
 json_directory = "static/wesleyanDirectory.json"
-json_filmseries = "static/filmListJanFeb.json"
+json_filmseries = "static/filmListMarMay.json"
 json_red_and_black = "static/RedandBlack.json"
 json_weswings = "static/weswings_menu.json"
 # json_s_and_c = "static/wesleyanDirectory.json"
